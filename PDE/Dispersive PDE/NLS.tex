@@ -1,0 +1,311 @@
+\documentclass[reqno]{amsart}
+
+\usepackage{amsfonts,latexsym,amsthm,amssymb,amsmath,amscd,euscript,bm}
+\usepackage[sc]{mathpazo}
+\usepackage[margin = 2cm]{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+% sets numbering of enumerate to a, b, c, ...
+\renewcommand{\theenumi}{\alph{enumi}}
+
+% Theorems, propositions, etc.
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{claim}{Claim}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{notation}{Notation}
+
+\usepackage{tikz-cd}
+
+\usepackage{thmtools}
+\usepackage[framemethod=TikZ]{mdframed}
+	\mdfdefinestyle{mdrecbox}
+		{%
+			linewidth=0.5pt,
+			skipabove=12pt,
+			frametitleaboveskip=5pt,
+			frametitlebelowskip=0pt,
+			skipbelow=2pt,
+			frametitlefont=\bfseries,
+			innertopmargin=4pt,
+			innerbottommargin=8pt,
+			nobreak=true,
+		}
+	\declaretheoremstyle
+		[
+			headfont=\bfseries,
+			mdframed={style=mdrecbox},
+			headpunct={\\[3pt]},
+			postheadspace={0pt},
+		]
+		{thmrecbox}
+\newcounter{problem}[section]	\declaretheorem[style=thmrecbox,name=Problem, numberlike=problem]{statement}
+
+
+% Solution environment
+\newenvironment{solution}
+	{
+		\begin{proof}[Solution]}{\end{proof}
+	}
+
+
+% Math blackboard font
+\newcommand{\nc}{\newcommand}
+\nc{\on}[1]{\operatorname{#1}}
+
+\nc{\R}{\mathbb R}
+\nc{\C}{\mathbb C}
+\nc{\Q}{\mathbb Q}
+\nc{\Z}{\mathbb Z}
+\nc{\N}{\mathbb N}
+\nc{\HH}{\mathbb H}
+\nc{\DD}{\mathbb D}
+\nc{\TT}{\mathbb T}
+\nc{\EE}{\mathbb E}
+\nc{\PP}{\mathbb P}
+
+\nc{\cT}{\mathcal T}
+\nc{\cA}{\mathcal A}
+\nc{\cM}{\mathcal M}
+\nc{\cR}{\mathcal R}
+\nc{\cB}{\mathcal B}
+\nc{\cG}{\mathcal G}
+\nc{\cD}{\mathcal D}
+\nc{\cS}{\mathcal S}
+\nc{\cF}{\mathcal F}
+\nc{\cL}{\mathcal L}
+\nc{\cE}{\mathcal E}
+\nc{\cN}{\mathcal N}
+
+\nc{\diam}{\operatorname{diam}}
+\nc{\del}{\partial}
+\nc{\osc}{\operatorname{osc}}
+\nc{\inter}{\mathrm{o}}
+\nc{\close}[1]{\overline{#1}}
+\nc{\supp}{\operatorname{supp}}
+\nc{\BV}{\operatorname{BV}}
+\nc{\Per}{\operatorname{Per}}
+\nc{\loc}{\text{loc}}
+\nc{\Lip}{\operatorname{Lip}}
+\nc{\ACL}{\operatorname{ACL}}
+
+% Why the f*** would you ever use \epsilon
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\emph}{\textsc}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+%inverse Fourier transform widecheck
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{
+      <5> <6> <7> <8> <9> <10>
+      <10.95> <12> <14.4> <17.28> <20.74> <24.88>
+      mathx10
+      }{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareFontSubstitution{U}{mathx}{m}{n}
+\DeclareMathAccent{\widecheck}{0}{mathx}{"71}
+
+\let\vec\mathbf
+
+% Title: change problem set number as needed
+\title
+{
+	\emph{Schrodinger equation}
+} 
+
+\author{Jason Zhao}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Fundamental solution}
+
+The \emph{fundamental solution} of the Schrodinger operator is a distribution $K \in C^\infty_c (\R^{1 + d})^*$ such that 
+	\[ (i \partial_t + \Delta) K = \delta_0. \]
+In terms of quantum mechanics, we view the fundamental solution as the particle wave evolution arising from the unit particle source concentrated at the origin. We can construct solutions to the Schrodinger equation on $\R^{1 + d}$ by convolving the fundamental solution with the source term; for any compactly supported distribution $f \in C^\infty (\R^{1 + d})^*$, we have
+	\[ f = \delta_0 * f = (i \partial_t + \Delta) K * f = (i \partial_t + \Delta)( K* f). \]
+The forward fundamental solution takes the form 
+	\[ K(t, x) := \frac{1}{(4\pi i t)^{d/2}} e^{i |x|^2/4t}. \]
+	
+
+\subsection{Derivation}
+
+Applying the space-time Fourier transform, the fundamental solution satisfies
+	\[ -(2\pi \tau + 4\pi^2 |\xi|^2) \cF_{t, x} K = 1. \]
+Formally rearranging we obtain
+	\[  \cF_{t, x} K = \frac{1}{-2\pi \tau - 4\pi^2 |\xi|^2}. \]	
+We need to be careful in interpreting the right-hand side as a distribution, as it fails to be locally integrable. 
+The polynomial $P(\tau, \xi) := -2\pi \tau - 4\pi^2 |\xi|^2$ is known as the space-time \emph{symbol}, and its zeros in $\R^{1 + d}$ form the \emph{characteristic hypersurface}. Computing the fundamental solution amounts to inverting the symbol. One choice of regularisation for the inverse is
+	\[ \frac{1}{P(\tau, \xi)} := \frac{1}{- 2\pi \tau - 4\pi^2 |\xi|^2 \pm i 0} = \lim_{\epsilon \downarrow 0}\frac{1}{-2\pi \tau - 4\pi^2 |\xi|^2 \pm  i \epsilon}. \]
+The signs $\pm$ correspond respectively to solutions moving forward and backwards in time; we will pursue the former. The fundamental solution is given by the inverse space-time Fourier transform. Writing $\cF_{t, x} = \cF_t \cF_x$, it will be convenient to first invert in the time variable. Appealing to continuity of $\cF_t : \cS^*_t (\R) \to \cS^*_t (\R)$ and convergence of the Fourier integral on $L^1_t (\R)$, we can write
+	\begin{align*}
+		\cF^{-1}_\tau \left(\frac{1}{2\pi \tau + 4\pi^2 |\xi|^2 - i \epsilon} \right)(t) 
+			&=
+		\lim_{R \to \infty} \cF^{-1}_\tau \left( \frac{1}{2\pi  \tau + 4\pi^2 |\xi|^2 - i \epsilon} \mathbb 1_{[-R, R]} (\tau) \right) (t) \\
+			&=			
+			\lim_{R \to \infty} \int_{[-R, R]} \frac{e^{2\pi i t \tau}}{2\pi \tau + 4\pi^2 |\xi|^2 - i \epsilon} d \tau.
+		\end{align*} 	
+	To compute the Fourier integral explicitly, we argue by the residue theorem, viewing the integrand as a meromorphic function in $\tau$. We know from the Jordan lemma that the integral over the upper (lower) semi-circle contours of radius $R$ vanish for $t > 0$ ($t < 0$) as $R \to \infty$, so the limit converges to the residue at $\tau = - 2\pi |\xi|^2 + \tfrac{1}{2\pi}i \epsilon$ for $t > 0$ and vanishes for $t < 0$,
+		\[ \lim_{\epsilon \downarrow 0}\lim_{R \to \infty} \int_{[-R, R]} \frac{e^{2\pi i t \tau}}{2\pi \tau + 4\pi^2 |\xi|^2 - i \epsilon} d \tau = \lim_{\epsilon \downarrow 0}  e^{- 4\pi^2 i t |\xi|^2 - i \epsilon t} \mathbb 1_{t > 0} (t) = e^{- 4\pi^2 i t |\xi|^2} \mathbb 1_{t > 0} (t)\]
+	This is a Gaussian in $\xi$, so taking the inverse Fourier transform in the spatial frequency $\xi$ produces the \textit{forward} fundamental solution, 
+	\[ K(t, x) = -\cF^{-1}_{\tau, \xi}\left( \frac{1}{2\pi \tau + 4\pi^2 |\xi|^2 - i \epsilon} \right) = - \cF_{\xi}^{-1}\left(  e^{- 4\pi^2 i t |\xi|^2} \mathbb 1_{t > 0} (t) \right)   = \frac{1}{(4\pi i t)^{d/2}} e^{-i |x|^2/4t} \mathbb 1_{t > 0} (t). \]
+
+\begin{remark}
+We elaborate on the parallels between the fundamental solutions of the heat and Schrodinger equations. 
+\begin{itemize}
+	\item The existence of only a forward solution for the heat equation corresponds to the law of thermodynamics, which indicates a canonical arrow of time, while the existence of a solution in both directions of time for the Schr{\"o}dinger equation indicates that there is no canonical direction of time in quantum mechanics. 
+	\item If $u$ solves the free Schr{\"o}dinger equation $(i\partial_t + \Delta)u = 0$, then the \textit{Wick rotation} $v(t, x) := u(it, x)$ soles the homogeneous heat equation $(\partial_t - \Delta)v = 0$. Thus the Schr{\"o}dinger equation is a ``heat equation'' in the sense that quantum propagation in real time is diffusion in imaginary time. 
+\end{itemize}	
+\end{remark}
+
+\subsection{Propagator}
+
+Let $\phi \in C^1_t \cS^*_x (\R \times \R^d)$ be a distributional solution to the free Schrodinger equation subject to initial data $\phi_0 \in \cS^*_x (\R^d)$. Converting from spatial physical space to spatial frequency space via the spatial Fourier transform, the PDE in space-time takes the form of an ODE in time, 
+	\begin{align*}
+		i\partial_t \widehat \phi - 4\pi^2 |\xi|^2 \widehat \phi 
+			&= 0 , \\
+		\widehat{\phi}_{|t = 0}
+			&= \widehat{\phi_0}.	
+	\end{align*}
+This admits the unique solution 
+	\[ \widehat \phi (t, \xi) = e^{-4\pi^2 i |\xi|^2 t} \widehat{\phi_0} (\xi). \]
+Converting back to spatial physical space, we can write the solution to the free Schrodinger equation as 
+	\[ \phi(t, x) = e^{i t \Delta} \phi_0 (x),  \]	
+where $e^{it \Delta}$ is a Fourier multiplier known as the \emph{free particle propagator}. 	With the free solutions at hand, we solve the inhomogeneous linear Schrodinger equation via \textit{variation of parameters}, or more precisely the method of \textit{integrating factors}. 
+
+\begin{theorem}[Duhamel's formula]
+	Suppose $\phi_0 \in \cS^*_x (\R^d)$ and $f \in C^0_t \cS^*_x ([0, T] \times \R^d)$. Then $\phi \in C^1_t \cS^*_x ([0, T] \times \R^d)$ defined by the formula
+		\[ \phi(t) := e^{it \Delta} \phi_0 + \int_0^t e^{i(t - s) \Delta} f(s) \, ds \]
+	is the unique tempered solution to the Schrodinger equation $(i \partial_t + \Delta) \phi = f$ with initial data $\phi_{|t = 0} = \phi_0$. 	
+\end{theorem}
+
+\begin{proof}
+	Under the \textit{ansatz} $\phi (t) = e^{it \Delta} u(t)$, the Schrodinger equation is equivalent to 
+		\[ \partial_t u (t) = e^{-i t \Delta} f (t),\]
+	which by the fundamental theorem of calculus is also equivalent to
+		\[ u(t) = u (0) + \int_0^t e^{-i s \Delta} f(s) \, ds. \]	
+	Upon applying the propagator $e^{it \Delta}$ to both sides we obtain Duhamel's formula.  	
+\end{proof}
+
+\begin{remark}
+	We can view the fundamental solution as the free particle propagation of the Dirac delta initial data 
+		\[ K(t) = e^{i t \Delta} \delta_{x = 0} = \int_{\R^d} e^{- 4 i \pi^2 t |\xi|^2}  e^{2\pi i x \cdot \xi} d\xi. \]
+\end{remark}
+
+\begin{corollary}[Dispersive estimate]
+	Let $\phi_0 \in L^1_x (\R^d)$, then 
+		\[ ||e^{it \Delta} \phi_0||_{L^\infty_x} \leq \frac{1}{(4\pi t)^{d/2}} || \phi_0||_{L^1_x}. \]
+\end{corollary}
+
+\begin{proof}
+	We can write
+		\[ e^{it \Delta} \phi_0 = e^{it \Delta} (\delta_{x = 0} * \phi_0) = (e^{it \Delta} \delta_{x = 0}) * \phi_0 = K(t) * \phi_0 = \frac{1}{(4\pi i t)^{d/2}} \int_{\R^d} e^{i |x - y|^2/4t} \phi_0 (y) \, dy .\]
+	The dispersive estimate follows immediately. 
+\end{proof}
+
+\begin{corollary}[Energy estimate]
+	For $s \in \R$, let $\phi_0 \in H^s_x (\R^d)$ and $f \in L^1_t H^s_x ([0, T] \times \R^d)$. Then the Duhamel solution to the Schrodinger equation $(i \partial_t + \Delta)\phi = f$ with initial data $\phi_{|t = 0} = \phi_0$ satisfies
+		\[ ||\phi||_{C^0_t H^s} \leq ||\phi_0||_{H^s_x} + ||f||_{L^1_t H^s_x}. \]	
+	In particular, the solution has regularity $\phi \in C^0_t H^s_x ([0, T] \times \R^d)$. 	
+\end{corollary}	
+
+\begin{proof}
+	Observe that $e^{i t \Delta}$ is unitary. Hence by the triangle inequality and Minkowski's integral equality, we write
+		\[ ||\phi||_{H^s_x} (t) \leq ||e^{it \Delta}\phi_0||_{H^s_x} + \int_0^t ||e^{i (t - s) \Delta} f(s)||_{H^s_x} \, ds \leq ||\phi_0||_{H^s_x} + ||f||_{L^1_t H^s_x}, \]
+	as desired. 	
+\end{proof}
+
+
+\begin{corollary}[Conservation law]
+	For $s \in \R$ and initial data $\phi_0 \in \dot H^s_x (\R^d)$, we have
+		\[ ||e^{it \Delta} u_0||_{\dot H^s_x} \equiv ||u_0||_{\dot H^s_x}. \]
+\end{corollary}
+
+\begin{proof}
+	The multiplier $e^{i t \Delta}$ is unitary and commutes with the Riesz potentials $|\nabla|^s$. 
+\end{proof}
+
+	
+\section{Strichartz estimates}
+
+The dispersive inequality states that if the initial data has suitability integrability in space, then the Schrodinger evolution will decay in time, contrasted with conservation of the $L^2_x$-mass of the solution. Interpolating between the two phenomenon, we obtain the estimate
+
+\begin{lemma}[$L^p$-dispersive estimate]
+	Let $1 \leq p \leq 2$ and $\phi_0 \in L^p (\R^d)$, then 
+		\[ ||e^{it \Delta} \phi_0||_{L^{p'}_x} \lesssim  t^{-d (\frac1p - \frac12)} ||\phi_0||_{L^p_x}. \]
+\end{lemma}
+
+However, in many situations our initial data $\phi_0$ is only known to be in an $L^2_x$-integrable Sobolev space $H^s_x (\R^d)$. Towards this end, we combine the $L^p$-estimates with duality arguments to obtain the \textit{Strichartz estimates} for the Schrodinger equation. 
+
+\begin{theorem}
+	For $s \in \R$ and $(q, r), (\widetilde q, \widetilde r)$ admissible exponents, let $\phi_0 \in H^s_x (\R^d)$ and $f \in L^{\widetilde q}_t W^{s, \widetilde r}_x ([0, T] \times \R^d)$. Then the Duhamel solution to the Schrodinger equation $(i \partial_t + \Delta) \phi = f$ with initial data $\phi_{|t = 0} = \phi_0$ satisfies
+		\[ ||\phi||_{L^q_t W^{s, r}_x} \lesssim ||\phi_0||_{H^s_x} + ||f||_{L^{\widetilde q}_t W^{s, \widetilde r}_x}, \]
+	and similarly if we replace the inhomogeneous Sobolev norms with their homogeneous counterparts. 	
+\end{theorem}
+
+\begin{proof}
+	Since the Riesz and Bessel potentials commute with the Schrodinger operator, it suffices to prove the case $s = 0$. We consider only the non-endpoint case $q, \widetilde q \neq 2$, and refer the reader to \cite{KeelTao} for the endpoint result. The proof follows the $TT^*$ argument; the result follows from the triangle inequality provided we show
+	\begin{alignat*}{2}
+		||e^{i t \Delta} \phi_0||_{L^q_t L^r_x} 
+			&\lesssim ||\phi_0||_{L^2_x}
+			&&\qquad \text{homogeneous estimate,} \\
+		\Big|\Big| \int_{s< t} e^{ i (t - s) \Delta} f(s) \, ds \Big|\Big|_{L^{q}_t L^{r}_x} 
+			&\lesssim ||f||_{L^{\widetilde q'}_t L^{\widetilde r'}_x}
+			&&\qquad \text{inhomogeneous estimate}.
+	\end{alignat*}	
+	The inhomogeneous estimate follows from composing the homogeneous estimate with the dual estimate
+		\[ \Big|\Big| \int_\R e^{- i s \Delta} f(s) \, ds \Big|\Big|_{L^2_x} \lesssim ||f||_{L^{q'}_t L^{r'}_x} \]
+	for $(q, r) = (\widetilde q, \widetilde r)$ and applying the Christ-Kiselev lemma \cite{ChristKiselev}. Moreover, the homogeneous estimate follows from the dual estimate via a duality argument, writing
+		\[ \langle e^{it \Delta} \phi_0, f \rangle_{t, x} = \langle \phi_0, e^{-it \Delta} f\rangle_{t, x} = \langle \phi_0, \int_\R e^{-i s \Delta} f(s)\, ds \rangle_x, \]
+	and then taking the supremum over $||f||_{L^{q'}_t L^{r'}_x} \leq 1$ and applying Cauchy-Schwartz on the right. It remains then to establish the dual homogeneous estimate. By Holder's inequality, we can write
+	\begin{align*}
+		\Big|\Big| \int_\R e^{- i s \Delta} f(s) \, ds \Big|\Big|_{L^2_x}^2 
+			&= \langle f, \int_\R e^{i (t - s) \Delta} f(s) \, ds \rangle_{t, x}\\
+			&\leq ||f||_{L^{q'}_t L^{r'}_x} \Big|\Big| \int_\R e^{i (t - s) \Delta} f(s) \, ds \Big|\Big|_{L^q_t L^r_x}.
+	\end{align*}
+	We control the second factor on the right by Minkowski's integral inequality, the $L^p$-dispersive estimate, and Hardy-Littlewood-Sobolev, 
+		\begin{align*}
+			 \Big|\Big| \int_\R e^{i (t - s) \Delta} f(s) \, ds \Big|\Big|_{L^q_t L^r_x}
+			 	&\leq  \Big|\Big| \int_\R || e^{i (t - s) \Delta} f||_{L^r_x}(s) \, ds \Big|\Big|_{L^q_t}\\
+			 	&\lesssim \Big|\Big| \int_\R || f||_{L^{r'}_x} \, (s) * \frac{1}{|t|^{d (\frac12 - \frac1r)}} ds \Big|\Big|_{L^q_t} \lesssim ||f||_{L^{q'}_t L^{r'}_x}
+		\end{align*}
+	whenever $2 < r, q\leq \infty$ satisfy $\tfrac2q + \tfrac{d}{r} = \tfrac{d}{2}$. This completes the proof. 
+\end{proof}
+
+\section{Non-linear Schrodinger equation}
+
+We now turn to the study of non-linear Schrodinger equations; our prototype will be the the \textit{semi-linear} Schrodinger equation 
+\begin{align*}
+	(i \partial_t + \Delta) \phi
+		&= \mu |\phi|^{p - 1} \phi, \\
+	\phi_{|t = 0}
+		&= \phi_0,
+\end{align*}
+with exponent $1 < p < \infty$ denoting the power of the non-linearity and the sign $\mu = \pm 1$ denoting the \emph{focusing} and \emph{defocusing} equation respectively. 
+
+
+\subsection{Local existence}
+
+We say that the non-linear Schrodinger equation is \emph{locally well-posed} in $H^s_x (\R^d)$ if for any $u_0^* \in H^s_x (\R^d)$, there exists a time $T > 0$ and an open ball $B \subseteq H^s_x (\R^d)$. 
+
+
+
+\subsection{Global existence}
+
+\subsection{Scattering}
+
+\subsection{Illposedness}
+
+\bibliography{biblio}
+\bibliographystyle{alpha} 
+
+\end{document}

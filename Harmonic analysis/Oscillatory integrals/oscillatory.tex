@@ -1,0 +1,388 @@
+\documentclass[reqno]{amsart}
+
+\usepackage{amsfonts,latexsym,amsthm,amssymb,amsmath,amscd,euscript,bm}
+\usepackage[sc]{mathpazo}
+\usepackage[margin = 2cm]{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+% sets numbering of enumerate to a, b, c, ...
+\renewcommand{\theenumi}{\alph{enumi}}
+
+% Theorems, propositions, etc.
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{claim}{Claim}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{notation}{Notation}
+
+\usepackage{tikz-cd}
+
+\usepackage{thmtools}
+\usepackage[framemethod=TikZ]{mdframed}
+	\mdfdefinestyle{mdrecbox}
+		{%
+			linewidth=0.5pt,
+			skipabove=12pt,
+			frametitleaboveskip=5pt,
+			frametitlebelowskip=0pt,
+			skipbelow=2pt,
+			frametitlefont=\bfseries,
+			innertopmargin=4pt,
+			innerbottommargin=8pt,
+			nobreak=true,
+		}
+	\declaretheoremstyle
+		[
+			headfont=\bfseries,
+			mdframed={style=mdrecbox},
+			headpunct={\\[3pt]},
+			postheadspace={0pt},
+		]
+		{thmrecbox}
+\newcounter{problem}[section]	\declaretheorem[style=thmrecbox,name=Problem, numberlike=problem]{statement}
+
+
+% Solution environment
+\newenvironment{solution}
+	{
+		\begin{proof}[Solution]}{\end{proof}
+	}
+
+
+% Math blackboard font
+\newcommand{\nc}{\newcommand}
+\nc{\on}[1]{\operatorname{#1}}
+
+\nc{\R}{\mathbb R}
+\nc{\C}{\mathbb C}
+\nc{\Q}{\mathbb Q}
+\nc{\Z}{\mathbb Z}
+\nc{\N}{\mathbb N}
+\nc{\HH}{\mathbb H}
+\nc{\DD}{\mathbb D}
+\nc{\TT}{\mathbb T}
+\nc{\EE}{\mathbb E}
+\nc{\PP}{\mathbb P}
+
+\nc{\cT}{\mathcal T}
+\nc{\cA}{\mathcal A}
+\nc{\cM}{\mathcal M}
+\nc{\cR}{\mathcal R}
+\nc{\cB}{\mathcal B}
+\nc{\cG}{\mathcal G}
+\nc{\cD}{\mathcal D}
+\nc{\cS}{\mathcal S}
+\nc{\cF}{\mathcal F}
+\nc{\cL}{\mathcal L}
+\nc{\cE}{\mathcal E}
+
+\nc{\diam}{\operatorname{diam}}
+\nc{\del}{\partial}
+\nc{\osc}{\operatorname{osc}}
+\nc{\inter}{\mathrm{o}}
+\nc{\close}[1]{\overline{#1}}
+\nc{\supp}{\operatorname{supp}}
+\nc{\BV}{\operatorname{BV}}
+\nc{\Per}{\operatorname{Per}}
+\nc{\loc}{\text{loc}}
+\nc{\Lip}{\operatorname{Lip}}
+\nc{\ACL}{\operatorname{ACL}}
+
+% Why the f*** would you ever use \epsilon
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\emph}{\textsc}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+%inverse Fourier transform widecheck
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{
+      <5> <6> <7> <8> <9> <10>
+      <10.95> <12> <14.4> <17.28> <20.74> <24.88>
+      mathx10
+      }{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareFontSubstitution{U}{mathx}{m}{n}
+\DeclareMathAccent{\widecheck}{0}{mathx}{"71}
+
+\let\vec\mathbf
+
+% Title: change problem set number as needed
+\title
+{
+	\emph{Oscillatory integrals}
+} 
+
+\author{Jason Zhao}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+	An \textit{oscillatory integral} takes the form 
+		\[ \int_{\R^d} e^{i \lambda \phi(x)} a(x) \, dx, \]
+	where $a : \R^d \to \C$ is the \textit{amplitude}, $\phi : \R^d \to \R$ is the \textit{phase}, and $\lambda \in \R$ is a parameter to measure the extent of oscillation. While we can naively control the integral by the $L^1$-norm of $a$, we can alternatively exploit the cancellation arising from the oscillating phase $\phi$ to compute precise asymptotic decay as $\lambda \to \pm \infty$.  
+\end{abstract}
+
+\tableofcontents
+
+Formally, an \emph{oscillatory integral} (of the first kind) is an integral of the form
+	\[ \int_{\R^d} e^{i \lambda \phi(x)} a(x) \, dx \]
+where $a : \R^d \to \C$ is known as the \textit{amplitude}, $\phi : \R^d \to \R$ the \textit{phase}, and $\lambda \in \R$ the \textit{frequency}. 
+
+
+\section{Non-stationary phase}
+
+The integral exhibits oscillation and thus cancellation provided that the phase $\phi$ is non-stationary, i.e. $\phi$ does not admit critical points in the support of the amplitude $a$. Given oscillation, we can use integration-by-parts to exchange regularity of $a$ for decay in $\lambda$. 
+
+\begin{theorem}[Non-stationary phase on $\R$]
+	Let $a \in C^\infty_c (\R)$, and suppose $\phi : \R \to \R$ be a smooth phase such that $\phi'$ is non-zero on the support of $a$. For $N \in \N_0$, we have 
+		\[ \left| \int_\R e^{i \lambda \phi(x)} a(x) \, dx \right| \lesssim_{N, \phi, a} \frac{1}{\lambda^N} \]
+	uniformly in $\lambda > 0$. 	
+\end{theorem}
+\begin{proof}
+	Consider the differential operator $D$ and its formal adjoint $D^*$ given by 
+		\[ Df := \frac{1}{i \lambda \phi'(x)} \frac{d}{dx}, \qquad D^* f = - \frac{d}{dx} \left( \frac{1}{i \lambda \phi'(x)} f \right). \]
+	It is clear that $D e^{i \lambda \phi(x)} = e^{i \lambda \phi(x)}$, so integrating by parts, 
+	\begin{align*}
+		\int_\R e^{i \lambda \phi(x)} a(x) dx
+			&= \int_\R D^N \left(e^{i \lambda \phi(x)}\right) a(x) dx = \int_\R e^{i \lambda \phi(x)} (D^*)^N a(x) dx.
+	\end{align*}
+	Therefore by the triangle inequality and the product rule
+		\begin{align*}
+			 \left| \int_\R e^{i \lambda \phi(x)} a(x) dx \right| 
+			 	&\leq \lambda^{-N} \int_\R \left| \left( \frac{d}{dx} \frac{1}{\phi'(x)} \right)^N a(x) \right| dx \\
+			 	&\lesssim\lambda^{-N} \sum_{k = 0}^N \sum_{\beta + \alpha_1 + \dots + \alpha_k = N} \left|\left| \frac{\partial^\beta a ( \partial^{\alpha_1} \phi' \cdots \partial^{\alpha_k} \phi')}{(\phi')^{N + k}} \right|\right|_{L^1} \lesssim_{N, \phi, a} \lambda^{-N}. 
+		\end{align*}	 
+	This completes the proof. 	
+\end{proof}
+
+\begin{remark}
+\leavevmode
+\begin{enumerate}
+	\item The implicit constant depends only on the derivatives of $a$ up to order $N$ and the derivatives of $\phi$ up to order $N + 1$. 	
+	
+	\item The prototypical example of non-stationary phase is the decay of the Fourier transform of a compactly supported function, which is the case where $\phi(x) = \pm x$. 
+	
+	\item If the amplitude $a$ is not compactly supported, then the best decay is $\lambda^{-1}$. For example,
+		\[ \int_a^b e^{i \lambda x} dx = \frac{e^{i \lambda b} - e^{i \lambda a}}{i \lambda}. \]
+\end{enumerate}	
+\end{remark}
+
+\begin{theorem}[Non-stationary phase on $\R^d$]
+	Let $a \in C^\infty_c (\R^d)$, and suppose $\phi : \R \to \R$ be a smooth phase such that $\nabla \phi$ is non-zero on the support of $a$. For $N \in \N_0$, we have 
+		\[ \left| \int_\R e^{i \lambda \phi(x)} a(x) \, dx \right| \lesssim_{N, \phi, a} \frac{1}{\lambda^N} \]
+	uniformly in $\lambda > 0$. 	
+\end{theorem}
+
+\begin{proof}
+	Consider the differential operator $D$ and its formal adjoint $D^*$ given by 
+		\[ D f := \frac{\nabla \phi (x)}{i \lambda |\nabla \phi(x)|^2} \cdot \nabla f, \qquad D^* f = - \nabla \cdot \left( \frac{\nabla \phi(x)}{i \lambda |\nabla \phi(x)|^2} f \right). \]
+	As in the one-dimensional case, we see that $D e^{i \lambda \phi(x)} = e^{i \lambda \phi(x)}$, so integrating by parts
+		\[ \int_{\R^d} e^{i \lambda \phi(x)} a(x) \, dx = \int_{\R^d} D \left( e^{i \lambda \phi(x)} \right) a(x) \, dx = \int_{\R^d} e^{i \lambda \phi(x)} D^* a(x) \, dx = - \frac{1}{i\lambda} \int_{\R^d} e^{i \lambda \phi(x)} \nabla \cdot \left( \frac{a \nabla \phi }{|\nabla \phi|^2} \right)(x) \, dx  .\]
+	The triangle inequality furnishes the result for $N = 1$. Note that $\nabla \cdot (a\nabla \phi /|\nabla \phi|^2) \in C^\infty_c (\R^d)$, so we iterate to obtain the estimate for all $N \in \N_0$. 
+\end{proof}
+
+\begin{remark}
+	The implicit constant obtained from this proof becomes frighteningly complicated. However, one class of functions which behaves well under the operator $D^*$ is the \textit{symbol class}
+		\[ \partial^\alpha_x a(x) \lesssim_\alpha \langle x \rangle^{m - |\alpha|} \]
+	of order $m \in \R$. It is an exercise in the product rule to verify that the symbol class is closed under multiplication and division by symbols satisfying $|a| \gtrsim 1$. If $a$ and $\nabla \phi$ are in the symbol class for $m = 0$ and $|\nabla \phi| \gtrsim 1$, then $D^*$ forms a \textit{pseudo-differential operator} of order 1 sending symbols of order $m$ to order $m - 1$. 
+\end{remark}
+
+
+\section{Scaling}
+
+To illustrate the principle of scaling, consider the one-dimensional oscillatory integral
+	\[ I_{J, \phi} (\lambda) := \int_J e^{i \lambda \phi(x)} \, dx \]
+where $J \subseteq \R$ is a finite interval and $\phi : J \to \R$ is a smooth phase function. Then 
+	\[ I_{L(J), \phi \circ L^{-1}} (\lambda) = |\det (L)| I_{J, \phi} (\lambda) \]
+for any invertible affine transformation $L : \R \to \R$.
+
+\begin{theorem}[van der Corput lemma on $\R$]
+	Let $\phi : \R \to \R$ be a smooth phase such that $|\partial_x^k \phi | \geq 1$ for some $k \in \N$; in the case $k = 1$, we assume further that $\partial_x \phi$ is monotone. Then 
+		\[ \left| \int_a^b e^{i \lambda \phi(x)} dx \right| \lesssim_k \lambda^{-1/k} \]
+	uniformly in $\lambda > 0$, the phase $\phi$, and the interval $[a, b]$. 	
+\end{theorem}
+
+\begin{proof}
+	We induct on $k$; consider the case $k = 1$, then integrating by parts gives
+		\begin{align*}
+			\int_a^b e^{i \lambda \phi(x)} dx
+				&=  \left[ \frac{e^{i \lambda \phi(b)}}{i \lambda \partial_x\phi(b)} - \frac{e^{i \lambda \phi(a)}}{i \lambda \partial_x\phi(a)} \right] - \int_a^b e^{i \lambda \phi(x)} \frac{d}{dx} \left[ \frac{1}{i \lambda \partial_x\phi (x)} \right] dx.
+		\end{align*}	
+	As $|\partial_x\phi| \geq 1$, the first term on the right is bounded by $2/\lambda$. To bound the second term by $2/\lambda$, we want to apply the fundamental theorem of calculus. Applying the triangle inequality removes the phase term, 
+		\[ \left| \int_a^b e^{i \lambda \phi(x)} \frac{d}{dx} \left[ \frac{1}{i \lambda\partial_x\phi (x)} \right] dx \right| \leq \frac1\lambda\int_a^b \left| \frac{d}{dx} \left[ \frac{1}{\partial_x\phi(x)} \right] dx \right|. \]
+	We know $1/\partial_x\phi$ is monotone, so its derivative is either non-negative or non-positive, allowing us to ``reverse'' the triangle inequality and take the absolute values out of the integral, 
+		\[	\frac1\lambda \left| \int_a^b \frac{d}{dx} \left[ \frac{1}{\partial_x\phi(x)} \right] dx\right| = \frac1\lambda\left| \frac{1}{\partial_x\phi(b)} - \frac{1}{\partial_x\phi(a)} \right| \leq \frac2\lambda.\]
+	This proves the lemma for $k = 1$.  Assume for induction the claim holds for $k \geq 1$ and $|\partial^{(k + 1)}_x \phi| \geq 1$. Without loss of generality, assume $\partial_x^{k + 1}\phi \geq 1$; in particular, $\partial_x^k \phi$ is strictly increasing on $[a, b]$, so there exists at most one point $c \in [a, b]$ such that $\partial_x^k \phi (c) = 0$. 
+
+Consider the case where $c$ exists; as $\partial_x^{k + 1}\phi \geq 1$, we know 
+	\[ |\partial_x^{k}\phi (x)| \geq \delta \qquad \text{whenever } |x - c| > \delta \]
+for any choice of $\delta > 0$. Rescaling, it follows that
+	\[  \partial_y^k (\phi(\delta^{-1/k}y)) = \delta^{-1} \partial_x^k \phi (\delta^{-1/k} y) \geq 1 \qquad \text{whenever } y \in [\delta^{1/k} a, \delta^{1/k} (c - \delta)] \cup [\delta^{1/k} (c + \delta), \delta^{1/k} b]. \]
+Hence we can apply the induction hypothesis on the rescaled function $y \mapsto \phi(\delta^{-1/k} y)$,
+	\[ \left| \left( \int_a^{c - \delta} + \int_{c + \delta}^b \right) e^{i \lambda \phi(x)} dx \right| = \left| \left( \int_{\delta^{1/k}a}^{\delta^{1/k}(c - \delta)} +\int_{\delta^{1/k}(c + \delta)}^{\delta^{1/k}b} \right) e^{i \lambda \phi(\delta^{-1/k}y)} \delta^{1/k} dy \right| \lesssim \delta^{-1/k} \lambda^{-1/k}, \]
+and similarly for the integral on $[c + \delta, b]$. On the other hand, we estimate naively 
+	\[ \left| \int_{c - \delta}^{c + \delta} e^{i \lambda \phi(x)} \right| \leq 2 \delta. \]
+Choosing $\delta = \lambda^{-1/(k + 1)}$, we obtain
+	\[ \left| \int_a^b e^{i \lambda \phi(x)}  dx \right| \lesssim \delta^{-1/k} \lambda^{-1/k} + 2 \delta \sim \lambda^{- \frac{1}{k + 1}}. \]	
+This completes the proof for this case. 	
+
+Consider the case where $\partial_x^k \phi (x) \neq 0$	for all $x \in [a, b]$, e.g. without loss of generality $\partial_x^k \phi > 0$. As $\partial_x^{k + 1} \phi \geq 1$, we know that 
+	\[ \partial_x^k (x) \geq \delta \qquad \text{whenever } x \in [a + \delta, b]. \]
+Following the argument from the previous case, we have
+	\[ \left| \int_{a + \delta}^b e^{i \lambda \phi(x)} dx \right|  \lesssim \lambda^{-1/k} \delta^{-1/k}\]
+and the naive estimate
+	\[ \left| \int_a^{a + \delta} e^{i \lambda \phi(x)} dx \right| \leq \delta. \]	
+Choosing $\delta = \lambda^{1/(k + 1)}$, we conclude the result. 	
+\end{proof}
+
+\begin{remark}
+	Monotonicity of $\partial_x \phi$ is necessary in the case $k = 1$; writing $e^{i \theta} = \cos (\theta) + i \sin (\theta)$, we can bound the integral from below,  
+		\[ \left| \int_a^b e^{i \phi(x)} dx \right| \geq \left| \int_a^b \cos(\phi(x)) dx \right|. \]
+	We can construct a phase function satisfying $|\phi' (x)| \gg 1$ whenever $\cos(\phi(x)) < 0$ and $|\phi'(x)| \ll 1$ whenever $\cos(\phi(x)) > 0$. It would follow that 
+		\[ |\{ x : \cos(\phi(x)) > 0\}| \gg |\{ x : \cos (\phi(x)) < 0 \}| \]
+	and thus
+		\[ \left| \int_a^b \cos(\phi(x)) dx \right| \sim \int_a^b \cos(\phi(x)) dx \overset{b - a \to \infty}{\longrightarrow} \infty. \]	
+\end{remark}
+
+\begin{corollary}
+	Let $\phi : \R \to \R$ be a smooth phase such that $|\partial^k_x \phi| \geq 1$ for some $k \in \N$; in the case $k = 1$, we assume further that $\partial_x \phi$ is monotone. For amplitude functions $\psi: \R \to \C$ of bounded variation,
+		\[  \left|\int_a^b e^{i \lambda \phi(x)} \psi(x) dx \right| \lesssim_k \lambda^{-1/k} \left( |\psi(b)| + ||\psi||_{\on{BV}} \right). \]
+\end{corollary}
+
+\begin{proof}
+	Integrating by parts in the Riemann-Stieltjes sense, we can write
+	\[\int_a^b e^{i \lambda \phi(x)} a(x) dx = \int_a^b \psi(x) \frac{d}{dx} \left( \int_a^x e^{i \lambda \phi(y)} dy\right) dx = \psi(b) \int_a^b e^{i \lambda \phi(y)} dy - \int_a^b \left( \int_a^x e^{i \lambda \phi(y)} dy \right) d a. \]
+	By the triangle inequality and the van der Corput lemma, it follows that 
+	\[ \left|\int_a^b e^{i \lambda \phi(x)} \psi(x) dx\right| \lesssim \lambda^{-1/k} \left( |\psi(b)| + ||\psi||_{\on{BV}} \right) \]
+	as desired. 	
+\end{proof}
+
+\begin{theorem}[van der Corput lemma on $\R^d$]
+	Let $\psi \in C^\infty_c (\R^d)$, and suppose $\phi : \R^d \to \R$ be a smooth phase such that $|\partial^\alpha \phi| \geq 1$ for some $|\alpha| > 0$ throughout the support on $\psi$. Then 
+		\[ \left| \int_{\R^d} e^{i \lambda \phi(x)} \psi(x) \, dx \right| \lesssim_{k, \phi} \lambda^{-d/k} (||\psi||_{L^\infty} + ||\nabla \psi||_{L^1})\]
+\end{theorem}
+
+\section{Stationary phase}
+
+It follows from the principle of non-stationary phase that determining the asymptotics of an oscillatory integral reduces to localising the integral to a neighborhood of the stationary set $\nabla \phi = 0$. In the case where the critical points are isolated, the \textit{principle of stationary phase} roughly states that 
+	\[ \int_{\R^d} e^{i \lambda \phi(x)} a(x) \, dx \sim \sum_{\nabla \phi(x_0) = 0} e^{i \lambda \phi(x_0)}  a(x_0) |\{ x \approx x_0 : \phi(x) = \phi(x_0) + O(\lambda^{-1}) \}|. \]
+The size of the region where the phase is close to stationary depends on the order to which $\phi$ vanishes at the critical point. The model cases are the monomial phases $\phi(x) = |x|^k$ which vanish up to order $k - 1$, in which case we expect the asymptotic expansion
+	\[ \int_{\R^d} e^{i \lambda |x|^k} a(x) \, dx \sim a(0) \lambda^{-\frac{d}{k}} + O(\lambda^{-\frac{d}{k} - 1}), \]
+which is consistent with the van der Corput lemma.  
+
+\subsection{Fresnel phase}
+
+To motivate our approach, consider the quadratic case $\phi(x) = |x|^2$. In this case, the oscillating factor takes the form of a complex Gaussian. Recall the Fourier transform of a Gaussian
+	\[ \int_{\R^d} e^{- \pi z |x|^2} e^{-2\pi i x \cdot \xi} \, dx = z^{-d/2} e^{-\pi |\xi|^2/z}, \]
+for $\Re z > 0$. Passing $z \to -i \lambda/\pi$ in the sense of tempered distributions, it follows from Plancharel's theorem and, formally, taking the Taylor expansion of the exponential, 
+	\begin{align*}
+		 \int_{\R^d} e^{i \lambda |x|^2} a(x) \, dx 
+		 	&= (-i \lambda/\pi)^{-d/2} \int_{\R^d} e^{- i \pi^2|\xi|^2/\lambda} \widehat a(\xi) \, d\xi \\
+		 	&= (-i \lambda/\pi)^{-d/2} \sum_{n = 0}^\infty  \int_{\R^d} ( {-i \pi^2 |\xi|^2}\lambda^{-1})^n \frac{1}{n!} \widehat a (\xi) \, d\xi \\
+		 	&= (i \pi)^{\frac{d}{2}} \sum_{n = 0}^\infty \lambda^{-n -\frac{d}{2}} \frac{i^n}{n!} (\Delta^n a)(0)
+	\end{align*}	 
+for $a \in C^\infty_c (\R^d)$. While some care needs to be taken when dealing with the convergence of the sum, nonetheless we expect the full asymptotic expansion to take the above form. 
+
+\subsection{Quadratic phase}
+With this primer at hand, we now consider the case of non-degenerate quadratic phases $\phi(x) = x \cdot Qx$ where $Q \in \R^{d \times d}$ is a non-degenerate symmetric matrix. An analogous formula for the Fourier transform of the corresponding ``Gaussian'' holds, however our approach will need to be more subtle to deal with negative eigenvalues. Writing
+	\[ \int_{\R^d} e^{i \lambda x \cdot Qx} a(x) \, dx = \int_{\R^d} e^{x \cdot (i \lambda Q - I) x} e^{|x|^2} a(x) \, dx, \]
+we take the Fourier transform of $e^{x \cdot (i \lambda Q - I) x} \in \cS (\R^d)$ and $e^{|x|^2} a(x) \in C^\infty_c (\R^d)$. To compute the former, we argue by complex analysis; given symmetric matrices $A, B \in \R^{d \times d}$ with $A$ positive definite, we define the square root of $Z := A + iB$ via analytic continuation along the map $s \mapsto A + i s B$ for $s \in [0, 1]$. 
+
+\begin{lemma}
+	Let $A, B \in \R^{d \times d}$ be symmetric matrices with $A$ positive definite. Denoting $Z = A + iB$, we have
+	\begin{align*}
+		\int_{\R^d} e^{-\pi x\cdot Z x}dx = \sqrt{\det(Z^{-1})}.  
+	\end{align*}
+\end{lemma}
+
+\begin{proof}
+	We first prove the case $B = 0$, and conclude the general case via analytic continuation. Let $\sqrt A \in \R^{d \times d}$ be the positive-definite square root of $A$, then making the change of variables $y = \sqrt A x$ gives
+		\[ \int_{\R^d} e^{-\pi x \cdot A x} dx = \frac{1}{\det \sqrt A} \int_{\R^d} e^{-\pi |y|^2} dy = \sqrt{\det (A^{-1}) }. \]
+	For the general case, define $Z(s) := A + i s B$ and consider the analytic map
+		\[ \Phi(z) := \int_{\R^d} e^{-\pi x \cdot Z(s) x} dx. \]
+	Observe $\Re Z(s) = A - (\Im s) B$ is positive definite on the strip
+	\[ |\Im s| < \frac{1}{||B|| \ || A^{-1}||}, \]
+	where $|| \cdot ||$ is the usual matrix operator norm induced by the Euclidean metric. It follows from the first case that $\Phi(s) = \sqrt{\det( Z(s)^{-1})}$ on the strip whenever $\Re s = 0$. By the uniqueness theorem, this result extends globally to the entire strip, particularly when $s = 1$ which is exactly the desired identity. 
+\end{proof}
+
+
+\begin{proposition}
+	Let $A, B \in \R^{d \times d}$ be symmetric matrices with $A$ positive-definite. Denoting $Z = A + iB$, we have
+		\begin{equation*}
+			\int_{\R^d} e^{-\pi x \cdot Z x} e^{-2\pi i \xi \cdot x} dx = e^{-\pi \xi \cdot Z^{-1} \xi}\sqrt{\det(Z^{-1})} .
+		\end{equation*}	\label{prop:fouriergauss}
+\end{proposition}
+
+\begin{proof}
+	For brevity denote the left-hand and right-hand sides by $L(\xi)$ and $R(\xi)$ respectively. We claim that
+		\[ \nabla L(\xi) = -2\pi Z^{-1} \xi L(\xi), \qquad \nabla R(\xi) = -2\pi Z^{-1} \xi R(\xi). \]
+	The previous lemma furnishes $L(0) = R(0)$, so $L$ and $R$ satisfy an ordinary differential equation with the same initial data. We conclude from uniqueness the desired equality $L \equiv R$ from the claim. To prove the claim, recall
+		\[ \frac12 \nabla (x \cdot A x) = Ax \]
+	for any symmetric matrix $A$. The claim therefore follows for $R$ by the chain rule. To prove the claim for $L$, we integrate by parts 
+		\begin{align*}
+			\nabla_\xi L(\xi) 
+				&= -2\pi i \int_{\R^d}  x e^{-\pi x \cdot Z x} e^{i \xi x} dx \\
+				&=  i Z^{-1}  \int_{\R^d} e^{2\pi i x \cdot \xi} \left( \nabla_x e^{-\pi x \cdot Z x} \right) dx \\
+				&= -i Z^{-1} \int_{\R^d} \left(\nabla_x e^{2 \pi i x \cdot \xi} \right) e^{-\pi x \cdot Z x} dx \\
+				&= -2\pi Z^{-1} \xi \int_{\R^d} e^{-\pi x \cdot Z x} e^{2 \pi i x \cdot \xi} dx = -Z^{-1} \xi L(\xi). 
+		\end{align*}
+	This completes the proof of the claim and thereby the lemma.	
+\end{proof}
+
+\begin{theorem}[Asymptotics for quadratic phase]
+	Let $a \in C^\infty_c (\R^d)$, and suppose $Q \in \R^{d \times d}$ is a non-degenerate symmetric matrix, then 
+		\[ \int_{\R^d} e^{- i \lambda x \cdot Q x} a(x) \, dx = \sum_{n = 0}^N c_n \lambda^{-n - \frac{d}{2}} + O_{N, a, d} (\lambda^{-N - \frac{d}{2} - 1}) \]
+	for coefficients
+		\[ c_n := \left(\frac{ i\pi}{\det Q}\right)^{\frac{d}{2}} \frac{i^n}{n!} (\Delta^n_Q a) (0), \qquad \Delta_Q = \sum_{j, k = 1}^d Q^{jk} \partial_j \partial_k. \]	\label{thm:quadratic}
+\end{theorem}
+
+\begin{proof}
+	By diagonalising via an orthonormal change of variables, we can assume without loss of generality that the phase takes the form $x \cdot Q x = \mu_1 |x_1|^2 + \dots + \mu_d |x_d|^2$, where $\mu_j \in \R$ are the eigenvalues of $Q$. Denote $b(x) := e^{|x|^2} a(x)$, we use Plancharel's theorem and Proposition \ref{prop:fouriergauss} to write
+		\begin{align*}
+			\int_{\R^d} e^{i \lambda x \cdot Qx} a(x) \, dx 
+				&= \int_{\R^d} e^{ x \cdot (i \lambda Q -  I) x} e^{|x|^2} a(x) \, dx = \int_{\R^d} \prod_{j = 1}^d e^{(i \lambda \mu_j - 1) |x_j|^2} e^{|x|^2} a(x) \, dx \\
+				&= \pi^{d/2} \prod_{j = 1}^d (1 - i \lambda \mu_j)^{-1/2} \int_{\R^d} \prod_{j = 1}^d e^{- \pi^2 |\xi_j|^2/(i \lambda \mu_j - 1)} \, \widehat b(\xi) \, d \xi. 
+		\end{align*}	
+\end{proof}
+
+
+\subsection{Non-degenerate phase}
+
+We generalise the previous discussion by considering phases $\phi : \R^d \to \R$ with a unique critical point $x_0 \in \R^d$ which is non-degenerate, i.e. $\det \nabla^2 \phi(x_0) \neq 0$. A fact unique to phases which vanishes only up to first order is the \textit{Morse lemma}, which states that any such phase admits local coordinates under which it takes the form of a quadratic form. 
+
+\begin{lemma}[Morse lemma]
+	Let $\phi : \R^d \to \R$ be a smooth function and $x_0 \in \R^d$ a non-degenerate isolated critical point of $\phi$. Then there exists a local diffeomorphism $\Phi : \R^d \to \R^d$ such that $\nabla \Phi (x_0) = I$ and 
+		\[ \phi (x) = \phi(x_0) + \frac12  \Phi(x) \cdot \nabla^2 \phi (x_0) \Phi(x) . \]
+\end{lemma}
+
+\begin{theorem}[Asympotic expansion for non-degenerate phase]
+	Let $a \in C^\infty_c (\R^d)$, and suppose $\phi : \R^d \to \R$ is a smooth phase admitting a unique non-degenerate critical point $x_0 \in \R^d$ in the support of $a$, then 
+		\[ \int_{\R^d} e^{i \lambda \phi(x)} a(x) \, dx = \sum_{n = 0}^N c_n \lambda^{-n - \frac{d}{2}} e^{i \lambda \phi(x_0)} + O_{N, a, d} (\lambda^{-N - \frac{d}{2}  - 1}) \]
+	for some coefficients $c_n$ depending only only finitely many derivatives of $a$ and $\phi$ at $x_0$. In particular, 
+		\[ c_0 := \frac{(2\pi)^{d/2} e^{i\frac{\pi}{4} \operatorname{sgn} \nabla^2 \phi(x_0)}  }{ |\det \nabla^2 \phi(x_0)|^{1/2}} a(x_0) . \]	
+\end{theorem}
+
+\begin{proof}
+	If $a$ vanishes in a neighborhood of $x_0$, the claim follows from the principle of non-stationary phase, so localising we can assume that the change of variables $y = \Phi(x)$ from the Morse lemma is global on the support of $a$. Applying the change of variables, 
+		\[ \int_{\R^d} e^{i \lambda \phi(x)} a(x) \, dx = e^{i \lambda \phi(x_0)} \int_{\R^d} e^{\frac12 i \lambda y \cdot \nabla^2 \phi(x_0) y} (a \circ \Phi^{-1})(y) |\det \nabla \Phi^{-1} (y)| \, dy. \]
+	Noting $(a \circ \Phi^{-1}) (0) = a(x_0)$ and $\det \nabla \Phi^{-1} (0) = 1$, we see that Theorem \ref{thm:quadratic} completes the proof. 	
+\end{proof}
+
+
+\begin{theorem}[Asymptotic expansion for finite-order vanishing phase]
+	Let $a \in C^\infty_c (\R)$, and suppose $\phi : \R \to \R$ is a smooth phase admitting a unique critical point $x_0 \in \R$ in the support of $a$. If $\phi(x_0)$ vanishes up to order $k - 1$, that is $\phi^{(1)} (x_0) = \dots = \phi^{(k - 1)} (x_0) = 0$ and $\phi^{(k)} (x_0) \neq 0$, then 
+		\[ \int_{\R} e^{i \lambda \phi(x)} a(x) \, dx = \sum_{n = 0}^N c_n \lambda^{-n/k} e^{i \lambda \phi(x_0)} + O_{N, a, \phi ,k} (\lambda^{-(N + 1)/k}) \]
+	for some coefficients $c_n$ depending only on finitely many derivatives of $a$ and $\phi$ at $x_0$. In particular, 
+		\[ c_0 \sim |\phi^{(k)} (x_0)|^{-1/k} |a(x_0)| . \]	
+\end{theorem}
+
+\end{document}

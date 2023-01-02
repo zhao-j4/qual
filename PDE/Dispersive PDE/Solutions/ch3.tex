@@ -1,0 +1,1147 @@
+\begin{statement}
+	Obtain the analogue of Exercise 2.47 for the NLS, and Exercise 2.58 for the NLW, by adding the non-linear potential energy term $V(u)$ to the Hamiltonian. 
+\end{statement}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{statement}
+	Let $u \in C^2_{t, x, \loc} (\R \times \R^d \to V)$ be a classical solution to a $d$-dimenaional NLS. Show that the field $v \in C^2_{t, x, \loc} (\R \times \R^{d + 1} \to V)$ defined by 
+		\[ v(t, x_1, \dots, x_d, x_{d + 1}) := e^{-i (t + x_{d + 1})} u\left( \frac{t - x_{d  1}}{2}, x_1, \dots, x_d \right) \]
+	is a classical solution to the corresponding $(d + 1)$-dimensional NLW.	
+\end{statement}
+
+\begin{solution}
+
+\end{solution}
+
+
+\begin{statement}
+	By taking formal limits of the Lax pair formulation of the periodic Ablowitz-Ladik system discussed in Section 1.7, discover a Lax pair formalism for the one-dimensional cubic defocusing Schrodinger equation. 
+\end{statement}
+
+\begin{solution}
+
+\end{solution}
+
+
+\subsection{On scaling and other symmetries}
+\begin{statement}
+	Use the heuristic analysis of bump function initial data to give some informal justification to Principle 3.1. In the sub-critical case, develop a heuristic relationship between the $H^s_x$-norm of the initial data and the predicted time $T$ in which the linear behaviour dominates, namely 
+		\[ T \sim ||u_0||_{H^s_x}^{2/(s - s_c)}, \qquad T \sim (||u_0||_{H^s_x} + ||u_1||_{H^{s - 1}_x})^{1/(s - s_c)}\]
+	for NLS and NLW respectively. 	
+\end{statement}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{statement}
+	Let $d, p$ be arbitrary and let $\mu = +1$, and let $s < 0$ or $s < s_c$. Using the solutions,
+		\[ u_{v, \lambda} (t, x) \mapsto \lambda^{2/(p - 1)} e^{i (x \cdot v + i t |v|^2 /2 + i t \tau/\lambda^2)} Q((x - vt)/\lambda),\]
+	show that for any $\epsilon, \delta > 0$ there exists a pair of classical solutions $u, v$ to NLS with $H^s_x (\R^d)$ norm $O(\epsilon)$ and $H^s_x (\R^d)$-norm separation $O(\delta)$ at time zero, such that at some later time $t = O(\epsilon)$ the $H^s_x (\R^d)$-norm separation has grown to be as large as $O(\epsilon)$. 	
+		
+\end{statement}
+
+\begin{solution}
+
+\end{solution}
+\subsection{What is a solution?}
+\begin{statement}[Preservation of reality]
+	Show that if a classical solution to a NLW is real-value at one time $t_0$, then it is real-value for all other times for which the classical solution exists. 
+\end{statement}
+
+\begin{solution}
+	Suppose $u$ is a classical solution such that $u(t_0)$ is real-valued, observe that $\overline u$ is also a solution;
+		\[ \Box \overline u = \overline{(\Box u)} = \overline{(\mu |u|^{p - 1} u)} = \mu |\overline u|^{p - 1} \overline u. \]
+	Since $u(t_0) = \overline{u(t_0)}$, it follows from uniqueness that $u = \overline u$, i.e. $u$ is real-valued.	
+\end{solution}
+
+\begin{statement}[Preservation of symmetry]
+	Let $I \subseteq \R_t$ be a time interval and $t_0 \in I$. Suppose $u \in C^2_{t, x, \loc} (I \times \R^d_x)$ is a classical solution to a NLS (resp. NLW) such that $u(t_0)$ (resp $u[t_0]$) is spherically symmetric. For NLS, we furthermore require that $u$ obey the boundedness decay condition. Prove that $u(t)$ is in fact spherically symmetric for all times $t \in I$. 
+\end{statement}
+
+\begin{solution}
+	We claim that $v(t) = u (t) \circ T$ is also a classical solution to the NLS for any orthogonal transformation $T \in \mathsf O (\R^d_x)$. Indeed, since $\partial_t$ and $\Delta$ commute with $T$, 
+		\[ i \partial_t v  (x) + \frac12 \Delta v (x) = i \partial_t u (Tx) + \frac12 \Delta u (Tx) = \mu |u(Tx)|^{p - 1} u(Tx) = \mu |v(x)|^{p - 1} v(x). \]
+	Since $u(t_0) = u(t_0) \circ T$, it follows from uniqueness that $u = u \circ T$ for all $T \in \mathsf O(\R^d_x)$, i.e. $u$ is spherically symmetric. Arguing similarly furnishes the result for NLW. 
+\end{solution}
+
+\begin{statement}[Descent of NLS]
+	Suppose that a periodic NLS on a torus $\TT^{d + 1}$ is locally well-posed in $H^s_{x} (\TT^{d + 1})$ in either the subcritical or critical sense. Show that the same NLS, but placed on the torus $\TT^d$, is also locally well-posed in $H^s_x (\TT^d)$ in the same sense.
+\end{statement}
+
+\begin{solution}
+	Writing $\widetilde x = (x, x_{d + 1})$, we can view $H^s_x (\TT^d)$ as an element of $H^s_{\widetilde x} (\TT^{d + 1})$ via
+		\[ \widetilde{u_0} (\widetilde x) := u_0 (x).  \]
+	It is clear that this is an isometry $H^s_x (\TT^d) \to H^{s}_{\widetilde x} (\TT^{d + 1})$. Let $u_0 \in H^s_x (\TT^d)$, then by well-posedness of the periodic NLS on $\TT^{d + 1}$ there exists a time $T > 0$, a ball $\widetilde B\subseteq H^s_{\widetilde x} (\TT^{d + 1})$ containing $\widetilde{u_0}$ and a solution space $\widetilde X \subseteq C^0_t H^s_{\widetilde x} ([-T,T] \times \TT^{d + 1})$ such that for each $\widetilde{v_0} \in \widetilde B$ there exists a strong unique solution $v \in \widetilde X$ to the NLS, and the map $\widetilde{v_0} \mapsto \widetilde v$ is continuous. Let $B \subseteq H^s_x (\TT^d)$ be the pre-image of $\widetilde B$ under the aforementioned isometry, then by translation invariance of the NLS and uniqueness we know $\widetilde v \in \widetilde X$ does not depend on $x_{d + 1}$ for every $v_0 \in B$. 
+	
+	
+	\begin{alignat*}{3}
+		B &\longrightarrow \widetilde B &\longrightarrow \widetilde X &\longrightarrow X \\
+		v_0 &\longmapsto \widetilde{v_0} &\longmapsto \widetilde v &\longmapsto v 
+	\end{alignat*}
+\end{solution}
+
+\begin{statement}[Localised blow-up for focusing NLW]
+	Show that for any focusing NLW there exists smooth compactly supported initial data $(u_0, u_1)$ for which the corresponding Cauchy problem for the NLW does not admit a global classical solution. 
+\end{statement}
+
+\begin{solution}
+	Consider the following blow-up solution to the focusing NLW
+		\[ v (t, x) := \left(  \frac{2(p + 1)}{(p - 1)^2}\right)^{\frac{1}{p - 1}} (1 - t)^{-\frac{2}{p - 1}} \]
+	for $t < 1$. Let $\phi \in C^\infty_c (\R^d)$ be a smooth cut-off satisfying $\phi \equiv 1$ in the ball $|x| \leq 2$. Suppose towards a contradiction that there exists a global classical solution $u \in C^2_{t, x, \loc} (\R \times \R^d)$ to the NLW with initial data 
+		\begin{align*}
+			u_{|t = 0}		&= \phi v_{|t = 0}, \\
+			\partial_t u_{|t = 0} &= \phi  \partial_t v_{|t = 0}.
+		\end{align*}
+	By choice of cut-off, the initial data for $u$ agrees with the initial data for $v$ on the ball $|x| \leq 2$, so it follows from finite speed of propagation that $u \equiv v$ in the region $|x| \leq 2 - |t|$. However, $v$ exhibits blow-up at $t = 1$, a contradiction. 
+\end{solution}
+
+\begin{statement}[Time shifting of strong solutions]
+	Let $I \subseteq \R_t$ be a time interval containing $t_0$, and let $u$ be a strong $H^s_x$-solution to the NLS with initial data $u(t_0) = u_0$. Let $t_1$ be any other time $I$ and let $u_1:= u(t_1)$. Show that $u$ is also a strong $H^s_x$ solution to the NLS with initial data $u(t_1) = u_1$. Thus the notion of a strong solution is independent of the initial time. Also, show that the field $\widetilde u (t, x) := \overline{u (-t, x)}$ is a strong $H^s_x$-solution to NLS on the interval $-I$ with initial datum $\widetilde{u}(-t_0) = \overline{u_0}$. 
+\end{statement}
+
+\begin{solution}
+	Since $u$ is a strong $H^s_x$-solution to the NLS with initial data $u(t_0) = u_0$, we can write
+		\begin{align*}
+			u(t) 
+				&= e^{i (t - t_0) \Delta/2} u_0 - i \mu \int_{t_0}^t e^{i (t - s) \Delta/2} \left( |u(s)|^{p - 1} u(s) \right) ds \\
+				&= e^{i (t - t_0) \Delta/2} u_0 - i \mu \int_{t_0}^{t_1} e^{i (t - s) \Delta/2} \left( |u(s)|^{p - 1} u(s) \right) ds - i \mu \int_{t_1}^{t} e^{i (t - s) \Delta/2} \left( |u(s)|^{p - 1} u(s) \right) ds.
+		\end{align*}
+	By the group law for linear propagators, we can write
+		\begin{align*}
+			e^{i (t - t_1) \Delta/2} u_1
+				&= e^{i (t - t_1)\Delta/2} \left( e^{i (t_1 - t_0) \Delta/2} u_0 - i \mu \int_{t_0}^{t_1} e^{i ({t_1} - s) \Delta/2} \left( |u(s)|^{p - 1} u(s) \right) ds\right) \\
+				&= e^{i (t - t_0) \Delta/2} u_0 - i \mu \int_{t_0}^{t_1} e^{i (t - s) \Delta/2} \left( |u(s)|^{p - 1} u(s) \right) ds.
+		\end{align*}	
+	Hence, 	
+		\[u(t) = e^{i (t - t_1) \Delta/2} u_1 - i \mu \int_{t_1}^{t} e^{i (t - s) \Delta/2} \left( |u(s)|^{p - 1} u(s) \right) ds\]	
+	i.e. $u$ is a strong $H^s_x$-solution to the NLS with initial data $u (t_1) = u_1$. 	
+	
+	Denote $\widetilde{u_0} := \widetilde u(-t_0)$, then making a change of variables $s \mapsto - s$, we can write
+	\begin{align*}
+		\widetilde u(t)=\overline{u(-t)}
+			&= \overline{e^{i (-t - t_0)} u_0 - i \mu \int_{t_0}^{-t} e^{i (-t - s) \Delta/2} \left( |u(s)|^{p - 1} u(s) \right) ds} \\
+			&= e^{i (t + t_0)} \overline{u_0} + i \mu \int_{t_0}^{-t} e^{i (t + s) \Delta/2} \left( |u(s)|^{p - 1} \overline{u(s)} \right) ds \\
+			&= e^{i (t + t_0)} \widetilde{u_0} - i \mu \int_{-t_0}^t e^{i (t - s)} \left( |\widetilde{u} (s)|^{p - 1} \widetilde{u} (s) \right) ds,
+	\end{align*}
+	i.e. $\widetilde u$ is a strong $H^s_x$-solution to the NLS on the interval $-I$ with initial datum $\widetilde u (-t_0) = \widetilde{u_0}$. 
+\end{solution}
+
+\begin{statement}[Gluing of strong solutions]
+	Let $I, J$ be intervals which intersect at a single time $t_0$. Suppose that $u, v$ are strong $H^s_x$-solutions to the NLS on $I \times \R^d$ and $J \times \R^d$ respectively with initial data $u(t_0) = v(t_0) = w_0$. Show that the combined field $w$ on $(I \cup J) \times \R^d$ is also a strong solution to the NLS. 
+\end{statement}
+
+\begin{solution}
+	It is clear that $w \in C^0_{t, \loc} H^s_x ((I \cup J) \times \R^d)$. 
+\end{solution}
+
+\begin{statement}
+	Let $p$ be an odd integer and $s > d/2$. Show that every weak $H^s_x$-solution to the NLS is also a strong $H^s_x$-solution. 
+\end{statement}
+
+\begin{solution}
+	Let $u \in L^\infty_{t, \loc} H^s_x (I \times \R^d)$ be a weak distributional solution to the NLS, then, arguing as we did in Exercise 3.10, time shifting holds a.e. $t_1 \in I$, i.e. denoting $u_1 := u(t_1)$ we have $u_1 \in H^s_x (\R^d)$ and we can write
+		\[ u(t) = e^{i (t - t_1) \Delta/2} u_1 - i \mu \int_{t_1}^t e^{i (t - s) \Delta/2} \left( |u (s)|^{p - 1} u(s) \right) ds. \]
+	Thus for a.e. $t_1, t_2 \in I$ we have
+		\begin{align*}
+			u(t_2) - u(t_1) = \left(e^{i (t_2 - t_1) \Delta/2} - 1\right) u_1 - i \mu  \int_{t_1}^{t_2} e^{i (t_2 - s) \Delta/2} \left( |u(s)|^{p - 1} u(s)  \right)ds.
+		\end{align*}
+	By the triangle inequality, we control the $H^s_x$-norm of the left-hand side by the $H^s_x$-norm of the two terms on the right. It follows from Plancharel's theorem and the dominated convergence theorem that 
+		\[ \left| \left| \left(e^{i (t_2 - t_1) \Delta/2} - 1\right) u_1 \right| \right|_{H^s_x} \overset{|t_1 - t_2| \to 0}{\longrightarrow} 0. \]
+	As $s > d/2$, we know that $H^s_x (\R^d)$ is a Banach algebra, so, writing $|u|^2 = u \overline u$, we have $|| |u|^{p - 1} u||_{H^s_x} \lesssim || u||_{H^s_x}^p$ for $p$ odd. It follows then by Minkowski's inequality and the fact that the propagator $e^{i (t -s)\Delta/2}$ is unitary that 
+		\[ \left|\left| \int_{t_1}^{t_2} e^{i (t_2 - s) \Delta/2} \left( |u(s)|^{p - 1} u(s)  \right)ds \right|\right|_{H^s_x} \lesssim ||u||_{L^\infty_{t, \loc} H^s_x} |t_2 - t_1|. \]
+	We conclude
+		\[ ||u(t_2) - u(t_1)||_{H^s_x} \overset{|t_1 - t_2| \to 0}{\longrightarrow} 0, \]
+	i.e. $u \in C^0_{t, \loc} H^s_x (I \times \R^d)$, completing the proof. 		
+\end{solution}
+
+\begin{statement}[Local uniqueness implies global uniqueness]
+	Fix $p, d, \mu, s$ and suppose that one knows that for any time $t_0$ and initial datum $u_0 \in H^s_x (\R^d)$, there exists an open time interval $I$ containing $t_0$ such that there is at most one strong $H^s_x$-solution to the NLS on $I \times \R^d$. Show that this automatically implies global uniqueness of strong solutions, or more precisely for any time interval $J$ containing $t_0$ that there is at most one strong $H^s_x$-solution to the NLS on $J \times \R^d$. 
+\end{statement}
+
+\begin{solution}
+	Let $J$ be a time interval containing $t_0$ such that there exists two strong $H^s_x$-solutions $u, v \in C^0_{t, \loc} H^s_x (J \times \R^d)$ to the NLS with initial datum $u_0 \in H^s_x (\R^d)$. We argue by connectedness to show that $u \equiv v$. 	Since the solutions are strong, the map $J \to H^s_x (\R^d)$ given by 
+		\[ t \mapsto (u - v)(t) \]
+	is continuous. In particular, the set of times $K \subseteq J$ on which $u(t) \equiv v(t)$ is closed. It is also open, since for every $t \in K$, local uniqueness furnishes an open interval $I$ containing $t$ such that $u(s) \equiv v(s)$ for all $s \in I$. It follows from connectedness that $K = J$. 
+\end{solution}
+
+\subsection{Local existence theory}
+
+\begin{statement}[$H^{k, k}$ is a Banach algebra]
+	Prove that 
+		\[ ||fg ||_{H^{k, k}_x} \lesssim_{k, d} ||f||_{H^{k, k}_x} ||g||_{H^{k, k}_x}. \]
+\end{statement}
+
+\begin{solution}
+	Observe that $|\nabla^j \langle x \rangle^k | \lesssim \langle x \rangle^{k - j}$, so when applying the Leibniz rule to $\langle x \rangle^j f$, the norm is dominated by the term where all the derivatives are applied to $f$,
+		\[ || f||_{H^{k, k}_x} \sim\sum_{j = 0}^k || \langle x \rangle^j f ||_{H^{k - j}_x} \sim \sum_{j = 0}^k \sum_{i = 0}^{k - j} || \nabla^i (\langle x \rangle^j) f ||_{L^2_x} \sim \sum_{j = 0}^k \sum_{i = 0}^{k - j} || \langle x \rangle^j \nabla^i f ||_{L^2_x} \sim \sum_{i + j \leq k} || \langle x \rangle^i \nabla^j f ||_{L^2_x}. \]
+	Writing the $H^{k, k}_x$ of $fg$ in terms of the right-hand side above and applying Holder's inequality yields
+		\[ ||f g ||_{H^{k, k}_x} \lesssim \sum_{i + j + l + m = k} || \langle x \rangle^i \nabla^j f \nabla^l g ||_{L^2_x} \leq \sum_{i + j + l + m = k} || \langle x \rangle^i \nabla^j f ||_{L^{\frac{2k}{i + j}}_x} || \nabla^l g||_{L^{\frac{2k}{l  + m}}_x} . \]
+	For indices $i + j + l + m = k$, we have
+		\[  || \langle x \rangle^i \nabla^j f ||_{L^{\frac{2k}{i + j}}_x} \lesssim ||  \langle x \rangle^i \nabla^j f ||_{H^{k - i - j}_x}, \qquad || \nabla^l g||_{L^{\frac{2k}{l  + m}}_x} \lesssim || \nabla^l g ||_{H^{k - l - m}_x},\]
+	where the cases $j = l = k$ are trivial and the cases $j, l \neq k$ follow from the Gagliardo-Nirenberg inequality. Arguing as we did in the beginning with the Leibniz rule and pointwise control of $\nabla^j \langle x \rangle^k$, we conclude
+		\begin{align*}
+			\sum_{i + j + l + m = k} || \langle x \rangle^i \nabla^j f ||_{L^{\frac{2k}{i + j}}_x} || \nabla^l g||_{L^{\frac{2k}{l  + m}}_x} 
+				&\lesssim \sum_{i + j + l + m = k} || \langle x \rangle^i \nabla^j f ||_{H^{k - i - j}_x} || \nabla^l g||_{H^{k - l - m}_x} \\
+				&\leq \left( \sum_{i + j \leq k}  || \langle x \rangle^i \nabla^j f ||_{H^{k - i - j}_x}  \right) \left( \sum_{l + m \leq k} || \nabla^l g||_{H^{k - l - m}_x} \right) \lesssim ||f||_{H^{k, k}_x} ||g||_{H^{k, k}_x},
+		\end{align*}	
+	as desired. 	
+\end{solution}
+
+\begin{statement}
+	Using the Fourier transform, show that the solution to the pseudoconformal focusing NLS
+		\[ u(x, t) = \frac{1}{(it)^{d/2}} e^{-i \tau/t} e^{i |x|^2/2t} Q(x/t) \]
+	blows up in $H^s_x$ for any $s > 0$ as $t \to 0$, but stays bounded in $L^2_x$, and even goes to zero in $H^s_x$ for $s < 0$. Using this, show that when $s < 0$, one no longer has uniqueness for weak $H^s_x$-solutions. 
+\end{statement}
+
+\begin{solution}
+	We can write
+		\[ u(x, t) = \frac{1}{(it)^{d/2}} e^{-i \tau/t} \cF^{-1} \left[e^{i \Delta/2t} \cF [Q(x/t)](\xi)\right] (x)= (-i t)^{d/2} e^{-i \tau/t} \cF^{-1} \left[ e^{i \Delta/2t} \cF Q(t \xi)\right] (x). \]
+	Making a change of variables $\eta = t \xi$, we obtain
+		\[ ||u||_{H^s} = || \langle \xi \rangle^s \cF u||_{L^2_\xi} = t^{d/2} || \langle \xi \rangle^s e^{i \Delta/2t} \cF Q(t\xi) ||_{L^2_\xi} = ||\langle \eta/t\rangle^{s} e^{i \Delta/2t} \cF Q(\eta)||_{L^2_\eta} \sim t^{-s/2} \]
+	uniform for $t \ll 1$. This proves that $u$ blows up, stays bounded, and vanishes in $H^s_x$ as $t \to 0$ for $s > 0$, $s = 0$ and $s < 0$ respectively. Extending the solution $u$ by zero for $t < 0$, we obtain an infinite family of weak $H^s_x$-solutions to the NLS for initial data $u_{|t = 0} = 0$. 
+\end{solution}
+
+\begin{statement}
+	Let $u \in \dot S^1 (I \times \R^3)$ be an $H^1_x$-well-posed solution to the quintic NLS, and suppose that $u(t_0) \in H^k (\R^3)$ for some $t_0 \in I$ and some integer $k \in \N$. Show that $u(t) \in H^k (\R^3)$ for all $t \in I$, and in fact
+		\[ ||u||_{H^k} (t) \lesssim_{||u||_{\dot S^1}} ||u||_{H^k} (t_0).  \]
+\end{statement}
+
+\begin{solution}
+	By the product rule, we can write
+		\[ |\nabla^j (|u|^4 u) | \lesssim \sum_{a + b + c + d + e = j} |\nabla^a u| \, |\nabla^b u| \, |\nabla^c u| \, |\nabla^d u| \, |\nabla^e u|. \]
+\end{solution}
+\begin{statement}[Unconditional uniqueness]
+	Let $u, v \in C^0_t \dot H^1_x (I \times \R^3)$ be a strong $H^1_x$-solution to the quintic NLS with $u(t_0) = v(t_0)$ for some $t_0 \in I$. Show that $u \equiv v$. 
+\end{statement}
+
+\begin{solution}
+	The map $t \mapsto ||u - v||_{L^6_x}$ is continuous by Sobolev embedding, so the times where $u \equiv v$ is closed. It suffices then to show local in time uniqueness, which would imply the times where $u \equiv v$ is open and thereby the entire interval $I$. From Proposition 3.21, the local well-posedness of the NLS $\dot H^1 (\R^3)$ in the critical case, we can take without loss of generality $v \in \dot S^1 (J \times \R^3)$ for a sufficiently small interval $J$ containing $t_0$. In particular, by Sobolev embedding we have $v \in L^{10}_t \dot W^{30/13}_x (J \times \R^3) \subseteq L^{10}_{t, x} (J \times \R^3)$. Recall the pointwise inequality
+		\[ \left| |u|^4 u - |v|^4 v\right| \lesssim |u - v|^5 + |u - v| \, |v|^4.\]	
+	It follows from the pointwise inequality above, the Strichartz estimates, noting $(2, 6)$ and $(10, 30/13)$ are admissible pairs with dual pairs $(2, 6/5)$ and $(10/9, 30/17)$, the triangle inequality, and Holder's inequality that	
+	\begin{align*}
+		||u - v||_{L^2_t L^6_x (J \times \R^3)} 
+			&\lesssim ||  |u|^4 u - |v|^4 v ||_{N^{0}_{t, x} (J \times \R^3)} \\
+			&\lesssim || |u - v|^5 ||_{L^{2}_t L^{6/5}_x (J \times \R^3)} + || |u - v| \, |v|^4 ||_{L^{10/9}_t L^{30/17}_x (J \times \R^3)} \\
+			&\leq || u - v||_{L^2_t L^6_x (J \times \R^3)} \left( ||u - v||^4_{L^{\infty}_{t}L^6_x (J \times \R^3)} + ||v||_{L^{10}_{t, x} (J \times \R^3)}^4 \right).
+	\end{align*}
+	This inequality can only hold if $u (t) \equiv v (t)$ in a neighborhood of $t_0$, otherwise for any $\epsilon > 0$ we can take $J$ sufficiently small such that 
+		\[ ||u - v||^4_{L^{\infty}_{t}L^6_x (J \times \R^3)} + ||v||_{L^{10}_{t, x} (J \times \R^3)}^4 < \epsilon, \]
+	which upon taking $\epsilon$ sufficiently small would contradict the previous inequality. 	
+\end{solution}
+
+
+\begin{statement}[$L^2_x$-critical well-posedness]
+	Show that the NLS is locally well-posed in $L^2_x (\R^d)$ in the critical sense for $p = 1 + \tfrac4d$ and $\mu = \pm 1$. More precisely, show that given any $R > 0$ there exists $\epsilon_0 > 0$ such that whenever $||u_*||_{L^2_x} \leq R$ and $I$ is a time interval containing zero such that 
+		\[ ||e^{i t\Delta/2} u_*||_{L^{2(d + 2)/d}_{t, x} (I \times \R^d)} \leq \epsilon_0 \]
+	then for any $u_0 \in B$ where
+		\[ B:= \{u_0 \in L^2_x (\R^d) : ||u_0 - u_*||_{L^2_x} \leq \epsilon_0\} \]	
+	there exists a unique strong $L^2_x$-solution $u \in S^0 (I \times \R^d)$ to the NLS, and, furthermore, the map $u_0 \mapsto u$ is Lipschitz $B \to S^0 (I \times \R^d)$. 
+\end{statement}
+
+\begin{solution}
+	Fix $R > 0$ and let $I$ be a small time interval. We place our non-linearity in the space $\cN = N^0 (I \times \R^d)$ and our solution in the space $\cS = S^0 (I \times \R^d)$ with norm
+		\[ || u||_{\cS} := \delta ||u||_{S^0} + ||u||_{L^{2(d + 2)/d}_{t, x}}. \]
+	Let $D : \cN \to \cS$ be the Duhamel operator and $N: \cS \to \cN$ the non-linearity, 
+		\[ DF (t) := \int_0^t e^{i(t - s) \Delta/2} F(s) ds, \qquad Nu (t) := i\mu |u(t)|^{p - 1} u(t). \]
+	It follows from the Strichartz estimates that $D$ is bounded,
+		\[ ||DF||_\cS \lesssim (1 + \delta)  ||F||_\cN \leq 2 ||F||_\cN. \]	
+	Applying Holder's inequality to the pointwise bound $|Nu - Nv| \lesssim_p |u - v| (|u|^{p - 1} + |v|^{p - 1})$, we see that $N$ is Lipschitz on balls centered at the origin with constant depending on the radius,
+	\begin{align*}
+		|| Nu - Nv ||_\cN
+				&\lesssim || |u - v| (|u|^{p - 1}  + |v|^{p - 1}) ||_{L^{2(d + 2)/(d + 4)}_{t, x}} \\
+				&\leq ||u - v||_{L^{2(d + 2)/d}_{t, x}} \left( || u ||_{L^{2(d + 2)/d}_{t, x}}^{4/d} + || v||_{L^{2(d + 2)/d}_{t, x}}^{4/d} \right) \leq ||u - v||_{\cS} \left(||u||^{4/d}_\cS + ||v||_\cS^{4/d} \right).
+	\end{align*}
+	Choosing $||u||_\cS, ||v||_\cS \ll 1$, it follows from the iteration scheme Proposition 1.38 that there exists a unique solution $u \in \cS$ with $||u||_\cS \ll 1$ to the equation 
+		\[ u(t) = u_{\text{lin}} + DN u =: e^{i \Delta/2} u_0 + i\mu \int_0^t e^{i (t - s) \Delta/2} |u(s)|^{p - 1} u(s) ds \]
+	whenever $||u_{\text{lin}}||_\cS \ll 1$, and the map $u_{\text{lin}} \mapsto u$ is Lipschitz continuous. By a continuity argument, the condition $||u||_\cS \ll 1$ can be dropped to conclude $u$ is the unconditional unique solution in $\cS$. It remains to show that the linear evolution $u_{\text{lin}}$ is small in $\cS$. Indeed, by the triangle inequality and Strichartz estimates, 
+		\[ ||e^{i t \Delta/2} u_0 ||_\cS \leq || e^{i t \Delta/2} (u_0 - u_*) ||_{\cS} + ||e^{i t \Delta/2}u_* ||_{\cS} \lesssim (1 + \delta) \epsilon_0 + \delta ||u_*||_{L^2_x} + \epsilon_0, \]
+	so choosing $\delta, \epsilon_0 \ll 1$ depending on $R$ finishes the proof. 
+\end{solution}
+
+
+\begin{statement}
+	Show that the quintic NLS is locally well-posed in $\dot H^1_x (\R^3)$ in the critical sense, or, more precisely, given any $R > 0$ there exists $\epsilon_0 > 0$ such that whenever $||u_*||_{\dot H^1_x} \leq R$ and $I$ is a time interval containing zero such that 
+		\[ ||e^{it \Delta/2} u_*||_{L^{10}_{t, x} (I \times \R^3)} \leq \epsilon_0 \]
+	then for any $u_0 \in B$, where
+		\[ B:= \{u_0 \in \dot H^1_x (\R^3) : ||u_0 - u_*||_{\dot H^1_x} \leq \epsilon_0\} \]	
+	there exists a unique strong $\dot H^1_x$-solution $u \in \dot S^1(I \times \R^3)$ to the quintic NLS and, furthermore, the map $u_0 \mapsto u$ is Lipschitz $B \to \dot S^1 (I \times \R^3)$. 
+\end{statement}
+
+\begin{solution}
+	Fix $R > 0$ and let $I$ be a small time interval. We place our non-linearity in the space $\cN = \dot N^1 (I \times \R^d)$ and our solution in the space $\cS = \dot S^1 (I \times \R^d)$. Let $D : \cN \to \cS$ be the Duhamel operator and $N: \cS \to \cN$ the non-linearity,
+		\[ DF(t) := \int_0^t e^{i (t - s) \Delta/2} F(s) ds, \qquad Nu (t) := i \mu |u(t)|^4 u(t). \]
+	It follows from the Strichartz estimates that $D$ is bounded, 
+		\[ ||DF||_\cS \lesssim ||F||_\cN. \]
+	We have the pointwise bound
+		\[ |\nabla (Nu - Nv)| \lesssim (|u|^4 + |v|^4) |\nabla (u - v)| + (|u|^3 + |v|^3) |u - v| |\nabla (u - v)|. \]
+	Then
+		\[ ||Nu - Nv||_\cN \lesssim  \]		
+\end{solution}
+
+
+\begin{statement}
+	Show that the cubic NLS on the circle $\TT$ is locally well-posed in $L^2_x (\TT)$ in the sub-critical sense. Also, show persistence of regularity, or more precisely if the initial datum lies in $H^k_x (\TT)$ for some positive integer $k$ then the local $L^2_x (\TT)$ solution constructed by the iteration method is in fact a strong $H^k_x (\TT)$ solution. 
+\end{statement}
+
+\begin{solution}
+	Recall from Exercise 2.74 that global solutions to the inhomogeneous periodic Schrodinger equation $i \partial_t u + \tfrac12\Delta u = F$ satisfy 
+		\[ ||\eta (t) u||_{C^0_t L^2_x (\R \times \TT)} + ||\eta(t) u||_{L^4_{t, x} (\R \times \TT)} \lesssim_\eta ||u||_{L^2_x (\TT)} (0) + ||F||_{L^{4/3}_{t, x} (\R \times \TT)}\]
+	for any $\eta \in C^\infty_c (\R)$. Fix $R > 0$ and let $0 < T < 1$ be a small time to be chosen later, and choose a cut-off satisfying $\eta \equiv 1$ on the interval $[-T, T]$. We place our non-linearity in the space $\cN = L^{4/3}_{t, x} ([-T, T] \times \TT)$ and our solution in the space $\cS = C^0_t L^2_x ([-T, T] \times \TT) \cap L^4_{t, x} ([-T, T] \times \TT)$ endowed with the norms
+		\[ ||F||_\cN = ||F||_{C^0_t H^{s - 1}_x ([-T, T] \times \TT)}, \qquad  ||u||_\cS = ||u||_{C^0_t L^2_x ([-T, T] \times \TT)} + ||u||_{L^4_{t, x} ([-T, T] \times \TT)}.\]
+	Let $D: \cN \to \cS$ be the Duhamel operator and $N: \cS \to \cN$ the non-linearity,
+		\[ DF (t) := \int_0^t e^{i(t - s) \Delta/2} F(s) ds, \qquad Nu (t) := i\mu |u(t)|^2 u(t). \]
+	We need to verify that $D$ is bounded and $N$ is Lipschitz in an appropriately chosen ball to guarantee existence and uniqueness of a solution via iteration. 	By Duhamel's formula for the Schrodinger equation, $u = DF$ is a solution to the equation $i \partial_t u + \tfrac{\Delta}{2} u = F$ with zero initial data, so, extending $F \in \cN$ by zero in time, it follows from Exercise 2.74 and $\eta \equiv 1$ on $[-T, T]$ that 
+			\[ ||DF||_\cS \lesssim ||F||_{\cN}. \]
+	From the pointwise bound $|Nu - Nv| \lesssim |u - v| (|u|^2 + |v|^2)$ and Holder's inequality, we obtain
+	\begin{align*}
+		 ||Nu - Nv||_{\cN} 
+		 	&\lesssim |||u - v|  (|u|^2 + |v|^2) ||_{L^{4/3}_{t, x} ([-T, T] \times \TT)} \\
+		 	&\lesssim T^\alpha ||u - v||_{L^4_{t, x} ([-T, T] \times \TT)} \left( ||u||^2_{L^4_{t, x} ([-T, T] \times \TT)} + ||v||^2_{L^4_{t, x} ([-T, T] \times \TT)} \right) \lesssim_R T^\alpha ||u - v||_{\cS},
+	\end{align*}			
+	for $||u||_\cS, ||v||_\cS \lesssim R$, where the factor of $T^\alpha$ for some $\alpha > 0$ is obtained from Holder in time. Choosing $T \ll 1$ depending on $R$ and $\eta$, it follows from the iteration scheme Proposition 1.38 that there exists a unique solution $u \in \cS$ with $||u||_\cS \lesssim R$ to the equation 
+		\[ u(t) = u_{\text{lin}} + DN u =: e^{i \Delta/2} u_0 + i\mu \int_0^t e^{i (t - s) \Delta/2} |u(s)|^2 u(s) ds\]
+	whenever $||u_{\text{lin}}||_\cS \lesssim R$, which holds whenever $||u_0||_{L^2_x (\TT)} \lesssim R$ by Exercise 2.74. This furnishes a solution to the NLS in the Duhamel integral form, with map $u_0 \mapsto u$ being Lipschitz continuous from the ball in $L^2_x (\TT)$ of radius $O(R)$ to $\cS$. By a continuity argument, the condition $||u||_\cS \lesssim R$ can be dropped to conclude $u$ is the unconditional unique solution in $\cS$.
+	
+	Suppose now $u_0 \in H^k_x (\TT)$, we want to show the solution constructed above satisfies $u \in H^k_x ([-T, T] \times \TT)$. Since Schrodinger equation commutes with derivatives, it follows from Exercise 2.74 that 
+		\[ || \eta (t) u||_{C^0_t H^k_x (\R \times \TT)} + || \eta (t) u||_{L^4_t W^{k, 4}_{x} (\R \times \TT)} \lesssim_\eta ||u||_{H^k_x (\TT)}(0) + ||F||_{L^{4/3}_t W^{k, 4/3}_x (\R \times \TT)}. \]
+	Assume for induction that $u_0 \in H^{k - 1}_x (\TT)$ implies $u \in C^0_t H^{k - 1}_x ([-T, T] \times \TT) \cap L^4_{t}W^{k - 1, 4} ([-T, T] \times \TT)$. From the inequality above, it remains to control the derivatives of the non-linearity $F = |u|^2 u$. By the product rule, 
+		\[ \sum_{j \leq k} | \nabla^j (|u|^2 u)| \lesssim \sum_{a + b + c \leq k} |\nabla^a u| \, |\nabla^b u| \, |\nabla^c u|. \]	
+	We divide the sum on the right into lower order terms, where $a, b, c \leq k - 1$, and highest order terms, where one of $a, b, c$ is equal to $k$. Applying Holder's inequality and the induction hypothesis, the lower order terms are controlled by
+		\[ \sum_{a, b, c \leq k - 1} || |\nabla^a u| \, |\nabla^b u| \, |\nabla^c u| ||_{L^{4/3}_{t, x}} \leq  \sum_{a, b, c \leq k - 1} || \nabla^a u||_{L^4_{t, x}} || \nabla^b u||_{L^4_{t, x}} || \nabla^c u||_{L^4_{t, x}} < \infty,  \]	
+	while the highest order terms are controlled
+		\[ || |u|^2 |\nabla^k u| ||_{L^{4/3}_{t, x}} \leq |||u|^2||_{L^{4/3}_t L^2_{x}} || \nabla^k u||_{L^{4/3}_t L^4_x} \leq T^\alpha ||u||_{L^{4}_{t, x}}^2 ||\nabla^k u ||_{L^{4}_{t, x}} .\]
+	Choosing $T \ll 1$ concludes the proof. 		
+\end{solution}
+
+\begin{statement}[Classical well-posedness of NLW]
+	Show that an algebraic NLW is unconditionally locally well-posed in $H^s_x (\R^d) \times H^{s - 1}_x (\R^d)$ for $s > d/2$ in the sub-critical sense, thus for each $R > 0$ there exists $T > 0$ such that for all initial data $(u_0, u_1) \in B_R$ where
+		\[ B_R := \{ (u_0, u_1) \in H^s_x (\R^d) \times H^{s - 1}_x (\R^d) : ||u_0||_{H^s_x} + ||u_1||_{H^{s - 1}_x} < R \}\]
+	there exists a unique classical solution $u \in C^0_t H^s_x ([-T, T] \times \R^d) \cap C^1_t H^{s - 1}_x ([-T, T] \times \R^d)$ to the NLW for $p$ odd. Furthermore, the map $(u_0, u_1) \mapsto u$ is Lipschitz continuous. 
+\end{statement}
+
+\begin{solution}
+	Fix $R > 0$ and let $0 < T < 1$ be a small time to be chosen later. We place our non-linearity in the space $\cN = C^0_t H^{s}_x ([-T, T] \times \R^d)$ and our solution in the space $\cS  = C^0_t H^s_x ([-T, T] \times \R^d) \cap C^1_t H^{s - 1}_x ([-T, T] \times \R^d)$ endowed with the norms
+		\[ ||F||_{\cN} = ||F||_{C^0_t H^{s - 1}_x}, \qquad||u||_{\cS} =  ||u||_{C^0_t H^s_x} + ||\partial_t u||_{C^0_t H^{s - 1}_x}. \]
+	Let $D: \cN \to \cS$ be the Duhamel operator and $N : \cS \to \cN$ the non-linearity, 
+		\[ DF(t) := \int_0^t \frac{\sin((t - s) \sqrt{- \Delta})}{\sqrt{-\Delta}} F(s) ds, \qquad N u(t) := \mu |u(t)|^{p - 1} u(t).  \]	
+	We need to verify that $D$ is bounded and $N$ is Lipschitz in an appropriately chosen ball to guarantee existence and uniqueness of a solution via iteration. Recall the wave equation Strichartz estimate
+		\[ ||u||_{C^0_t H^s_x} + ||\partial_t u||_{C^0_t H^{s - 1}_x} \lesssim \langle T \rangle \left(||u_0||_{H^s_x} + ||u_1||_{H^{s - 1}_x} + ||F||_{L^1_t H^{s - 1}_x }\right) \]	
+	for $\Box u = F$ with initial data $(u_0, u_1)$. By Duhamel's formula for the wave equation, $u = DF$ is a solution to the equation $\Box u = F$ with zero initial data, so it follows from the Strichartz estimate that  
+		\[ || DF||_\cS \lesssim \langle T \rangle ||F||_{L^1_t H^{s - 1}} \lesssim T || F||_{\cN}. \] 
+	From the pointwise bound $|Nu - Nv| \lesssim |u - v| (|u|^{p - 1} + |v|^{p - 1})$ and the algebra property of $H^s_x (\R^d)$, we obtain
+		\begin{align*}
+			 || Nu - Nv||_{\cN} 
+			 	&\lesssim_p || |u - v| (|u|^{p - 1} + |v|^{p - 1}) ||_{C^0_t H^s_x}
+			 	\\
+			 	& \lesssim_{s,d} \left(|||u|^{p - 1}||_{C^0_t H^s_x} + |||v|^{p - 1}||_{C^0_t H^s_x}\right) ||u - v||_{C^0_t H^s_x} \lesssim_{R,p,d} ||u - v||_\cS,
+		\end{align*}	 
+	for $||u||_\cS, ||v||_\cS \lesssim R$. Choosing $T \ll 1$ depending on $s, d, p , R$, it follows from the iteration scheme Proposition 1.38 that there exists a unique solution $u \in \cS$ with $||u||_\cS \lesssim R$ to the equation 
+			\[ u(t) = u_{\text{lin}} + DN u =: \cos (t \sqrt{-\Delta}) u_0 + \frac{\sin(t \sqrt{-\Delta})}{\sqrt{-\Delta}} u_1 - \mu \int_0^t \frac{\sin((t - s) \sqrt{- \Delta})}{\sqrt{-\Delta}} |u(s)|^{p - 1} u(s) ds  \]
+	whenever $||u_{\text{lin}}||_\cS \lesssim R$, which holds whenever $(u_0, u_1) \in B_R$ by Exercise 2.18. This furnishes a solution to the NLW in the Duhamel integral form, with map $(u_0, u_1) \mapsto u$ being Lispchitz continuous from the ball in $H^s_x (\R^d)$ of radius $O(R)$ to $\cS$. By a continuity argument, the condition $||u||_\cS \lesssim R$ can be dropped to conclude $u$ is the unconditional unique solution in $\cS$.
+\end{solution}
+
+
+\begin{statement}[$H^1_x (\R^3)$ sub-critical NLW solutions]
+	Let $\mu = \pm 1$ and $2 \leq p < 5$. Show that the NLW is locally well-posed in $H^1_x (\R^3) \times L^2_x (\R^3)$ in the sub-critical sense. 
+\end{statement}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{statement}
+	Let $d \geq 3$, $\mu = \pm 1$ and let $p = 1 + \tfrac{4}{d - 2}$ be the $\dot H^1_x$-critical power. Show that for any $u_0 \in H^1_x (\R^d)$ with sufficiently small norm, there exists a unique global solution $u \in S^1 (\R \times \R^d)$ to the NLS with the specified initial datum. 
+\end{statement}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{statement}
+	Suppose that an NLW on $\R^d$ is locally well-posed in $H^s_x \times H^{s - 1}_x$ in the sub-critical sense for some $s \geq 0$. Assume also that one has the finite speed of propagation result for $H^s_x \times H^{s - 1}_x$-well-posed solutions. Show that the corresponding periodic NLW on $\TT^d$ is also locally well-posed in $H^s_x \times H^{s - 1}_x$. 
+\end{statement}
+
+\begin{solution}
+	Extending periodically, we can view initial data $(u_0, u_1) \in H^s_x (\TT^d) \times H^{s - 1}_x (\TT^d)$ as elements of the space $H^s_{x, \loc} (\R^d) \times H^{s - 1}_{x, \loc} (\R^d)$. Fix a cut-off $\psi \in C^\infty_c (\R^d)$ 
+	
+	Finite speed of propagation guarantees the solution remains periodic so that we can glue ends together. 
+\end{solution}
+
+
+\begin{statement}[Analytic well-posedness]
+	Consider an algebraic NLS, and let $s > d/2$ and $R > 0$. By the $H^s_x$-version of Proposition 3.8, we know that there exists $T  >0$ such that every $u_0 \in H^s_x (\R^d)$ with norm at most $R$ extends to a strong $H^s_x$-solution $u \in C^0_t H^s_x ([0, T] \times \R^d)$. Show that if $T$ is small enough, the map $u_0 \mapsto u$ is in fact a real analytic map, thus there is a power series expansion 
+		\[ u = \sum_{k = 0}^\infty \cN_k (u_0, \dots, u_0) \]
+	which converges absolutely in $C^0_t H^s_x ([0, T] \times \R^d)$, where $\cN_k: H^s_x (\R^d) \to C^0_t H^s_x ([0, T] \times \R^d)$ is $k$-multilinear. 
+\end{statement}
+
+\begin{solution}
+	Assume a priori that such a power series expansion exists, we derive explicitly $\cN_k$ via recursion using the fact that $u$ is a fixed point in the iteration scheme of Proposition 3.8,
+		\begin{align*}
+			 \sum_{k = 0}^\infty \cN_k (u_0) = u(t) 
+			 	&= e^{it \Delta/2} u_0 - i \mu \int_0^t |u(t')|^{p - 1} u(t') dt' \\
+			 	&= e^{i t\Delta/2} u_0 - i \mu \int_0^t u(t')^{\frac{p + 1}{2}}\overline{ u(t')}^{\frac{p - 1}{2}} dt'\\
+			 	&= e^{i t \Delta/2} u_0  - i \mu \int_0^t \left( \sum_{k = 0}^\infty \cN_k (u_0)\right)^{\frac{p + 1}{2}} \overline{\left( \sum_{k = 0}^\infty \cN_k (u_0)\right)}^{\frac{p - 1}{2}} dt'.
+		\end{align*}
+	Comparing terms of the same order, it is clear that $\cN_0 (u_0) = 0$ and $\cN_1 (u_0) = e^{it \Delta/2} u_0$. For $k \geq 2$, we can define the map $\cN_k$ recursively by 
+		\[ \cN_k (u_0) = - i \mu \int_0^t \sum_{n_1 + \dots + n_p = k} \prod_{j = 1}^{\frac{p + 1}{2}} \cN_{n_j} (u_0)  \prod_{j = \frac{p + 1}{2}}^p \overline{\cN_{n_j} (u_0)} dt'.\]	
+	Recall $H^s_x (\R^d)$ is a Banach algebra for $s > d/2$, i.e. there exists $C \gg 1$ such that $||uv||_{H^s_x} \leq C ||u||_{H^s_x} ||v||_{H^s_x}$, and the number of partitions $n_1 + \dots + n_p = k$ is at most $D^k$ for some $D \gg 1 $. Assume for induction that 
+		\[ ||\cN_k (u_0)||_{C^0_t H^s_x} \leq C^{k - 1} T^{k - 1} R^k  \]
+	for $k \geq 1$; the base case $k = 1$ holds since the propagator $e^{i t \Delta/2}$ is an isometry on $H^s_x (\R^d)$. Then 
+		\[ ||\cN_{k + 1} (u_0)||_{C^0_t H^s_x} \leq T \sum_{n_1 + \cdots n_p = k + 1} C^p \prod_{j = 1}^p ||\cN_{n_j} ||_{C_t^0 H^s_x} \leq T  \sum_{n_1 + \cdots + n_p = k + 1} C^{k + 1} T^{k + 1} R^{k + 1}  \]	
+\end{solution}
+
+\subsection{Conservation laws and global existence}
+
+\begin{statement}
+	Verify
+		\[ \partial_t \text{T}_{00} + \partial_j \text{T}_{0j} = 0, \qquad \partial_t \text{T}_{j0} + \partial_j \text{T}_{jk} = 0, \]
+	for the pseudo-stress-energy tensor for $C^3_{t, x, \loc}$-solutions to the NLS. Conclude that if $u \in C^3_{t, x, \loc} (I \times \R^d)$ is a solution to the NLS which also lies in $C^0_t H^s_x (I \times \R^d)$ for sufficiently large $s$, then we have mass conservation and momentum conservation. 
+\end{statement}
+
+\begin{solution}
+	We compute
+		\begin{align*}
+			 \partial_j \text{T}_{0j} 
+			 	&= \partial_j \Im (\overline u \partial_j u) = \Im (|\partial_j u|^2 + \overline u \partial_j \partial_j u) = \Im( \overline u \Delta u) \\
+			 \partial_t \text{T}_{00} 
+			 	&= \partial_t (u \overline u) = 2 \Re (\overline u \partial_t u) = 2 \Re \left(-i \mu |u|^{p + 1} + \frac{i}{2}\overline u \Delta u\right) = - \Im (\overline u \Delta u).
+		\end{align*}	 	
+	By Sobolev embedding, $u \in C^0_t H^s_x (I \times \R^d)$ and its derivative vanish at infinity in space for $s > 1 + \tfrac{d}{2}$. Hence by the divergence theorem it follows that 
+		\[ \partial_t M[u] = \int_{\R^d} \partial_t \text{T}_{00} \, dx = - \int_{\R^d} \partial_j \text{T}_{0j} \, dx = 0. \]
+	This proves conservation of mass. 
+\end{solution}
+
+\begin{statement}
+	Let $p = 3$ and $u \in S^0 (I \times \R^2) \subseteq C^0_t L^2_x (I \times \R^2)$ be a strong solution to the NLS defined on some interval $I$. Show that mass is conserved.
+\end{statement}
+
+\begin{solution}
+	Since $u \in C^0_t L^2_x (I \times \R^2)$, the set of times where $M[u(t)] = M[u(t_0)]$ is closed.  
+\end{solution}
+
+\begin{statement}
+	Let $p = 3$ and let $u_0 \in H^s_x (\R)$ for some $s \geq 0$. Show that the solution $u$ constructed in Proposition 3.23 is a strong $H^s_x$-solution and we have the bound
+		\[ ||u||_{H^s_x} (t) \lesssim \exp(Ct) ||u_0||_{H^s_x} \]
+	where $C > 0$ depends only on $s$ and initial mass. 	
+\end{statement}
+
+\begin{solution}
+	The exponents $(4, \infty)$ form an admissible pair, so, combined with continuity with respect to initial data $u_0 \mapsto u$ from $L^2_x (\R)$ to $S^0 (I \times \R)$, we have
+		\[ ||u||_{L^4_t L^\infty_x} \leq ||u||_{S^0} \lesssim ||u_0||_{L^2_x}. \]
+	Following the proof of Proposition 3.11, persistence of regularity, it follows from Gronwall's inequality and Holder's inequality that
+		\[ ||u||_{H^s_x} (t) \leq ||u_0 ||_{L^2_x} \exp \left(B \int_0^t || u ||_{L^\infty_x}^2 (s) ds \right)  \leq ||u_0 ||_{L^2_x} \exp \left(B t^{1/2} ||u||_{L^4_t L^\infty_x}^2 \right) \lesssim  ||u_0 ||_{L^2_x}  \exp \left(C t \right).\]
+\end{solution}
+
+\begin{statement}
+	Show that the energy is formally the Hamiltonian for the NLS using the symplectic structure from Exercise 2.47. Also use Noether's theorem to formally connect the mass conservation law to the phase invariance of the NLS, and the momentum conservation law to the translation invariance of NLS. 
+\end{statement}
+
+\begin{solution}
+	We formally view $L^2 (\R^d)$ as a symplectic phase space with symplectic form
+		\[ \omega (u, v)  = - 2 \int_{\R^d} \Im  (u \overline v) dx. \]
+		
+\end{solution}
+
+\begin{statement}
+	Use Exercise 3.2 to link the pseudo-stress-energy tensor and energy conservation law for $d$-dimensional NLS to the stress-energy tensor for $(d + 1)$-dimensional NLW. 
+\end{statement}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{statement}
+	Let $u \in C^3_{t, x} (I \times \R^d)$ be a classical solution to the NLS. Verify the identity
+		\[ \partial_t \left( \frac12 |\nabla u|^2 + \frac{2\mu}{p + 1} |u|^{p + 1} \right) = \partial_j \left( \frac{1}{2} \Im (\overline{\partial_{k} \partial_k u} \partial_j u) + \mu |u|^{p - 1} \Im (\overline{u} \partial_j u) \right). \]
+	If $u$ is also in $C^0_t H^{k, k}_x (I \times \R^d)$ for some sufficiently large $k$, deduce the energy conservation law. 	
+\end{statement}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{statement}
+	If $s_c \leq 1$, show that the energy functional $u \mapsto E[u]$ is well-defined and continuous on the space $H^1_x (\R^d)$. When $s_c > 1$, show that the energy is not always finite for $H^1_x (\R^d)$. 
+\end{statement}
+
+\begin{solution}
+	Recall $s_c = \tfrac{d}{2} - \tfrac{2}{p - 1}$. The linear component of the energy is clearly well-defined and continuous on $H^1_x (\R^d)$, so it remains to consider the non-linear component. By Sobolev embedding
+		\[ ||u||_{L^{p + 1}_x} \lesssim ||u||_{H^1_x} \]
+	since $1 < 2 < p + 1 < \infty$ and
+		\[ \frac12 \leq \frac{1}{p + 1} + \frac1d \]	
+	
+	
+		\[ \left|\int_{\R^d} (|u|^{p + 1} - |v|^{p + 1}) dx \right| \lesssim \int_{\R^d} |u - v| (|u|^p + |v|^p) dx \]
+	
+\end{solution}
+
+\begin{statement}
+	Let $u_0 \in H^1_x (\R^2)$ have mass strictly less than the mass of the blow-up solution. Show that there is a global strong $H^1_x$-solution to the cubic defocusing two-dimensional NLS with initial datum $u_0$. 
+\end{statement}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{statement}
+	Let $u$ be an $H^1_x$-well-posed solution to the one-dimensional cubic NLS with initial datum $u_0$; this is a global solution by Proposition 3.23 and persistence of regularity. Establish the bound
+		\[ ||u||_{H^1_x} (t) \lesssim_{||u_0||_{H^1_x}} 1. \]
+\end{statement}
+
+\begin{solution}
+	As mass is conserved, it suffices to control the homogeneous norm $\dot H^1_x$ of the solution. By Gagliardo-Nirenberg, we can control the non-linear component of the energy by a fractional power of the linear component of the energy, times a factor depending only on the conserved mass, 
+		\[ ||u||_{L^4_x} \lesssim ||u||_{L^2_x}^{3/4} ||u||_{\dot H^1_x}^{1/4}. \] 
+	By the triangle inequality, the inequality above, and conservation of mass and energy, 
+		\begin{align*}
+			 || u||_{\dot H^1_x}^2 (t) 
+			 	&\leq 2|E[u (t)]| + 2||u||_{L^4_x}^4 (t)\\
+			 	& \lesssim ||u_0||_{\dot H^1_x}^2 + ||u_0||_{L^2_x}^3 ||u_0||_{\dot H^1_x} + ||u_0||_{L^2_x}^3 ||u||_{\dot H^1_x} (t)\leq C + C ||u||_{\dot H^1_x} (t)
+		\end{align*}	 
+	where $C > 1$ depends only on the	$H^1_x$-norm of the initial data. We conclude by a bootstrap argument; choose $B \gg 1$ such that $C + C\sqrt{2B} \leq B$, assume for continuous induction that
+		\[ ||u||_{\dot H^1_x}^2 (t) \leq 2B, \]
+	for $t \in [0, T]$, then substituting into the previous inequality we obtain the stronger bound
+		\[ ||u||_{\dot H^1_x}^2 (t) \leq C + C \sqrt{2B} \leq B \]	
+	for $t \in [0, T]$. This completes the proof. 
+\end{solution}
+
+\begin{statement}
+	Consider the three-dimensional cubic NLS. Show that one has global $H^1_x$-wellposed solutions if the initial datum $u_0$ is sufficiently small in $H^1_x (\R^3)$-norm, and in the defocusing case one has global $H^1_x$-wellposedness for arbitrarily large $H^1_x (\R^3)$ initial data. 
+\end{statement}
+
+\begin{solution}
+	It follows from Gagliardo-Nirenberg that the non-linear component of energy is controlled by 
+		\[ ||u||_{L^4_x}^4 \leq C ||u||_{L^2_x} ||u||_{\dot H^1_x}^3  \]
+	for some uniform constant $C > 0$. Hence, energy is controlled by 
+		\[ E[u] \leq \frac12 ||u||_{\dot H^1_x}^2 (1 + C ||u||_{L^2_x} ||u||_{\dot H^1_x}). \]	
+	We want to consider the cases when
+		\[ ||u||_{\dot H^1_x} \lesssim E[u]. \]
+	This is trivially true in the defocusing case $\mu = +1$ and continues to hold in the	focusing case provided that we have sufficiently small initial data, $||u_0||_{H^1_x} \ll 1$. Indeed, it follows from the triangle inequality and Gagliardo-Nirenberg that 
+		\[ E[u] = \frac12 ||u||_{\dot H^1_x}^2 - \frac12 ||u||_{L^4_x}^4 \geq  \frac12 \left( ||u||_{\dot H^1_x}^2 - C ||u||_{L^2_x} ||u||_{\dot H^1_x}^3 \right) \geq \frac14 ||u||_{\dot H^1_x}^2\]
+	for $||u||_{H^1_x}^2 \leq 1/4C$. We argue by bootstrap to propagate the bound above globally provided only smallness of initial data. Suppose for continuous induction the weaker bound
+		\[ ||u||_{\dot H^1_x}^2(t) \leq 8 E[u(t)]  \]
+	for $t \in [0, T]$, then by conservation of energy and Gagliardo-Nirenberg we have
+		\[ ||u||_{\dot H^1_x}^2 (t) \leq 8 E[u_0] \leq 4 ||u_0||_{\dot H^1_x}^2 (1 + C||u_0||_{L^2_x} ||u_0||_{\dot H^1_x}) \leq \frac{1}{4C} \]
+	for $||u_0||_{\dot H^1_x}^2 \leq 1/32C$. The original bound follows, completing the bootstrap argument. Hence, provided arbitrary initial data in the defocusing case and small data in the focusing case, we obtain the bound
+		\[ ||u||_{H^1_x} \lesssim E[u] + M[u]. \]	
+	From these bounds and the energy and mass conservation laws, we see that the $H^1_x$-norm of a solution is controlled by a quantity depending only on the $H^1_x$-norm of the initial datum. We conclude from Proposition 3.19 the global well-posedness of the three-dimensional cubic NLS in $H^1_x (\R^3)$. 
+\end{solution}
+
+\begin{statement}
+	Consider the one-dimensional cubic NLS. It turns out that there is a conserved quantity of the form
+		\[ E_2 (u) := \int_\R |\partial_{xx} u|^2 + c_1 \mu |\partial_x u|^2 |u|^2 + c_2 \mu \Re ((\overline u \partial_x u)^2) + c_3 \mu^2 |u|^6 dx \]
+	for certain absolute constants $c_1, c_2, c_3$. Assuming this, conclude the bound
+		\[ ||u||_{H^2_x } \lesssim_{||u_0||_{H^2_x}} 1\]
+	for classical solutions. 		
+\end{statement}
+
+\begin{solution}
+	By conservation of mass, it suffices to prove the result for the $\dot H^2_x$-norm. Since $H^1_x (\R)$ is a Banach algebra, $\partial_x (u^2) = u \partial_x u$, and applying Exercise 3.34, we obtain
+		\[ \int_\R \Re ((\overline u \partial_x u)^2) dx \leq \int_\R |\partial_x u|^2 |u|^2 \, dx \leq || u^2 ||_{H^1_x}^2 \lesssim ||u||_{H^1_x}^4 \lesssim_{||u_0||_{H^1_x}} 1.\]
+	It follows from Gagliardo-Nirenberg and Exercise 3.34 that
+		\[ \int_{\R} |u|^6 \, dx \lesssim ||u||_{L^2}^4 ||u||_{\dot H^1_x}^2 \lesssim_{||u_0||_{H^1_x}} 1. \]
+	Collecting these inequalities, it follows from the triangle inequality and conservation of $E_2 [u]$ that	
+		\[ ||\partial_{xx} u||_{L^2_x}^2 \lesssim |E_2[u_0]| + \int_\R \Re ((\overline u \partial_x u)^2) dx + \int_\R |\partial_x u|^2 |u|^2 \, dx  + \int_{\R} |u|^6 \, dx \lesssim_{||u||_{H^2_x}} 1,\]	
+	completing the proof. 
+\end{solution}
+
+\begin{statement}
+	Show that the one-dimensional cubic periodic NLS is globally well-posed in $L^2_x (\TT)$. Also show that if the initial datum is smooth, then the solution is globally classical. 
+\end{statement}
+
+\begin{solution}
+	
+\end{solution}
+
+\begin{statement}
+	Show that for every smooth initial data $u[0]$ to the three-dimensional cubic defocusing NLW, there is a unique classical solution. 
+\end{statement}
+
+\begin{solution}
+	Uniqueness follows from finite speed of propagation for classical solutions in $C^2_{t, x, \loc} (\R \times \R^3)$. To prove existence, let $\phi_R \in C^\infty_c (\R^3)$ be a cut-off satisfying $\phi_R \equiv 1$ in the ball $|x| \leq R$, by global well-posedness there exists a solution $u_R \in C^0_t H^s_x \cap C^1_t H^{s - 1}_x$ with initial data $\phi_R u[0] \in H^s_x \times H^{s - 1}_x$ for all $s \geq 1$. Set
+		\[ u(x, t) := u_R (x, t) \]
+	for $|x| < R - |t|$. By Sobolev embedding, trading regularity in space for regularity in time using the NLW, we know that $u \in C^\infty_{t, x, \loc} (\R \times \R^3)$. Again by finite speed of propagation, $u$ is well-defined independent of $R$ and satisfies the NLW with initial data $u[0]$. 
+\end{solution}
+
+\begin{statement}
+	Consider a global $H^1_x \times L^2_x$-wellposed solution $u$ to the three-dimensional cubic defocusing NLW with initial data $(u_0, u_1) \in H^k_x \times H^{k - 1}_x$ for some $k \geq 1$, show that 
+		\[ ||u||_{H^k_x} (t) + ||\partial_t u||_{H^{k - 1}_x} (t) \lesssim_{||u_0||_{H^k_x} + ||u_1||_{H^{k - 1}_x}} (1 + |t|)^{C_k} \]
+	for some $C_k > 0$. 
+\end{statement}
+
+\begin{solution}
+	It follows from Gagliardo-Nirenberg that
+		\[ E[u_0] \lesssim_{||u_0||_{H^1_x} + ||u_1||_{L^2_x}} 1. \]
+	Hence, applying the fundamental theorem of calculus, Minkowski's inequality, and conservation of energy,
+		\[ ||u||_{H^1_x} (t) + ||\partial_t u||_{L^2_x} (t) \lesssim ||u_0||_{L^2_x} + (1 + |t|) E[u_0]^{1/2} \lesssim_{||u_0||_{H^1_x} + ||u_1||_{L^2_x}} 1 + |t|. \]
+	This proves the case $k = 1$. 	
+		
+	Assume for induction the bound for some fixed $k \geq 2$, we prove the result for $k + 1$. Observe that $k \geq 3/2$, so $H^{k}_x (\R^3)$ is a Banach algebra. It follows from the Strichartz estimate and induction that 
+		\begin{align*}
+			  ||u||_{H^{k + 1}_x} (t) + ||\partial_t u||_{H^{k}_x} (t) 
+			  	&\lesssim (1 + |t|) \left(||u_0||_{H^{k + 1}_x} + ||u_1||_{H^{k}_x} + || \mu |u|^2 u||_{L^1_t H^{k}_x (0, t)} \right) \\
+			  	&\lesssim (1 + |t|) \left(||u_0||_{H^{k + 1}_x} + ||u_1||_{H^{k}_x} +  ||  u||_{L^3_t H^{k}_x (0, t)}^3 \right) \lesssim_{||u_0||_{H^k_x} + ||u_1||_{H^{k - 1}_x}} (1 + |t|)^{2  + 3C_k}.
+		\end{align*}	  
+	For the case $k = 1$, we need a sub-linear Gronwall's inequality. 	
+\end{solution}
+
+\begin{statement}
+	Show that the NLW is the (formal) Euler-Lagrange equation for the Lagrangian
+		\[ S(u, g) = \int_{\R^{1 + d}} L(u, g) dx, \]
+	where
+		\[ L(u, g) := g^{\alpha \beta} \partial_\alpha u \partial_\beta u + \frac{2\mu}{p + 1} |u|^{p + 1}.  \]
+	Conclude that the stress-energy tensor given here coincides with the one constructed in Exercise 2.60. 		
+\end{statement}
+
+\begin{solution}
+	
+\end{solution}
+
+\begin{statement}[Positivity of the stress-energy tensor]
+	Let $u$ be a classical solution to the defocusing NLW, and let $\text{T}^{\alpha \beta}$ be the associated stress-energy tensor. Let $x^\alpha, y^\alpha$ be forward time-like or forward-like vectors. Show that $\text{T}_{\alpha\beta} x^\alpha y^\beta \geq 0$. 
+\end{statement}
+
+\begin{solution}
+
+\end{solution}
+
+\subsection{Decay estimates}
+
+\begin{statement}
+	Show that the estimate
+		\[ \int_\R \int_{\R^3} \frac{|u(t, x)|^{p + 1}}{|x|} dx dt \lesssim_{p, d, ||u_0||_{H^1_x}} 1 \]
+	continues to hold for the linear Schrodinger equation $\mu = 0$ when $5/3 < p < 7$, but fails for $p < 5/3$ or $p > 7$. 
+\end{statement}
+
+\begin{solution}
+	Decomposing space into dyadic annuli, we obtain
+		\[ \int_{\R^3} \frac{|u(t, x)|^{p + 1}}{|x|} \leq \sum_{R \in 2^\Z} \frac2R \int_{R/2 < |x| < R} |u(t, x)|^{p + 1} dx \leq \sum_{R \in 2^\Z} \frac2R \int_{|x| < R} |u(t, x)|^{p + 1} dx.\]
+	Let $(p + 1, r)$ be admissible exponents, then by Holder's and the Strichartz inequalities, 
+		\begin{align*}
+			 \int_\R \int_{|x| < R} |u(t, x)|^{p + 1} dx dt 
+			 	&\leq  \int_\R R^{3(1 - \frac{p + 1}{r})} || |u|^{p + 1} ||_{L^{\frac{r}{p + 1}}_x} (t) dt \\
+			 	&= R^{3 - 3\frac{p + 1}{r}}  || u||_{L^{p + 1}_t L^r_x}^{p + 1}  \lesssim R^{3 - 3\frac{p + 1}{r}}  ||u_0||_{L^2_x}^{p + 1}.
+		\end{align*}	 
+	Observe that $3 - 3\frac{p + 1}{r} < 1$ whenever $5/3 < p$, so the sum in large radii $R \geq 1$ converges. We argue similarly for small radii $R < 1$. Since differentiation commutes with the Schrodinger operator, the Strichartz inequalities continue to hold replacing the spatial Lebesgue norms with spatial homogeneous Sobolev norms. Thus, applying the Holder, Sobolev, and Strichartz inequalities, 
+		\begin{align*}
+			 \int_\R \int_{|x| < R} |u(t, x)|^{p + 1} dx dt 
+			 	&\leq \int_\R R^{3 (1 - \frac{p + 1}{q})} || |u|^{p + 1}||_{L^{\frac{q}{p + 1}}_x} (t) dt \\
+			 	&= R^{3 - 3 \frac{p + 1}{q}} || u ||_{L^{p + 1}_t L^q_x} \lesssim R^{3 - 3 \frac{p + 1}{q}} ||u||_{L^{p + 1}_t \dot W^{1, r}_x}^{p + 1} \lesssim R^{3 - 3 \frac{p + 1}{q}} ||u_0||_{\dot H^1_x}^{p + 1}
+		\end{align*}
+	where $\tfrac1r = \tfrac1q + \tfrac13$. Observe that $3 - 3 \frac{p + 1}{q} > 1$ whenever $p < 7$, so the sum in small radii $R < 1$ converges. More precisely, collecting the two inequalities, we can write
+		\begin{align*}
+			 \int_\R \int_{\R^3} \frac{|u(t, x)|^{p + 1}}{|x|} dx dt 
+			 	&\leq 2 \left(\sum_{R \geq 1 \, : \, R \in 2^\Z} + \sum_{R < 1 \, : \, R \in 2^\Z}  \right) \frac1R \int_\R \int_{|x| < R} |u(t, x)|^{p + 1} dx dt \\
+			 	&\lesssim \sum_{R \geq 1 \, : \, R \in 2^\Z} R^{2 - 3\frac{p + 1}{r}}  ||u_0||_{L^2_x}^{p + 1} + \sum_{R < 1 \, : \, R \in 2^\Z}  R^{2 - 3 \frac{p + 1}{q}} ||u_0||_{\dot H^1_x}^{p + 1} \lesssim ||u_0||_{H^1_x}^{p + 1}.
+		\end{align*}	 
+	A priori this is a stronger inequality than what needed to be shown, however they are in fact equivalent. Indeed, since the linear Schrodinger equation is invariant by scalar multiplication, given any solution $u$ we normalize the initial data by writing $v := u/||u_0||_{H^1_x}$, then the original inequality states
+		\[ \int_\R \int_{\R^3} \frac{|v(t, x)|^{p + 1}}{|x|} dx dt \lesssim_{p} 1. \]
+	Writing in terms of $u$ and rearranging, we obtain
+		\[ \int_\R \int_{\R^3} \frac{|u(t, x)|^{p + 1}}{|x|} dx dt \lesssim_{p} ||u_0||_{H^1_x}^{p + 1}. \]
+	Using this stronger inequality, we show that the inequality fails in the cases $p < 5/3$ and $p > 7$ using scaling invariance. Consider the family of solutions $u_\lambda (t, x) := u(t/\lambda^2, x/\lambda)$, then 
+		\[ \int_{\R} \int_{\R^3} \frac{|u_\lambda (t, x)|^{p + 1}}{|x|} dx dt  \lesssim ||u_\lambda||_{H^1_x}^{p + 1} (0). \]
+	By a change of variables
+		\[ ||u_\lambda ||_{H^1_x}^{p + 1} (0) \sim \lambda^{\frac32 (p + 1)} ||u_0 ||_{L^2_x}^{p + 1} + \lambda^{\frac12 (p + 1)} ||\nabla u_0 ||_{L_x^2}^{p + 1},\]
+	and
+		\[ \int_{\R} \int_{\R^3} \frac{|u_\lambda (t, x)|^{p + 1}}{|x|} dx dt = \lambda^4 \int_\R \int_{\R^3} \frac{|u(t, x)|^{p + 1}}{|x|} dx dt. \]		
+	If $p < 5/3$, then $\tfrac12 (p + 1) < \tfrac32 (p + 1) < 4$, so rearranging an sending $\lambda \to \infty$ shows the inequality fails. Similarly, if $p > 7$, then $\tfrac32 (p + 1) > \tfrac12 (p + 1) > 4$, so sending $\lambda \to 0$ shows the inequality fails. 
+\end{solution}
+
+\begin{statement}
+	For simplicity let us work with a global classical solution $u : \R \times \R^3 \to \C$ to the three-dimensional linear Schrodinger equation. Define the ``two-particle'' field $U: \R \times \R^6 \to \C$ by 
+		\[ U(t, x, y) := u(t, x) u(t, y). \]
+	Show that $U$ solves the six-dimensional linear Schrodinger equation. Apply (2.37) to the solution $U$ with the weight $a(x, y) := |x - y|$ and deduce another proof of the interaction Morawetz inequaltiy
+		\[ \int_{t_0}^{t_1} \int_{\R^3} |u(t, x)|^4 dx dt \lesssim_{||u_0||_{H^1_0}} 1\]
+	in the linear case. How does the argument change when one places a defocusing non-linearity in the equation?	
+\end{statement}
+
+\begin{solution}
+	We compute
+		\[ \Delta_{x, y} U (t, x ,y) = u(t, x) \Delta_y u(t, y) + u(t, y) \Delta_x u(t, x), \qquad \partial_t U (t, x, y) = u(t, y) \partial_t u (t, x) + u(t, x) \partial_t u(t, y). \]
+	Since $u$ satisfies the three-dimensional linear Schrodinger equation, $U$ satisfies
+		\[ i\partial_t U(t, x, y) + \frac12 \Delta_{x, y} U (t, x, y) = \left( i \partial_t u(t, x) + \frac12 \Delta_x u(t, x) \right) u(t, y) + \left( i \partial_t u(t, y) + \frac12 \Delta_y u(t, y) \right) u(t, x) = 0. \]	
+		
+\end{solution}
+
+\begin{statement}[Morawetz inequality for the wave equation]
+	Let $u: I \times \R^3 \to \C$ be a classical solution to a three-dimensional defocusing NLW, and let $\text{T}^{\alpha \beta}$ be the associated stress-energy tensor. Using (3.34) and the identity
+		\[ \text{T}^{jk} = \Re (\partial_j u \overline{\partial_k u}) - \frac{\delta_{jk}}{4} \Box (|u|^2) + \frac{p \delta_{jk}}{2 (p + 1)} |u|^{p + 1} \]
+	for the spatial component of the stress-energy tensor, establish the identity
+		\[ \partial_t \int_{\R^3} \frac{x_j}{|x|} \text{T}^{0j} \, dx = \int_{\R^3} \frac{|\slashed \nabla u|^2}{|x|} + \frac{p}{p + 1} \frac{|u|^{p + 1}}{|x|} - \frac{1}{2|x|} \Box (|u|^2) dx. \]
+	Integrate this in time and use the Hardy inequality to establish the Morawetz inequality
+		\[ \int_I \int_{\R^3} \frac{|\slashed \nabla u|^2}{|x|} dx dt + \int_I \int_{\R^3} \frac{|u|^{p + 1}}{|x|} dx dt + \int_I |u(t, 0)|^2 dt \lesssim_p E[u]. \]		
+\end{statement}
+
+\begin{solution}
+	Integrating in time, we obtain
+\end{solution}
+
+\begin{statement}
+	Let $u$ be a classical solution to a NLS. Verify the identity
+		\[ E_{\text{pc}} [u(t), t] = t^2 E[u(t)] - t \int_{\R^d} x_j \text{T}_{0, j} (t, x) dx + \int_{\R^d} \frac12 |x|^2 \text{T}_{00} (t, x) dx \]
+	which connects the pseudoconformal energy to the ordinary energy and the pseudo-stress-energy tensor. Use this to verify the evolution law
+		\[ \partial_t E_{\text{pc}} [u(t), t] = - \frac{d \mu t(p - p_{L^2_x})}{p +1} \int_{\R^d} |u(t, x)|^{p + 1} dx. \]
+	From this and Gronwall's inequality, deduce the estimate
+		\[ ||u||_{L^{p + 1}_x}^{p + 1} \lesssim_{d, p} t^{-2} ||x u||_{L^2_x}^2 (0) \]
+	in the defocusing, $L^2_x$-supercritical case, as well as the estimate
+		\[ ||u||_{L^{p + 1}}^{p + 1} \lesssim_{d, p, t_0} t^{-d (p - 1)/2} \left( ||x u||_{L^2_x}^2 (0) + \int_0^{t_0} \int_{\R^d} |u(t, x)|^{p + 1} dx dt \right)\]
+	in the defocusing, $L^2$-subcritical case. 				
+\end{statement}
+
+\begin{solution}
+	
+\end{solution}
+
+\begin{statement}
+	Let $f \in C^\infty_t \cS_x (I \times \R^3)$, derive the Klainerman-Sobolev inequality
+		\[ ||\nabla_{t, x} f||_{L^\infty_x}(t) \lesssim \langle t \rangle^{-1} \sum_{m \leq 3} \sum_{K_1, \dots, K_m}||\nabla_{t, x} K_1 \dots K_m f||_{L^2_x} (t). \]
+\end{statement}
+
+\begin{solution}
+	
+\end{solution}
+
+\subsection{Scattering theory}
+
+\begin{statement}
+	Complete the proof of Proposition 3.28.
+\end{statement}
+
+\begin{solution}
+	Let $u_+ \in H^1_x (\R^3)$ and $T > 0$ be a large time to be chosen later. We place our non-linearity in the space $\cN = L^{10/7}_t W^{1, 10/7}_x ([T, \infty) \times \R^3)$ and our solution in the space $\cS = S^1 ([T, \infty) \times \R^3)$ with the norm
+		\[ ||u||_{\cS} := ||u||_{L^5_{t, x}} + ||u||_{L^{10/3}_t W^{1, 10/3}_x} + \delta ||u||_{S^1}. \]
+	Let $D: \cN \to \cS$ be the Duhamel operator, $L: \cN \to \cS$ be the linear evolution from infinity
+		\[ DF (t) = \int_0^t e^{i (t - s)\Delta/2} F(s) ds, \qquad LF (t) = \int_t^\infty e^{i (t - s) \Delta/2} F(s) ds = e^{i t \Delta/2} \int_\R e^{-i s \Delta/2} F(s) ds - DF(t),\]
+	and $N : \cS \to \cN$ the non-linearity, 
+		\[ Nu (t) = i \mu |u(t)|^2 u(t). \]
+	Observe that $LF$ is the solution the Schrodinger equation $(i \partial_t + \Delta/2) LF = F$ with initial data $LF(0) = \int_\R e^{-i s \Delta/2} F(s) ds$. It follows from the Strichartz estimates  that $L$ is bounded, 
+		\[ ||LF||_\cS \lesssim ||LF||_{S^1} \lesssim \left|\left| \int_\R e^{-i s \Delta/2} F(s) ds \right| \right|_{H^1_x} + ||F||_{N^1} \leq 2 ||F||_{N^1} \leq 2||F||_\cN . \]
+	For the iteration to converge, we need a sufficiently small Lipschitz constant for the non-linearity $N$. Recall the pointwise bounds
+		\begin{align*}
+			 |Nu - Nv| 
+			 	&\lesssim |u - v|(|u|^2 + |v|^2), \\
+			  |\nabla (Nu - Nv) |
+			  	&\lesssim (|u|^2 + |v|^2) |\nabla (u - v)| + (|u| + |v|) |u - v| |\nabla (u - v)| 
+		\end{align*}	 
+	Applying the bounds above, Holder's inequality and Sobolev embedding, we obtain
+		\begin{align*}
+			||Nu - Nv||_{\cN}
+				&\lesssim || u - v ||_{L^{10/3}_{t} W^{1, 10/3}_x} (||u||^2_{L^5_{t, x}} + ||v||_{L^5_{t, x}}^2) \lesssim || u - v ||_{L^{10/3}_{t} W^{1, 10/3}_x} (||u||^2_{L^5_{t} W^{1, 30/11}_x} + ||v||_{L^5_{t} W^{1, 30/11}_x}^2) .
+		\end{align*}	
+	Choosing $||u||_\cS, ||v||_\cS \ll 1$, it follows from the iteration scheme Proposition 1.38 that there exists a unique solution $u \in \cS$ with $||u||_\cS \ll 1$ to the equation 	
+		\[ u(t) = u_{\text{lin}} + LN u = e^{i t \Delta/2} u_+ + i \mu \int_t^\infty e^{i (t - s) \Delta/2} (|u(s)|^2 u(s)) ds  \]
+	whenever $||u_{\text{lin}} ||_\cS \ll 1$, and the map $u_{\text{lin}} \mapsto u$ is Lipschitz continuous. By a continuity argument, the condition $||u||_\cS \ll 1$ can be dropped to conclude $u$ is the unconditional unique solution in $\cS$. It remains to show that the linear evolution $u_{\text{lin}}$ is small in $\cS$. 	Indeed, by Sobolev embedding and the Strichartz estimate we have
+		\begin{align*}
+			 ||e^{it \Delta/2} u_+ ||_{L^5_{t, x} (\R \times \R^3)} + ||e^{it \Delta/2} u_+ ||_{L^{10/3}_t W^{1, 10/3}_{x} (\R \times \R^3)}  
+			 	&\lesssim  ||e^{it \Delta/2} u_+ ||_{L^5_{t} W^{1, 30/11}_x (\R \times \R^3)} +  ||e^{it \Delta/2} u_+ ||_{L^{10/3}_{t} W^{1, 10/3}_x (\R \times \R^3)} \\
+			 	& \lesssim ||e^{i t \Delta/2} u_+ ||_{S^1 (\R \times \R^3)} \lesssim ||u_+||_{H^1_x (\R^3)}.
+		\end{align*}	 
+	Choosing $T \gg 1$ and $\delta \ll 1$, it follows from monotone convergence that 
+		\[ ||e^{it \Delta/2}u_+ ||_{\cS} =  ||e^{it \Delta/2} u_+ ||_{L^5_{t, x} ([T, \infty) \times \R^3)} + ||e^{it \Delta/2} u_+ ||_{L^{10/3}_t W^{1, 10/3}_{x} ([T, \infty) \times \R^3)} + \delta || e^{i t \Delta/2} u_+||_{S^1 ([T, \infty) \times \R^3)}  \ll 1. \]	
+	Moreover, replacing $u_+$ with the perturbation $u_+ - v_+$, we can choose $T$ uniform in $||v_+||_{H^1_x} \ll 1$ by the triangle inequality and the same Strichartz estimates argument. Observe that $u$ is a strong $H^1_x$-solution to the NLS with initial data $u(T)$, 
+		\begin{align*}
+			 e^{i (t - T)\Delta/2} u(T) - i \mu \int_T^t e^{i (t - s)\Delta/2} (|u(s)|^2 u(s)) ds
+			 	&= e^{i t\Delta/2} u_+ + i \mu \int_t^\infty e^{-i s \Delta/2} (|u(s)|^2 u(s)) ds = u(t).
+		\end{align*} 
+	It follows from global $H^1_x$-wellposedness that this solution extends uniquely to $S^1 ([0, \infty) \times \R^3)$, so in particular $u$ will take some value $u(0) \in H^1_x (\R^3)$ at time $t = 0$. This gives existence of the wave map. 
+\end{solution}
+
+\begin{statement}
+	Establish the continuity component of Proposition 3.30.
+\end{statement}
+
+\begin{solution}
+	Let $u_+, v_+ \in H^1_x (\R^3)$ be asymptotic states for initial data $u_0, v_0 \in H^1_x (\R^3)$ respectively. Recall that the asymptotic states are non-linear perturbations of initial data,
+		\[ u_+ = u_0 - i \mu \int_0^\infty e^{-it \Delta/2} (|u(t)|^2 u(t)) dt,\]
+	and similarly for $v$. Then 
+		\[ ||u_+ - v_+||_{H^1_x} \leq ||u_0 - v_0||_{H^1_x} + |||u|^2 u - |v|^2 v||_{N^1 ([0, \infty) \times \R^3)}. \]		
+	We need to show that the difference in non-linearities vanishes in $N^1 ([0, \infty) \times \R^3)$ as $||u_0 - v_0||_{H^1_x} \to 0$. Using the Lipschitz inequality shown in the previous exercise and the triangle inequality, 
+			\begin{align*}
+				|| |u|^2 u - |v|^2 v||_{N^1 (I \times \R^3)}
+					&\leq || |u|^2 u - |v|^2 v||_{L^{10/7}_t W^{1, 10/7}_x (I \times \R^3)}\\
+					&\lesssim ||u - v||_{L^{10/3}_t W^{1, 10/3}_x (I \times \R^3)} (||u||^2_{L^5_{t, x}  (I \times \R^3)} + ||v||^2_{L^5_{t, x}  (I \times \R^3)} ) \\
+					&\lesssim ||u - v||_{L^{10/3}_t W^{1, 10/3}_x (I \times \R^3)} (||u||^2_{L^5_{t} W^{1, 30/13}_x  (I \times \R^3)} + ||u - v||^2_{L^5_{t} W^{1, 30/13}_x  (I \times \R^3)} ) 
+			\end{align*}		
+	for any $I \subseteq [0, \infty)$. Writing $I_j = [t_j, t_{j + 1}]$, by the Strichartz estimate and the inequality
+		\[ ||u - v||_{S^1 (I_j \times \R^3)} \leq C ||u - v||_{H^1_x} (t_j) + C ||u - v||_{S^1 (I_j \times \R^3)} (||u||^2_{L^5_t W^{1, 30/13}_x (I_j\times \R^3)} + ||u - v||^2_{S^1(I_j \times \R^3)}) \]
+	for some uniform constant $C > 1$. Fix $0 < \epsilon < 1/8C$, we sub-divide $[0, \infty)$ into finitely many intervals $I_j$ such that
+		\[ ||u||^2_{L^5_{t} W^{1, 30/13}_x  (I_j \times \R^3)} < \frac{1}{8C}.\]
+	Recall from global well-posedness we have continuous dependence on initial data for any compact interval $I$. In particular, we have
+		\[ ||u - v||_{H^1_x} (t_j) < \frac{\epsilon}{2C} \]
+	for $||u_0 - v_0||_{H^1_x} \ll 1$ and every $j$. Making the bootstrap assumption $||u - v||_{S^1 (I_j \times \R^3)} \leq 2 \epsilon$, substituting into the Strichartz inequality gives the stronger bound
+		\begin{align*}
+			  ||u - v||_{S^1 (I_j \times \R^3)} 
+			  	&\leq C ||u - v||_{H^1_x} (t_j) + C ||u - v||_{S^1 (I_j \times \R^3)} (||u||^2_{L^5_t W^{1, 30/13}_x (I_j\times \R^3)} + ||u - v||^2_{S^1(I_j \times \R^3)}) \\
+			  &\leq \frac{\epsilon}{2} + 2C\epsilon \left( \frac{1}{8C} + 4\epsilon^2 \right)	 \leq \frac{\epsilon}{2} + 2 C \epsilon \left( \frac{1}{8C} + \frac{1}{16 C^2} \right) \leq \epsilon.
+		\end{align*}	 
+	Concatenating these finitely many intervals completes the proof. 
+\end{solution}
+
+\begin{statement}
+	Suppose there exists a bound of the form
+		\[ ||u||_{L^{10}_{t, x}} \lesssim_{||u_0||_{H^1_0}} 1\]
+	for all $H^1_x$-wellposed solutions to the three-dimensional defocusing quintic NLS. Show that 
+		\[ ||u||_{S^1} \lesssim_{||u_0||_{H^1_x}} 1. \]
+\end{statement}
+
+\begin{solution}
+	Let $\epsilon > 0$ to be chosen later, we can divide the time axis $\R$ into $O_{\epsilon, ||u_0||_{H^1_x}} (1)$ intervals $I$ such that
+		\[ ||u||_{L^{10}_x (I \times \R^3)} \leq \epsilon. \]
+	Fix one of these intervals $I= [t_0, t_1]$, then by the Strichartz estimate and conservation of energy
+		\[ ||u||_{S^1 (I \times \R^3)} \lesssim ||u||_{H^1_x (\R^3)} (t_0) + |||u|^4 u||_{N^1 (I \times \R^3)} \lesssim O_{||u_0||_{H^1_x}} (1) + || |u|^4 u||_{N^1 (I \times \R^3)} . \]
+	Then 
+		\begin{align*}
+			|| |u|^4 u||_{N^1 (I \times \R^3)}
+				&\lesssim \sum_{k = 0, 1} || |u|^4 |\nabla^k u| ||_{L^{10/7}_{t, x} (I \times \R^3)} \\
+				&\lesssim ||u||_{L^{10}_{t, x} (I \times \R^3)}^4 ||u||_{L^{10/3}_t W^{1, 10/3}_x (I \times \R^3)} \leq \epsilon^4 ||u||_{S^1 (I \times \R^3)}.
+		\end{align*}
+	Collecting the inequalities above, we obtain
+		\[ ||u||_{S^1 (I \times \R^3)} \lesssim O_{||u_0||_{H^1_x}} (1) + \epsilon^4 ||u||_{S^1 (I \times \R^3)}. \]
+	Choosing $\epsilon \ll 1$, continuity arguments, namely Exercise 1.21, allow us to conclude $||u||_{S^1 (I \times \R^3)} \lesssim O_{||u_0||_{H^1_x}}(1)$. Summing over the intervals, we conclude the desired inequality. 
+\end{solution}
+
+\begin{statement}
+	Suppose one is working with a global $H^1_x (\R^3)$-wellposed solution $u$ to either the cubic or quintic three-dimensional NLS. Suppose it is known that 
+		\[ \frac{1}{p + 1} \int_{\R^3} |u(t, x)|^{p + 1} dx \overset{t \to \infty}{\longrightarrow} 0. \]
+	Conclude that the solution scatters in $H^1_x$ to an asymptotic state $e^{i t \Delta/2} u_+$. 	
+\end{statement}
+
+\begin{solution}
+	It suffices to show that the non-linearity is in $N^1 ([0, \infty) \times \R^3)$. We can assume from the existence theory and unconditional uniqueness for the sub-critical and critical NLS that $u \in S^1_{\loc} ([0, \infty) \times \R^3)$. To this end, given an interval $I \subseteq [0, \infty)$, we claim
+		\[ || |u|^{p - 1} u||_{L^1_t H^1_x (I \times \R^3)} \leq ||u||_{S^1 (I \times \R^3)}^{p - 1} ||u||_{L^\infty_t L^{p + 1}_x (I \times \R^3)}. \]
+	This shows that the non-linearity is in $L^1_t H^1_x ([0, T) \times \R^3) \subseteq N^1 ([0, T) \times \R^3)$ for any $T > 0$. To obtain the result on the time interval $[T, \infty)$, which would complete the proof, it follows from the Strichartz estimate and conservation of energy and mass that
+		\begin{align*}
+			 ||u||_{S^1 ([T, \infty) \times \R^3)} 
+			 	&\lesssim ||u||_{H^1_x} (T) + ||u||_{S^1 ([T, \infty) \times \R^3)}^{p - 1} ||u||_{L^\infty_t L^{p + 1}_x ([T, \infty) \times \R^3)} \\
+			 	&\lesssim_{||u_0||_{H^1_x}} 1 + ||u||_{S^1 ([T, \infty) \times \R^3)}^{p - 1} ||u||_{L^\infty_t L^{p + 1}_x ([T, \infty) \times \R^3)}.
+	\end{align*}
+	Choosing $T \gg 1$, decay of the non-linear component of energy implies $||u||_{L^\infty_t L^{p + 1}_x ([T, \infty) \times \R^3)} \ll 1$, which by continuity arguments, namely Exercise 1.21, allows us to conclude from the inequality above
+		\[ ||u||_{S^1 ([T, \infty) \times \R^3)} \lesssim 1. \]
+	We turn to establishing the claim. For $p = 5$, applying Holder's inequality and Sobolev embedding gives
+		\begin{align*}
+			|| |u|^4 u||_{L^1_t H^1_x} 
+				&\sim \sum_{k = 0, 1} || |u|^4 |\nabla^k u||_{L^1_t L^2_x} \leq \sum_{k = 0, 1} || \nabla^k u||_{L^2_t L^6_x} ||u||_{L^\infty_t L^6_x} ||u||_{L^6_t L^{18}_x}^3 \\
+				&\lesssim || u||_{L^2_t W^{1, 6}_x} ||u||_{L^\infty_t L^6_x} ||u||_{L^6_t \dot W^{18/7}_x}^3 \lesssim ||u||_{S^1}^4 ||u||_{L^\infty_t L^6_x}.
+		\end{align*} 
+	Similarly for $p = 3$ we have
+		\begin{align*}
+			|| |u|^2 u||_{L^1_x H^1_x} 
+				&\sim \sum_{k = 0, 1} || |u|^2 |\nabla^k u||_{L^1_t L^2_x} \leq \sum_{k = 0, 1} || \nabla^k u||_{L^2_t L^6_x} ||u||_{L^\infty_t L^4_x} ||u||_{L^2_t L^{12}_x} \\
+				&\lesssim ||u||_{L^2_t W^{1, 6}_x}^2 ||u||_{L^\infty_t L^4_x} \leq ||u||_{S^1}^2 ||u||_{L^\infty_t L^4_x}.
+		\end{align*}	
+	This proves the claim, completing the proof.
+\end{solution}
+
+\begin{statement}[Blow-up criterion for $H^1_x$-critical NLS]
+	Suppose that $u \in C^0_{t, \loc} H^1_x ([0, T) \times \R^3)$ is a strong $H^1_x$-solution to the quintic NLS which cannot be continued beyond a finite time $T$ as a strong solution. Show that the $L^{10}_{t, x} ([0, T) \times \R^3)$ norm of $u$ is infinite. 
+\end{statement}
+
+\begin{solution}
+	Assume otherwise, then arguing as in Exercise 3.51 we can show that $u \in \dot S^1 ([0, T) \times \R^3)$. Our aim is to show the linear evolution is sufficiently small in $L^{10}_{t, x}$ on an interval $[t_0, T + \epsilon]$, which by Proposition 3.21 would imply $u$ can be continued as a solution to a larger interval, a contradiction. By the triangle inequality, 
+		\[ ||e^{i(t - t_0) \Delta/2} u(t_0) ||_{L^{10}_{t, x}} \leq ||u||_{L^{10}_{t, x}} + || D (|u|^4 u)||_{L^{10}_{t, x}}, \]	
+	where $D$ is the Duhamel operator beginning from $t_0$. By monotone convergence choosing $t_0$ close to $T$ gives
+		\[ ||u||_{L^{10}_{t, x}((t_0, T) \times \R^3)} \ll 1. \]
+	By Sobolev embedding, Strichartz estimate, and Holder's inequality, 
+	\begin{align*}
+			||D(|u|^4 u)||_{L^{10}_{t, x}((t_0, T) \times \R^3)} 
+				&\lesssim || D(|u|^4 u) ||_{L^{10}_t \dot W^{10, 30/13}_x ((t_0, T) \times \R^3)} \lesssim |||u|^4 u||_{\dot N^1 ((t_0, T) \times \R^3)} \\
+				&\lesssim || |u|^4 |\nabla u| ||_{L^{10/7}_{t, x} (t_0, T) \times \R^3)} \lesssim ||u||_{L^{10}_{t, x} (t_0, T) \times \R^3)}^4 ||u||_{\dot S^1 (t_0, T) \times \R^3)} \ll 1.
+		\end{align*}
+	Thus, for $\epsilon \ll 1$, 
+		\[ ||e^{i(t - t_0) \Delta/2} u(t_0) ||_{L^{10}_{t, x} ((t_0, T + \epsilon) \times \R^3)} \ll 1,  \]
+	as desired. 
+\end{solution}
+
+\begin{statement}
+	Consider the two-dimensional defocusing cubic NLS. Show that if a global $L^2_x$-wellposed solution $u$ is known to have finite $L^4_{t, x} (\R \times \R^2)$ norm, then $e^{-i t \Delta/2} u(t)$ converges in $L^2_x$ to an asymptotic state $u_+ \in L^2_x \R^2)$ as $t \to \infty$. 
+\end{statement}
+
+\begin{solution}
+	It suffices to show that $|u|^2 u \in N^0 ([0, \infty) \times \R^2)$. We can assume from the existence theory and unconditional uniqueness for the critical NLS that $u \in S^0_{\loc} ([0, \infty) \times \R^2)$. To this end, given an interval $I \subseteq [0, \infty)$, it follows from Holder's inequality that
+		\begin{align*}
+			|| |u|^2 u||_{N^0 (I \times \R^2)}
+				&\leq || |u|^2 u||_{L^1_t L^2_x (I \times \R^2)} \leq || u ||_{L^4_{t, x} (I \times \R^2)}^2 ||u||_{L^2_t L^\infty_x (I \times \R^2)} \leq ||u||^2_{L^4_{t, x} (I \times \R^2)} ||u||_{S^0 (I \times \R^2)}.
+		\end{align*}
+	In particular, $|u|^2 u \in N^0 (I \times \R^2)$ for any bounded interval $I$. It remains to show the result for an unbounded interval $[T, \infty)$. Using the Strichartz estimate, conservation of mass, and the inequality above, we can write 
+		\[ ||u||_{S^0 ([T, \infty) \times \R^2)} \lesssim ||u||_{L^2_x} (T) + || |u|^2 u||_{N^0 ([T, \infty) \times \R^2)} \leq  ||u||_{L^2_x} (0) + ||u||^2_{L^4_{t, x} ([T, \infty) \times \R^2)} ||u||_{S^0 ([T, \infty) \times \R^2)}.  \]		
+	Choosing $T \gg 1$, monotone convergence implies $||u||^2_{L^4_{t, x} ([T, \infty) \times \R^2)} \ll 1$, so from Exercise 1.21 we know
+		\[ ||u||_{S^0 ([T, \infty) \times \R^2)} \lesssim ||u_0||_{L^2_x}. \]
+	This completes the proof. 	
+\end{solution}
+
+\subsection{Stability theory}
+
+\begin{statement}[Justification of energy conservation]
+	Consider the three-dimensional defocusing NLS for $1 < p < 5$. For $u_0 \in H^1_x (\R^3)$ and $\epsilon > 0$, show that there exists a global $H^1_x$-wellposed solution $u^{(\epsilon)}$ solution to the regularised NLS
+		\[ i \partial_t u^{(\epsilon)} + \frac12 \Delta u^{(\epsilon)} = (|u^{(\epsilon)}|^2 + \epsilon^2)^{(p - 1)/2} u^{(\epsilon)}, \qquad u^{(\epsilon)} (0) = u_0 \]
+	with conserved energy 
+		\[ E^{(\epsilon)} [u^{(\epsilon)} (t)] := \int_{\R^3} \frac12 |\nabla u^{(\epsilon)}|^2 + \frac{2}{p + 1} (|u^{(\epsilon)} |^2 + \epsilon )^{(p + 1)/2}   - \epsilon^{p + 1}) dx. \]
+	Then show that for any compact time interval $I$ containing $0$, $u^{(\epsilon)}$ converges in $S^1 (I \times \R^3)$ to a strong $H^1_x$-solution $u \in S^1 (I \times \R^3)$ to the NLS with conserved energy
+		\[ E[u] := \int_{\R^3} \frac12 |\nabla u |^2 + \frac{2}{p + 1} |u|^{p + 1} dx. \]		
+\end{statement}
+
+\begin{solution}
+	By global well-posedness for the sub-critical NLS we know there exists a solution $u \in S^1_{\loc} (\R \times \R^3)$. Writing $u = u^{(\epsilon)} + w^{(\epsilon)}$, we see that $w^{(\epsilon)}$ satisfies the equation 
+		\[ i \partial_t w^{(\epsilon)} + \frac12 \Delta w^{(\epsilon)} = |u^{(\epsilon)} + w^{(\epsilon)}|^{p - 1} (u^{(\epsilon)} + w^{(\epsilon)}) -  (|u^{(\epsilon)}|^2 + \epsilon^2)^{(p - 1)/2} u^{(\epsilon)} \]
+	with initial data $w(0) = 0$.  
+\end{solution}
+
+\begin{statement}[Weak solutions]
+	Let $1 < p < 6$. Show that for $u_0 \in H^1_0 (\R^3)$ and $\lambda > 0$ there exists a global $H^1_x$-wellposed solution $u^{(\lambda)}$ to the tempered defocusing three-dimensional NLS
+		\[ i \partial_t u^{(\lambda)} + \frac12 \Delta u^{(\lambda)} = \min (|u^{(\lambda)}|^{p - 1}, \lambda^4) u^{(\lambda)}; \qquad u^{(\lambda)} (0) = u_0\]
+	with conserved mass $\int_{\R^3} |u^{(\lambda)}|^2 dx$ and conserved energy
+		\[ E^{(\lambda)} [u^{(\lambda)}] := \int_{\R^3} \frac12 |\nabla u^{(\lambda)}|^2 dx + \int_{\R^d} \int_0^{|u^{(\lambda)}|} \max (w^p, \lambda^4 w^2) dw dx.\]
+	Using weak compactness, show that there exists a sequence $\lambda_n \to \infty$ such that the solutions $u^{(\lambda_n)}$ converge weakly in $L^\infty_t H^1_x (\R \times \R^3)$ to a global weak $H^1_x$-solution $u \in L^\infty_t H^1_x (\R \times \R^3)$ to the NLS. 	
+\end{statement}
+
+\begin{solution}
+	
+\end{solution}
+
+\begin{statement}
+	Complete the proof of Proposition 3.34. 
+\end{statement}
+
+\begin{solution}
+	Let 
+		\[ \cS := \{ tu : ||u||_{C^0_t H^1_x ([0, 1] \times \R)} \lesssim_\psi \epsilon \}, \qquad \widetilde v(t, x) = \epsilon e^{-i \frac{2}{p - 3} \epsilon^{p - 1} |\psi (x)|^{p - 1} t^{(p - 3)/2}} \psi(x), \]
+	and $\Phi : \cS \to C^0_t H^1_x ([0, 1] \times \R)$ be the non-linear operator
+		\[ \Phi (w) := -i \int_0^t \frac{e^{i (t - s) \partial_{xx}/2}}{s^{(5 - p)/2}} (|\widetilde v(s) + w(s)|^{p - 1} (\widetilde v(s) + w(s)) - |\widetilde v(s)|^{p - 1} \widetilde v(s)) - \frac12 \partial_{xx} \widetilde v (s) ds. \]	
+	We claim that $\Phi$ is a contraction into $\cS$ for $\epsilon \ll 1$, which would furnish a unique fixed point $w \in \cS$ satisfying
+		\[ ||w||_{H^1_x} (t) \lesssim t \epsilon. \]
+	We first show that $\Phi$ maps $\cS$ into itself. Let $w \in \cS$, then by the algebra property of $H^1_x$ in one-dimension we see that $\Phi(w) \in C^0_t H^1_x ([0, 1] \times \R)$. More explicitly, writing $w = tf$ for $||f||_{C^0_t H^1_x} \lesssim_\psi \epsilon$, 
+		\begin{align*}
+			 ||\Phi(w)/t||_{H^1_x} 
+			 	&\lesssim  \frac1t \int_0^t \frac{1}{s^{(5 - p)/2}} || |\widetilde v + w|^{p - 1} (\widetilde v + w) - |\widetilde v|^{p - 1} \widetilde v ||_{H^1_x} ds + \frac1t \int_0^t ||\partial_{xx} \widetilde v||_{H^1_x} ds\\
+			 	&\lesssim_p \frac1t \int_0^t \frac{1}{s^{(5 - p)/2}} |||w| (|\widetilde v + w|^{p - 1} + |\widetilde v|^{p - 1})||_{H^1_x} ds +  ||\partial_{xx} \widetilde v||_{C^0_t H^1_x} \\
+			 	&\lesssim \frac{||f||_{C^0_t H^1_x} (||\widetilde v + w||_{C^0_t H^1_x}^{p - 1} + ||\widetilde v ||^{p - 1}_{C^0_t H^1_x})}{t} \int_0^t \frac{1}{s^{(3 - p)/2}} ds + ||\partial_{xx} \widetilde v||_{C^0_t H^1_x} \lesssim_\psi \frac{\epsilon}{t} \frac{1}{t^{(1 - p)/2}} + \epsilon \lesssim \epsilon,
+		\end{align*}	 
+	since $3 < p < 5$. Thus $\Phi(w) \in \cS$. Let $w_1, w_2 \in \cS$, then using the algebra property of $H^1_x$ in one-dimension and local integrability of $1/s^{(5 - p)/2}$, we can write
+		\begin{align*}
+			||\Phi(w_1) - \Phi(w_2)||_{C^0_t H^1_x}
+				&\leq \int_0^1 \frac{1}{s^{(5 - p)/2}} || |\widetilde v + w_1|^{p - 1} (\widetilde v + w_1) - |\widetilde v + w_2|^{p - 1} (\widetilde v + w_2) ||_{H^1_x} ds \\
+				&\lesssim \int_0^1 \frac{1}{s^{(5 - p)/2}} || |w_1 - w_2| (|\widetilde v + w_1|^{p - 1} + |\widetilde v + w_2|^{p - 1}) ||_{H^1_x} ds \\
+				&\lesssim ||w_1 - w_2||_{C^0_t H^1_x}  \left(||  \widetilde v + w_1||_{C^0_t H^1_x}^{p - 1} + ||\widetilde v + w_2 ||_{C^0_t H^1_x}^{p - 1}\right) .
+		\end{align*}
+	A routine computation shows that $||w_1||_{C^0_t H^1_x}, ||w_2||_{C^0_t H^1_x}, ||\widetilde v||_{C^0_t H^1_x} \lesssim \epsilon$, so choosing $\epsilon \ll 1$ furnishes the claim. 
+\end{solution}
+
+
+\begin{statement}
+	Prove Lemma 3.36.
+\end{statement}
+
+\begin{solution}
+	By Sobolev embedding, 	
+		\[ ||\widetilde u||_{L^{10}_{t, x}} \lesssim ||\widetilde u||_{L^{10}_t \dot W^{1, 30/13}_x} \leq \epsilon_0. \]
+	By the Strichartz, triangle, and Holder inequalities, we can write
+		\begin{align*}
+			||\widetilde u||_{\dot S^1}
+				&\lesssim ||\widetilde u||_{H^1_x} (t_0) + || |\widetilde u|^4 \widetilde u + e||_{\dot N^1}\\
+				&\lesssim E + || |\widetilde u|^4 |\nabla \widetilde u|||_{L^1_t L^2_x} + ||e||_{L^2_t \dot W^{1, 6/5}_x} \leq E + ||\widetilde u||_{L^{10}_{t, x}}^4 ||\widetilde u||_{L^{5/3}_t \dot W^{1, 10}_x}  + \epsilon \lesssim E + \epsilon_0^4 ||\widetilde u||_{\dot S^1} + \epsilon.
+		\end{align*}	
+	Choosing $\epsilon_0 \ll 1$ depending on $E$, Exercise 1.21	implies
+		\[ ||u||_{\dot S^1} \lesssim E. \]
+	Then 
+		\begin{align*}
+			||(i \partial_t + \Delta/2) (u - \widetilde u)||_{L^2_t \dot W^{1, 6/5}_x}
+				&\leq || |u|^4 u - |\widetilde u|^4 \widetilde u ||_{L^2_t \dot W^{1, 6/5}} + ||e||_{L^2_t \dot W^{1, 6/5}}\\
+				&\lesssim || | u - \widetilde u| (|\nabla  u| + |\nabla \widetilde u|) (|u|^3 + |\widetilde u|^3) ||_{L^2_t L^{6/5}_x} \\
+				&\qquad + || |\nabla u - \nabla \widetilde u| (|u|^4 + |\widetilde u|^4)||_{L^2_t L^{6/5}_x} + \epsilon \\
+				&\lesssim || u - \widetilde u||_{L^{10}_{t, x}} (||u||_{L^{10}_t \dot W^{1, 30/13}_x} + ||\widetilde u||_{L^{10}_t \dot W^{1, 30/13}_x}) (||u||_{L^{10}_{t, x}}^3 + ||\widetilde u||_{L^{10}_{t, x}}^3) \\
+				&\qquad + || u - \widetilde u||_{L^{10}_t \dot W^{1, 30/13}_x} (||u||_{L^{10}_{t, x}}^4 + ||\widetilde u||_{L^{10}_{t, x}}^4) + \epsilon
+		\end{align*}	
+\end{solution}
+
+\begin{statement}
+	Prove Lemma 3.37.
+\end{statement}
+
+\begin{solution}
+	Arguing as in Exercise 3.51, with the modification that control of $\widetilde u$ in $C^0_t \dot H^1_x (I \times \R^3)$ replaces the role of conservation of energy, gives
+		\[ ||\widetilde u||_{\dot S^1 (I \times \R^3)} \lesssim_{E, M} 1. \]
+	In particular, $\widetilde u \in L^{10}_t \dot W^{1, 30/13}_x (I \times \R^3)$, so we can subdivide $I$ into $O_{E, M} (1)$-many intervals $[t_j, t_{j + 1}]$ such that 
+		\[ ||\widetilde u||_{L^{10}_t \dot W^{1, 30/13}_x ([t_j, t_{j + 1}] \times \R^3)} \leq \epsilon. \]
+	Assume for induction that 
+		\begin{align*}
+			||u - \widetilde u||_{\dot H^1_x} (t_j)
+				&\lesssim_{E, E', M} 1, \\
+						 ||e^{i (t - t_j) \Delta/2} (u(t_j) - \widetilde u(t_j)) ||_{L^{10}_t \dot W^{1, 30/13}_x ([t_j, t_{j +1}] \times \R^3)}
+				&\lesssim_{E, E', M} \epsilon
+		\end{align*}	 
+	Applying Lemma 3.36 to $[t_j, t_{j + 1}]$, we obtain
+	\begin{align*}
+		||u - \widetilde u||_{\dot S^1 ([t_j, t_{j + 1}] \times \R^3)} 
+			&\lesssim_{E, E', M} 1,\\
+		||u||_{\dot S^1 ([t_j, t_{j + 1}] \times \R^3)}
+			&\lesssim_{E, E', M} 1,\\
+		||u - \widetilde u||_{L^{10}_{t, x} ( [t_j, t_{j + 1}]\times \R^3)} \lesssim ||u - \widetilde u||_{L^{10}_t \dot W^{1, 30/13}_{x} ([t_j, t_{j + 1}] \times \R^3)}
+			&\lesssim_{E, E', M} \epsilon, \\
+		||(i \partial_t + \Delta/2) (u - \widetilde u)||_{L^2_t \dot W^{1, 6/5}_x ( [t_j, t_{j + 1}] \times \R^3)}
+			&\lesssim_{E, E', M} \epsilon. 	
+	\end{align*}	
+	Then	
+	\begin{align*}
+			||u - \widetilde u||_{\dot H^1_x} (t_{j + 1})
+				&\lesssim_{E, E', M} 1, \\
+						 ||e^{i (t - t_{j + 1}) \Delta/2} (u(t_{j + 1}) - \widetilde u(t_{j + 1})) ||_{L^{10}_t \dot W^{1, 30/13}_x ([t_{j + 1}, t_{j +2}] \times \R^3)}
+				&\lesssim_{E, E', M} \epsilon
+		\end{align*}	 
+\end{solution}
+
+\begin{statement}
+	By refining the analysis used in the proof, replace the $\log^{1/3} (1/\epsilon)$ in Proposition 3.35 with $\log (1/\epsilon)$. 
+\end{statement}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{statement}
+	Let $u \in C^0_{t, \loc} \cS_x (\R \times \TT^2)$ be a classical solution to the cubic defocusing NLS. Using the Fourier ansatz
+		\[ u(t, x) = \sum_{k \in (2\pi \Z)^2} e^{i (k \cdot x - \frac12 |k|^2 t)} a_k (t), \]
+	deduce the infinite system of ODE
+		\[ \partial_t a(t) = \cN_t (a(t), a(t), a(t)) \]
+	where $a = (a_k)_{k \in (2\pi \Z)^2}$ and $\cN_t$ is the trilinear form
+		\[ \cN_t (a, b, c)_k := -i \sum_{k_1, k_2, k_3 \in (2\pi \Z)^2 \, : \, k_1 - k_2 + k_3 = k} a_{k_1} \overline{b_{k_2}} c_{k_3} e^{-\frac{i}{2} (|k_1|^2 - |k_2|^2 + |k_3|^2)t}. \]		
+	Let $K \gg 1$ be a large number, let $0 < \sigma < 1$, and let $T \leq c(\sigma) K^2 \log K$ for some small $c(\sigma) > 0$. Suppose we have a system $b(t) = (b_k (t))_{k \in (2\pi \Z)^2}$ of functions with $b \in C^1_t \ell^1_k ([0, T] \times (2\pi \Z)^2)$ with $b(0) = a(0)$ which obeys the approximate equation 
+		\[ \partial_t b(t) = \cN_t (b(t), b(t), b(t)) + e(t) \]
+	where $e(t)$ and $b(t)$ obey the $\ell^1$ bounds
+		\[ ||b||_{C^1_t \ell^1_k([0, T] \times (2\pi\Z)^2)} \lesssim K^{-1}, \qquad || \int_0^t e(s) ds||_{C^0_t \ell^1_k ([0, T] \times (2\pi\Z)^2)} \lesssim K^{- 1 - \sigma}. \]
+	Then if $c(\sigma)$ is sufficiently small, establish the estimate
+		\[ ||a - b||_{C^1_t \ell^1_k([0, T] \times (2\pi\Z)^2)} \lesssim K^{-1 - \sigma/2}. \]			
+\end{statement}
+
+\begin{solution}
+	We know that $u$ is a classical solution, 
+		\[ i \partial_t u + \frac12 \Delta u = |u|^2 u. \]
+	Since the solution is Schwartz in $x$, we know that the Fourier coefficients $a_k (t)$ decay sufficiently quickly to justify the following computations uniformly in $x$ and pointwise in $t$; 
+		\begin{align*}
+			i \partial_t u + \frac12 \Delta u
+				&= i \sum_{k \in (2\pi\Z)^2} e^{i (k \cdot x - \frac12 |k|^2 t)} (- i \frac12 |k|^2 a_k + \partial_t a_k) -  \frac12 \sum_{k \in (2\pi\Z)^2} |k|^2 e^{i (k \cdot x - \frac12 |k|^2 t)}  a_k \\
+				&= i\sum_{k \in (2\pi \Z)^2} e^{i(k \cdot x - \frac12 |k|^2 t)} \partial_t a_k, \\
+			|u|^2 u = u \overline u u
+				&= \left( \sum_{k_1 \in (2\pi\Z)^2} e^{i (k_1 \cdot x - \frac12 |k_1|^2 t)} a_{k_1} \right)	  \left( \sum_{k_2 \in (2\pi\Z)^2} e^{-i (k_2 \cdot x - \frac12 |k_2|^2 t)} \overline{ a_{k_2} }\right)	 	  \left( \sum_{k_3 \in (2\pi\Z)^2} e^{i (k \cdot x - \frac12 |k_3|^2 t)}  a_{k_3} \right) \\
+				&=\sum_{k \in (2\pi\Z)^2} \sum_{k_1, k_2 ,k_3 \in (2\pi \Z)^2 \,:\, k_1 - k_2 + k_3 = k} e^{i (k \cdot x - \frac12 (|k_1|^2 - |k_2|^2 + |k_3|^2) t)} a_{k_1} \overline{a_{k_2}} a_{k_3}.
+		\end{align*}
+	Integrating both sides of the equation on $\TT^2$ against $e^{-i k \cdot x}$, we obtain
+		\[ \partial_t a_k = -i \sum_{k_1, k_2, k_3 \in (2\pi \Z)^2 \, : \, k_1 - k_2 + k_3 = k} a_{k_1} \overline{a_{k_2}} a_{k_3} e^{-\frac{i}{2} (|k_1|^2 - |k_2|^2 + |k_3|^2)t} .\]
+	We claim that $\cN_t : \ell^1_k ((2\pi\Z)^2) \times \ell^1_k ((2\pi\Z)^2) \times \ell^1_k ((2\pi\Z)^2)\to \ell^1_k ((2\pi \Z)^2)$ is bounded; indeed by the triangle inequality and interchanging sums, 
+		\begin{align*}
+			 ||\cN_t (a, b, c)||_{\ell^1_k} 
+			 	&\leq \sum_{k \in (2\pi \Z)^2} \sum_{k_1, k_2, k_3 \in (2\pi \Z)^2 \, : \, k_1 - k_2 + k_3 = k} |a_{k_1} b_{k_2} c_{k_3} | \\
+			 	&\leq  \sum_{k_1, k_2 \in (2\pi\Z)^2} |a_{k_1} b_{k_2} |\sum_{k, k_3 \in (2\pi \Z)^2 \, : \, k_1 - k_2 + k_3 = k}  | c_{k_3} | = ||c||_{\ell^1_k}\sum_{k_1, k_2 \in (2\pi\Z)^2} |a_{k_1} b_{k_2} | = ||a||_{\ell^1_k} ||b||_{\ell^1_k} ||c||_{\ell^1_k}.
+		\end{align*}	
+	Denote $O_{\ell^1_k} (X)$ to denote any quantity with an $\ell^1_k$-norm of size at most $O(X)$, and set $E:= \int_0^t e(s) ds$ and $c := b - E$. Then by trilinearity and boundedness of $\cN_t$ we have
+		\[ \partial_t c = \partial_t (b - E) = \cN_t (b, b, b) = \cN_t (c + E, c + E, c + E) = \cN_t (c, c, c) + O_{\ell^1_k}(K^{-3 - \sigma}). \]	
+	Write $d := a - c$, then 
+		\begin{align*}
+			\partial_t d = \partial_t (a - c) 
+				&= \cN_t (a, a, a) - \cN_t (c, c, c) + O_{\ell^1_k}(K^{-3 - \sigma}) \\
+				&= \cN_t (c + d, c + d, c + d) - \cN_t (c, c, c) + O_{\ell^1_k}(K^{-3 - \sigma}) \\
+				&=O_{\ell^1_k}( ||d||_{\ell^1_k}^3) + O_{\ell^1_k}( K^{-1} ||d||_{\ell^1_k}^2)+ O_{\ell^1_k}( K^{-2} ||d||_{\ell^1_k})  + O_{\ell^1_k}( K^{-3 - \sigma}). 
+			\end{align*}	
+	We claim that $||d||_{C^1_t \ell^1_k} \lesssim K^{-1 - \sigma/2}$; by the inequality above, it suffices to show $||d||_{C^0_t \ell^1_k} \lesssim K^{-1 - \sigma/2}$. We argue by continuity methods; by Minkowski's inequality, 
+		\[ \partial_t ||d||_{\ell^1_k} \lesssim  ||d||_{\ell^1_k}^3 +  K^{-1} ||d||_{\ell^1_k}^2+  K^{-2} ||d||_{\ell^1_k}  +  K^{-3 - \sigma}. \]	
+	Making the bootstrap assumption $||d||_{\ell^1_k} = O(K^{-1})$ for all $t \in [0, T]$, the first and second terms on the right-hand side can be absorbed into the third term. Applying Gronwall's inequality and $T \leq c(\sigma) K^2 \log K$ gives
+		\[ ||d||_{\ell^1_k} \lesssim K^{-1 - \sigma} \exp(C K^{-2} t) \leq K^{-1 - \sigma} \exp (C c(\sigma) \log K) \leq K^{-1 - \sigma/2} \]
+	for all $t \in [0, T]$ and appropriate chose of $c(\sigma)$. We conclude by the triangle inequality
+		\[ ||a - b||_{C^1_t \ell^1_k} \leq ||E||_{C^1_t\ell^1_k} + ||d||_{C^1_t\ell^1_k} \lesssim K^{-1 - \sigma/2}. \]
+\end{solution}
+
+\subsection{Illposedness results}
+
+\begin{statement}
+	Let $u$ be a classical solution to an NLW, and let 
+		\[ V(t) := \int_{\R^d} |x|^2 \text{T}_{00} (t, x) - \frac{d - 1}{2} |u|^2 dx. \]
+	Establish the following analogue of the virial identity for this quantity, namely
+		\[ \partial_{tt} V(t) = 2 E[u] + \frac{\mu (d - 1) (p - p_{H^{1/2}_x})}{ p + 1} \int_{\R^d} |u(t, x)|^{p + 1} dx \]
+	where $p_{H^{1/2}_x} := 1 + \frac{4}{d - 1}$ is the conformal power.		
+\end{statement}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{statement}
+	Consider a focusing NLS with $p \geq p_{L^2_x}$, and let $s < s_c$. Show that there exists classical data of arbitrarily small $H^s_x$-norm such that the solution to the NLS blows in arbitrarily small time. 
+\end{statement}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{statement}
+	Let $T > 0$ be arbitrary. Use a scaling argument to show that the map 
+		\[ u_0 \mapsto \int_0^t e^{i (t - t') \Delta/2} (|e^{i t' \Delta/2} u_0|^2 e^{it' \Delta/2} u_0) dt' \]
+	is not a bounded map from $H^s$ to $C^0_t H^s_x ([0, T] \times \R^3)$ when $s < 1/2$. Conversely, use Strichartz estimates to show that this map is bounded for $s \geq 1/2$. 	
+\end{statement}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{statement}
+	Consider the non-linear wave equation
+		\[ \Box u = - |u|^p \]
+	for some $H^1_x$-subcritical power $1 \leq p < 1 + \frac{4}{d - 2}$. Let $u$ be a strong $H^1_x \times L^2_x$-solution to this equation whose initial position is supported in the ball $|x| \leq 1$ and whose initial velocity is zero. Assuming finite speed of propagation, show that if 
+		\[ \int_{\R^d} u(0, x) dx \gg_{d, p} 1 \]
+	then the solution $u$ can only exist for a finite amount of time in the forward direction. If $p < 1 + \frac{2}{d}$, show that one only needs the value above to be strictly positive. 	
+\end{statement}
+
+\begin{solution}
+	Set
+		\[ m(t) := \int_{\R^d} u(t, x) dx. \]
+	Observe that $m$ is convex; differentiating under the integral sign, using the equation and integrating by parts gives
+		\[ m'' (t) = \int_{\R^d} \partial_{tt} u(t, x) dx = \int_{\R^d} \Delta u + |u|^p dx = \int_{\R^d} |u|^p dx = ||u||_{L^p_x}^p. \]
+	Since the initial velocity is zero, $m'(0) = \int \partial_t u(0, x) dx = 0$, so by convexity we know that $m$ is non-decreasing. By montonicity, finite speed of propagation and Holder's inequality,	
+		\[ m(0) \leq m(t) \leq \int_{|x| \leq 1 + t} |u(t, x)| dx \lesssim_d (1 + t)^{d \frac{p - 1}{p}} ||u||_{L^p_x} (t).\]
+	Rearranging,
+		\[ (1 + t)^{-d(p - 1)} m(0)^p \lesssim m''(t). \]		
+	Integrating, 
+		\[ \frac{m(0)^p}{1 - d(p - 1)} ( (1 + t)^{1 -d(p - 1)} - 1) \lesssim m' (t).  \]		
+\end{solution}
+
+\begin{statement}
+
+\end{statement}
+
+\begin{solution}
+
+\end{solution}
+
+\subsection{Almost conservation laws}
+
+\begin{statement}
+	Prove that 
+		\[ ||u_{\text{hi}}||_{L^\infty_x} \lesssim_s ||\partial_x I u_{\text{hi}}||_{L^2_x} \]
+	whenever $u_{\text{hi}}$ is a Schwartz function supported on frequencies $> N/100$. 	
+\end{statement}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{statement}
+	Prove
+		\[ \left| \int_\R \overline{I(|u|^4 u)} (I(|u|^4 u) - |Iu|^4 Iu) dx \right| \lesssim N^{-1/2}. \]
+\end{statement}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{statement}
+	Let
+		\[ ||u||_{H^s_x} (0) \lesssim 1, \]
+	show that 
+		\[ ||u||_{H^s_x} (t) \lesssim_s N^{1 - s} \]
+	for all $|t| \ll_s N^{\frac12 - 2(1 - s)}$. 		
+\end{statement}
+
+\begin{solution}
+
+\end{solution}

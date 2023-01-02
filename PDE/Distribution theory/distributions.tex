@@ -1,0 +1,420 @@
+\documentclass[reqno]{amsart}
+
+\usepackage{amsfonts,latexsym,amsthm,amssymb,amsmath,amscd,euscript,bm}
+\usepackage[sc]{mathpazo}
+\usepackage[margin = 2cm]{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+% sets numbering of enumerate to a, b, c, ...
+\renewcommand{\theenumi}{\alph{enumi}}
+
+% Theorems, propositions, etc.
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{claim}{Claim}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{notation}{Notation}
+\newtheorem*{example}{Example}
+
+\usepackage{tikz-cd}
+
+
+
+% Solution environment
+\newenvironment{solution}
+	{
+		\begin{proof}[Solution]}{\end{proof}
+	}
+
+
+% Math blackboard font
+\newcommand{\nc}{\newcommand}
+\nc{\on}[1]{\operatorname{#1}}
+
+\nc{\R}{\mathbb R}
+\nc{\C}{\mathbb C}
+\nc{\Q}{\mathbb Q}
+\nc{\Z}{\mathbb Z}
+\nc{\N}{\mathbb N}
+\nc{\HH}{\mathbb H}
+\nc{\DD}{\mathbb D}
+\nc{\TT}{\mathbb T}
+\nc{\EE}{\mathbb E}
+\nc{\PP}{\mathbb P}
+
+\nc{\cT}{\mathcal T}
+\nc{\cA}{\mathcal A}
+\nc{\cM}{\mathcal M}
+\nc{\cR}{\mathcal R}
+\nc{\cB}{\mathcal B}
+\nc{\cG}{\mathcal G}
+\nc{\cD}{\mathcal D}
+\nc{\cS}{\mathcal S}
+\nc{\cF}{\mathcal F}
+\nc{\cL}{\mathcal L}
+\nc{\cE}{\mathcal E}
+
+\nc{\diam}{\operatorname{diam}}
+\nc{\del}{\partial}
+\nc{\osc}{\operatorname{osc}}
+\nc{\inter}{\mathrm{o}}
+\nc{\close}[1]{\overline{#1}}
+\nc{\supp}{\operatorname{supp}}
+\nc{\BV}{\operatorname{BV}}
+\nc{\Per}{\operatorname{Per}}
+\nc{\loc}{\text{loc}}
+\nc{\Lip}{\operatorname{Lip}}
+\nc{\ACL}{\operatorname{ACL}}
+\nc{\pv}{\operatorname{p.v.}}
+\nc{\Id}{\operatorname{Id}}
+\nc{\Ai}{\operatorname{Ai}}
+
+% Why the f*** would you ever use \epsilon
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\emph}{\textsc}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+%inverse Fourier transform widecheck
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{
+      <5> <6> <7> <8> <9> <10>
+      <10.95> <12> <14.4> <17.28> <20.74> <24.88>
+      mathx10
+      }{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareFontSubstitution{U}{mathx}{m}{n}
+\DeclareMathAccent{\widecheck}{0}{mathx}{"71}
+
+\let\vec\mathbf
+
+% Title: change problem set number as needed
+\title
+{
+	\emph{Distribution theory}
+} 
+
+\author{Jason Zhao}
+\date{\today}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+	Distributions
+\end{abstract}
+
+\tableofcontents
+
+\section{Distributions}
+
+The theory of distributions arose from the study of linear differential equations
+
+\subsection{Test functions}
+
+A \emph{test function} $\phi : \Omega \to \C$ is a smooth function with compact support. Denote $C^\infty_c (\Omega)$ the space of test functions
+
+The space of test functions, denoted by $C^\infty_c (\Omega)$, is endowed with a family of semi-norms
+	\[ ||\phi||_{m, K} := \sup_{x \in K} |\nabla^m \phi(x)| \]
+where $K \subseteq \Omega$ is compact. This induces a topology in which a sequence $\{ \phi_n \}_n \subseteq C^\infty_c (\Omega)$ converges to $\phi \in C^\infty_c (\Omega)$ if and only if there exists a compact set $K \subseteq \Omega$ such that $\supp \phi_n \subseteq K$ for all $n$ and 
+	\[ \partial^\alpha \phi_n  \overset{n \to \infty}{\longrightarrow}  \partial^\alpha \phi\]
+uniformly for all multi-indices $\alpha$. 
+
+\begin{proposition}
+	Let $T: C^\infty_c (\Omega) \to X$ be a linear map from the space of test functions into a Frechet space. Then the following are equivalent:
+	\begin{enumerate}
+		\item $T$ is continuous. 
+		\item $T$ is sequentially continuous. 
+		\item $T : C^\infty_c (K) \to X$ is continuous for each compact $K \Subset \Omega$. 
+	\end{enumerate}
+\end{proposition}
+
+\subsection{Distributions}
+
+A \emph{distribution} is a continuous linear functional $T: C^\infty_c (\Omega) \to \C$ denoted by 
+	\[ \phi \mapsto \langle \phi, T \rangle. \]
+The space of distributions, denoted by $C^\infty_c (\Omega)^*$, is endowed with the weak-$*$ topology. In this topology, a sequence $\{ T_n\}_n \subseteq C^\infty_c (\Omega)^*$ converges to $T \in C^\infty_c (\Omega)^*$ if and only if 
+	\[ \langle \phi, T_n \rangle \overset{n \to \infty}{\longrightarrow} \langle \phi, T \rangle \]
+for all $\phi \in C^\infty_c (\Omega)$. It furthermore forms a vector space over $\C$ with respect to the conjugate complex structure, that is, scalar multiplication of a distribution $T \in C^\infty_c (\Omega)^*$ by $\lambda \in \C$ is defined as 
+	\[ \langle \phi, \lambda T \rangle := \overline \lambda \langle \phi, T \rangle. \]
+A distribution $T \in C^\infty_c (\Omega)^*$ is of \emph{order} $k$ if $k$ is the smallest non-negative integer such that $T$ is continuous with respect to the $C^k (\Omega)$-topology. 
+	
+	
+\begin{example}
+Some examples
+\begin{itemize}
+	\item Locally integrable functions $u \in L^1_{\loc} (\R^d)$ form distributions $\langle -, u \rangle : C^\infty_c \to \C$ via the $L^2$-inner product
+			\[ \langle \phi, u \rangle := \int_{\R^d} \phi \overline u \, d x. \]
+	
+	\item Radon measures $\mu$ form distributions $\langle -, \mu \rangle : C_c^\infty (\R^d) \to \C$ via the integral of test functions  
+				\[ \langle \phi , \mu \rangle := \int_{\R^d} \phi \, d \overline\mu. \]
+			
+	
+\end{itemize}
+\end{example}	
+	
+	
+\begin{proposition}
+	A linear functional $T : C^\infty_c (\Omega) \to \C$ is a distribution if and only if for every compact $K \subseteq \Omega$ there exists $k \geq 0$ such that 
+		\[ |\langle \phi, T \rangle | \lesssim ||f||_{C^k (K)} \]
+	for all $f \in C^\infty_c (K)$. 	
+\end{proposition}	
+
+
+\begin{theorem}
+	Let $\{T_n\}_n \subseteq C^\infty_c (\Omega)^*$ be a sequence of distributions such that $\{ \langle \phi, T_n \rangle \}_n \subseteq \R$ is a convergent sequence for all $\phi \in C^\infty_c (\Omega)$. Then 
+		\[ \langle \phi, T \rangle := \lim_{n \to \infty} \langle \phi, T_n \rangle \]
+	defines a distribution $T \in C^\infty_c (\Omega)^*$. Moreover, for every compact $K \Subset \Omega$, there exists $N \in \N$ such that 
+		\[ |\langle \phi, T \rangle| \lesssim \sum_{|\alpha| \leq N} \sup_{x \in K} |\partial^\alpha \phi (x)| \]
+	and $\langle \phi_n, T_n \rangle \to \langle \phi, T \rangle$ whenever $\phi_n \to \phi$. 	
+\end{theorem}
+
+\begin{proof}
+	
+\end{proof}
+	
+\subsection{Adjoint operators}
+
+Given a continuous linear operator $A : C^\infty_c (\Omega) \to C^\infty_c (\Omega)$ on the space of the test functions, there exists a unique continuous linear \emph{adjoint operator} $A^*: C^\infty_c (\Omega)^* \to C^\infty_c (\Omega)^*$ on the space of distributions satisfying
+	\[ \langle \phi, A^* T \rangle = \langle A \phi, T \rangle \]
+for all $\phi \in C^\infty_c (\Omega)$ and $T \in C^\infty_c (\Omega)^*$. 
+\begin{itemize}
+	\item Multiplication by a smooth function $\psi \in C^\infty (\Omega)$ is self-adjoint, 
+		\[ \langle \phi, \psi T \rangle := \langle \psi \phi , T \rangle. \]
+	
+	\item Differentiation is skew-adjoint. Proceeding inductively, 
+		\[ \langle \phi, \partial^\alpha T \rangle := (-1)^{|\alpha|} \langle \partial^\alpha \phi, T \rangle. \]
+	
+	\item Scaling
+
+	
+	\item Convolution with a test function $\psi \in C^\infty_c (\R^d)$ is adjoint to convolution with
+		\[  \]
+	
+	\item \emph{Convolution with a test function:} by Fubini's theorem and a change of variables, convolution by $\psi \in C^\infty_c (\R^d)$ is adjoint to convolution by $\tilde \psi (x) := \psi(-x)$, so we define for $u \in \cD' (\R^d)$
+				\[ (\psi * u)(\phi) := u(\tilde \psi * \phi). \]
+	
+	\item \emph{Scaling the domain:} for $u \in L^1_\loc (\Omega)$ and $\lambda > 0$ define $S_\lambda u (x) = u(\lambda x)$. By a change of variables, the adjoint is $S_\lambda^* \phi (x) = \lambda^{-n} \phi(x/\lambda)$; hence we define
+				\[ (S_\lambda u) (\phi) = u (S^*_\lambda \phi).\]
+			We say $u$ is \emph{homogeneous of order $\alpha$} if 
+				\[ u(S^*_\lambda \phi) = \lambda^\alpha f(\phi) \]
+			for all $\lambda > 0$ and $\phi \in C^\infty_c (\Omega)$. 		
+\end{itemize}
+The \emph{support of a distribution} $u$, denoted $\supp u$, is defined as the complement of the largest open set $U \subseteq \Omega$ such that $u(\phi) = 0$ for all $u \in C^\infty_c (U)$. The space of \emph{compactly supported distributions} on $\Omega$ is denoted $\cE' (\Omega)$. We use this notation because this space can be viewed as the continuous dual of $\cE (\Omega) := C^\infty (\Omega)$ by truncating smooth functions outside the support of $u$. Let $\chi \in C^\infty_c (\Omega)$ such that $\chi \equiv 1$ on $U$, then  
+	\[ u(\phi) :=  u(\chi \phi) \]
+for $\phi \in C^\infty (\Omega)$. This is consistent with the definition on test functions $\phi \in C^\infty_c (\Omega)$. Indeed, $u((1 - \chi)\phi) = 0$ since $\supp (1 - \chi)\phi \subseteq U$, so by linearity
+	\[ u(\phi) = u(\chi \phi + (1 - \chi)\phi) = u (\chi\phi) + u((1 - \chi)\phi) = u (\chi \phi). \]
+
+\begin{example}
+	\item We can view $L^1_\loc (\Omega) \subseteq \cD' (\Omega)$ by identifying a locally integrable function with its action on test functions. Notice the topologies are compatible, and so this inclusion is continuous. 
+	\item The \emph{Dirac mass} at $x \in \Omega$ is defined as 
+				\[ \delta_x (\phi) := \phi(x), \]
+			and has $\supp \delta_x = \{x\}$. The Dirac mass at $x = 0$ is homogeneous of order $-n$. We can moreover write $\delta_0$ as the distributional limit of functions $L^1_{\loc}$. For example, in one dimension $n \mathbb 1_{[0, 1/n]} \to \delta_0$ as $n \to \infty$. 
+	
+	\item The \emph{Heaviside function} $H: \R \to \R$ is defined 
+				\[
+					H(x)
+						=
+						\begin{cases}
+							0, 		&\text{if } x \leq 0, \\
+							1, 		&\text{if } x > 0.
+						\end{cases}
+				\]			
+			This is an asymmetric function which is homogeneous of order zero. The derivative of the Heaviside function is the Dirac mass at zero, $H' = \delta_0$. 				
+\end{example} 
+
+
+\subsection{Localisation}
+
+While distributions generally do not admit pointwise values, they are nonetheless characterised by their local behaviour. To make this statement precise, we construct a partition of unity
+
+
+
+\begin{theorem}
+	Let $\Omega_k \subseteq \R^d$ be a collection of open subsets, and suppose $u_k \in C^\infty_c (\Omega_k)^*$ is a family of distributions satisfying the compatability condition 
+		\[ (u_k)_{|\Omega_j \cap \Omega_k} = (u_j)_{|\Omega_j \cap \Omega_k}. \]
+	Then there exists a unique distribution $u \in C^\infty_c (\bigcup_k \Omega_k)^*$ such that $u_{|\Omega_k} = u_k$.	
+\end{theorem}
+
+\begin{proof}
+	
+
+	We first establish uniqueness. Since distributions are linear, it suffices to show that if $u_{|\Omega_k} \equiv 0$ for all $k$, then $u \equiv 0$. 
+	
+	
+
+	Choose a partition of unity $\chi_k \in C^\infty_c (\R^d)$ subordinate to $\Omega_k$ and the functional $u: C^\infty_c (\bigcup_k \Omega_k) \to \C$ by 
+		\[ \langle \phi, u \rangle := \sum_k \langle \chi_k \phi, u_k \rangle.  \]
+		
+\end{proof}
+
+\begin{theorem}
+	Let $u \in \cS' (\R^n)$ be a tempered distribution supported in $\{0\} \subseteq \R^n$. Prove that there exists $N \in \N$ and coefficients $c_\alpha \in \C$ such that 
+		\[ u = \sum_{|\alpha| \leq N} c_\alpha \partial^\alpha \delta. \]
+\end{theorem}
+
+\begin{proof}
+	We claim that there exists $N \in \N$ such that 
+		\[ u(\phi) \leq N \sum_{|\alpha| \leq N, \, |\beta| \leq N} || x^\alpha \partial^\beta \phi ||_\infty \]
+	for all $\phi \in \cS (\R^n)$. Assume towards contradiction otherwise, then for all $N \in \N$ there exists $\phi_N \in \cS(\R^n)$ such that
+		\[ |u(\phi_N)| > N \sum_{|\alpha| \leq N, \, |\beta| \leq N} || x^\alpha \partial^\beta \phi_N ||_\infty. \]
+	Set 
+		\[ \psi_N = \left(N \sum_{|\alpha| \leq N, \, |\beta| \leq N} || x^\alpha \partial^\beta \phi_N ||_\infty\right)^{-1} \phi_N. \]	
+	By construction, $\psi_N \in \cS(\R^n)$ satisfying $|u(\psi_N)| \geq 1$ and 
+		\[ ||x^\alpha \partial^\beta \psi_N||_{\infty} \leq \frac1N\]
+	for all $|\alpha|, |\beta| \leq N$. However, the inequality above implies $\psi_N \to 0$ in $\cS(\R^n)$, a contradiction. 
+	
+	It remains to show that if $\psi \in \cS(\R^n)$ such that $\partial^\alpha \psi(0) = 0$ for $|\alpha| \leq N$, then $u(\psi) = 0$. We can find a bump function $\eta \in C_c^\infty (\R^n)$ satisfying $\eta \equiv 1$ on $|x| \leq 1$ and $\eta \equiv 0$ on $|x| \geq 2$. Set 
+		\[ \eta_\epsilon (x) := \eta(x/\epsilon), \qquad || \partial^\alpha \eta_\epsilon ||_\infty = \epsilon^{-|\alpha|} ||\partial^\alpha \eta ||_\infty.  \]
+	Since $u$ is supported on $\{0\}$, 
+		\[ u(\phi) = u((1 - \eta_\epsilon) \phi) + u(\eta_\epsilon \phi) = u(\eta_\epsilon \phi). \]
+	Observe that $|x^\alpha| \lesssim 1$ for $|\alpha| \leq N$ on bounded sets, particularly $\supp \eta_\epsilon \subseteq \{ |x| \leq 2\epsilon \}$. It follows from this observation, the initial claim, and the product rule that 
+		\begin{align*}
+			|u(\phi)| 
+				&\leq N \sum_{|\alpha| \leq N,\, |\beta| \leq N} ||x^\alpha \partial^{\beta} (\eta_\epsilon \phi) ||_\infty \lesssim_N \sum_{|\beta| \leq N} \sup_{|x|\leq 2 \epsilon}|\partial^\beta (\eta_\epsilon \phi) (x) |\lesssim_\eta \sum_{|\beta| \leq N} \epsilon^{|\beta| - N} \sup_{|x| \leq 2\epsilon}|\partial^\beta \phi (x)|.
+		\end{align*}	
+	We want to show the right-hand side vanishes taking $\epsilon \to 0$. For the highest order terms $|\beta| = N$, it follows from uniform continuity that 
+		\[ \lim_{\epsilon \to 0} \sup_{|x| \leq 2\epsilon} |\partial^\beta \phi (x)| = \partial^\beta \phi (0) = 0.  \]
+	For the lower order terms $|\beta| < N$, we apply the Taylor estimate, noting $\partial^\alpha \phi (0) = 0$ for $|\alpha| < N$, 
+		\[ \epsilon^{N - |\beta|} \sup_{|x| \leq 2\epsilon}|\partial^\beta \phi (x)| \leq \epsilon^{N - |\beta|} \sum_{|\alpha| = N - |\beta|} \frac{1}{(N - |\beta|)!} \sup_{|x| < 2\epsilon} |x^\alpha \partial^{\beta + \alpha} \phi (x)| \sim_{N, \beta}  \sum_{|\alpha| = N} \sup_{|x| < 2\epsilon} | \partial^\alpha \phi (x)|. \]
+	Again, since the order $N$ derivatives are uniformly continuous and vanish at the origin, the right-hand side vanishes as $\epsilon \to 0$, as desired. 		
+	
+	By Taylor's theorem, we can write $\phi \in \cS' (\R^n)$ as
+		\[ \phi(x) = \sum_{|\alpha| \leq N}\frac{ \partial^\alpha \phi(0)}{\alpha!} x^\alpha + \psi(x) \]
+	where $\psi \in C^\infty (\R^n)$. Then, since $x^\alpha \eta \in \cS (\R^n)$ and $\eta\psi \in C_c^\infty (\R^n)$ satisfies $\partial^\alpha(\eta \psi) (0) = \partial^\alpha \psi (0) = 0$ for $|\alpha| \leq N$, it follows from the previous result that
+		\[ u(\phi) = u((1 - \eta) \phi) + u(\eta \phi) =  \sum_{|\alpha| \leq N}\frac{u(x^\alpha \eta)}{\alpha!} \partial^\alpha \phi(0) .\]
+	This completes the proof. 	 
+\end{proof}
+
+
+
+\section{Convolution}
+
+Integration, interpreted as an averaging, acts as a smoothing operator. For example, we know from Lebesgue differentiation theorem that the local averaging operator
+	\[ (\mathbb 1_{[0, 1]} * f)(x) := \int_{x}^{x + 1} f(t) \, dt \]
+is continuous and differentiable a.e. when $f \in L^1_{\loc} (\R)$. Thus integration allows us to compare pointwise values of an approximation of $f$, a task ill-posed for generic locally integrable functions which are only defined pointwise up to a.e. modification. To generalise the averaging operator, given $f, g : \R^d \to \C$, we formally define the \emph{convolution} of $f$ against $\phi$ via the integral
+	\[ (\phi * f) (x) := \int_{\R^d} \phi(x - y) f(y) \, dy.  \]
+Thus $(\phi * f)(x)$ is the ``average'' of $f$ against the weight $\phi(x - y) dy$ centered at $x$. 
+
+\subsection{Convolution of test functions}
+
+\begin{proposition}
+	Let $f, g, h : \R^d \to \C$ be sufficiently regular, then the following properties hold:
+	\begin{enumerate}
+		\item convolution is commutative
+			\[ f * g = g * f, \]
+			
+		\item convolution is associative, 
+			\[ (f * g) * h = f * (g * h), \]
+			
+		\item the support of the convolution is contained in the algebraic sum of the supports, 
+			\[ \supp (f * g) \subseteq \supp f + \supp g, \]		
+	
+		\item the derivatives of the convolution are given by 
+			\[ \partial^\alpha (f * g) = (\partial^\alpha f) * g = f * (\partial^\alpha g), \]
+			
+		\item if $f \in C^\infty (\R^d)$, then $f * g \in C^\infty (\R^d)$. 	
+	\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+	(a) follows from a change of variables, (b) follows from Fubini's theorem, (d) follows from differentiating under the integral, (e) follows from (d). To show (c), suppose $x \in \R^d$ such that $(f * g)(x) \neq 0$. Writing 
+		\[ (f * g)(x) = \int_{\R^d} f(y) g(x - y) dy, \]
+	note the integral is non-zero only if there exists $y \in \supp f$ and $x - y \in \supp g$. 
+\end{proof}
+
+\begin{proposition}
+	The space of test functions $C^\infty_c (\Omega)$ is dense in $L^p (\Omega)$ for $1 \leq p < \infty$ and $C^k (\Omega)$ for $k \in \N$. 
+\end{proposition}
+
+\begin{proof}
+	Let $f \in L^p (\R^d)$, we want to find $\{ f_\epsilon \}_\epsilon \subseteq C^\infty_c (\R^d)$ such that $f_\epsilon \to f$ in $L^p$-norm. By dominated convergence and the triangle inequality we can assume without loss of generality that $f$ is compactly supported. Fix a test function $\phi \in C^\infty_c (\R^d)$ such that $\int \phi = 1$ and $\phi \equiv 0$ on $|x| > 1$, set
+		\[ \phi_\epsilon (x) := \frac{1}{\epsilon^d} \phi(x/\epsilon), \]
+	then $\int \phi_\epsilon = 1$ and $\phi_\epsilon \equiv 0$ on $|x| > \epsilon$. Moreover, $f * \phi_\epsilon \in C^\infty_c (\R^d)$ and satisfies
+		\[ f(x) - (f * \phi_\epsilon)(x) = \int_{\R^d} (f(x) - f(x - y)) \phi_\epsilon (y) \, dy = \int_{|z| \leq 1} (f(x) - f(x - \epsilon z)) \phi(z) \, dz. \]
+	Then by Minkowski's integral inequality and dominated convergence theorem 
+		\[ ||f - f * \phi_\epsilon||_{L^p} \leq \int_{|z| \leq 1} || f (x) - f(x - \epsilon z) ||_{L^p_x} \phi(z) \, dz \overset{\epsilon \to 0}{\longrightarrow} 0. \]	
+	Similarly, we can write
+		\[ \partial^\alpha f(x) - \partial^\alpha(f * \phi_\epsilon)(x) = \int_{|z| \leq 1} (\partial^\alpha f(x) - \partial^\alpha f(x - \epsilon z)) \phi(z) \, dz. \]	
+	By continuity and compactness, $\partial^\alpha f(x) - \partial^\alpha f(x - \epsilon z) \to 0$ uniformly as $\epsilon \to 0$ for $|z| \leq 1$ and $x$ in the compact support of $f$. This allows us to pass the limit uniformly under the integral sign. 
+\end{proof}
+
+\subsection{Convolution of distributions}
+
+\begin{theorem}
+	Let $U : C^\infty_c (\R^d) \to C^\infty (\R^d)$ be continuous with respect to the uniform topology on $C^\infty (\R^d)$, and suppose $U$ commutes with translation, then there exists a unique distribution $u \in C^\infty_c (\R^d)^*$ such that 
+		\[ U \phi = u * \phi.  \]
+\end{theorem}
+
+\begin{proposition}
+	Let $T \in C^\infty_c (\R^d)^*$ and $\phi, \psi \in C^\infty_c (\R^d)$. Then 
+	\begin{enumerate}
+		\item the convolution defines a smooth function $T * \psi \in C^\infty (\R^d)$ satisfying
+					\[ (T * \psi)(x) = T(\operatorname{Trans}_x \tilde \psi), \]
+		\item the derivatives of the convolution are given by 
+					\[ \partial^\alpha (T * \psi) = (\partial^\alpha T) * \psi = T * (\partial^\alpha \psi). \]
+		\item the support of the convolution is contained in the algebraic sum of the supports, 
+					\[ \supp (T * \psi) \subseteq \supp u + \supp \psi,  \]
+		\item convolution is associative, 
+					\[ (T * \psi) * \phi = T * (\psi * \phi). \]			
+	\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\leavevmode
+\begin{enumerate}
+	\item We first prove that $x \mapsto T( \operatorname{Trans}_x \tilde \psi)$ is smooth. Denote $e_j \in \R^d$ an elementary basis vector. The convergence $(\operatorname{Trans}_{x + he_j} \psi - \operatorname{Trans}_{x} \psi)/h \to \partial_j \psi$ as $h \to 0$ holds in the sense of test functions, so 
+	\[\lim_{h \to 0} \frac{(T * \psi)(x + h e_j) - (T * \psi)(x)}{h} =\lim_{h \to 0} u \left( \frac{\operatorname{Trans}_{x + he_j} \tilde \psi - \operatorname{Trans}_x \tilde \psi}{h} \right) = u(\partial_j \operatorname{Trans}_x \tilde\psi) .\]
+Arguing inductively gives the result. Then, since the Riemann sums converge in the sense of test functions, 
+					\begin{align*}
+						 \langle T(\operatorname{Trans}_x \tilde \psi), \phi \rangle 
+						 	&= \int_{\R^d}  T(\operatorname{Trans}_x \tilde \psi) \phi(x) dx = \lim_{h \to 0} \sum_{k \in \Z^d} T(\operatorname{Trans}_{kh} \tilde \psi) \phi(kh) h^n \\
+						 	&= \lim_{h \to 0} T \left( y \mapsto \sum_{k \in \Z^n} \operatorname{Trans}_{kh} \tilde \psi (y) \phi(kh) h^n \right) = T \left( \int_{\R^d} \tilde \psi(y - x) \phi(x) dx \right) = T(\tilde \psi * \phi).
+						\end{align*} 	
+
+	\item In the proof of a., we showed
+					\[ \partial^\alpha (u * \psi) = T (\partial^\alpha \operatorname{Trans}_x \tilde \psi) = \partial^\alpha T (\operatorname{Trans}_x \tilde \psi) = (\partial^\alpha T) * \psi.\]
+				We can also write
+					\[ \partial^\alpha (T * \psi) =T (\partial^\alpha \operatorname{Trans}_x \tilde \psi) = u(\operatorname{Trans}_x \widetilde{\partial^\alpha \psi}) =  u * (\partial^\alpha \psi). \]
+	\item Observe that $(T * \psi)(x) \neq 0$ only if $x - y \in \supp \psi$ for some $y \in \supp T$. Thus $x \in \supp T + \supp \phi$.
+	\item By convergence of the Riemann sums in the sense of test functions, 
+				\begin{align*}
+					 (T * (\psi * \phi))(x) 
+					 	&= \lim_{h \to 0} u \left( \sum_{k \in \Z^d} \operatorname{Trans}_x\widetilde{\operatorname{Trans}_{kh}\phi} h^d \psi(kh) \right) \\
+					 	&= \lim_{h \to 0} \sum_{k \in \Z^n} (T * \psi) (x - kh) h^d \phi(kh) = \int_{\R^d} (T * \psi)(x - y) \phi(y) dy = ((T * \psi) * \phi)(x) .
+				\end{align*}	 
+\end{enumerate} 
+\end{proof}
+
+\subsection{Convolution of compactly supported distributions}
+
+Let $u, v, \phi \in C^\infty_c (\R^d)$, then by a change of variables $z = x - y$ and Fubini's theorem, we can write
+\begin{align*}
+	(u * v)(\phi)
+			&= \int_{\R^d} \int_{\R^d} u(y) v(x - y) \phi(x) \, dx \, dy = \int_{\R^d} \int_{\R^d} u(y) v(z) \phi(z + y) \, dy \, dz = u (v (\operatorname{Trans}_y \phi)).
+\end{align*}
+The expression on the right continues to be well-defined for distributions $u$ and $v$ given that at least one is compactly supported. One important example is when we convolve a distribution with the Dirac mass at zero, 
+	\[ (u * \delta_0)(\phi) = u(\delta_0 (\operatorname{Trans}_y \phi)) = u (\phi). \]
+We can therefore view the space of compactly supported distributions $\cE' (\R^d)$ as a commutative algebra with respect to the convolution operator, where the identity element with respect to convolution is given by $\delta_0$.
+
+
+\subsection{Fundamental solutions}
+
+A \emph{linear partial differential operator of order $k$} takes the form 
+	\[ P(x, \partial) = \sum_{|\alpha| \leq k} c_\alpha (x) \partial^\alpha \]
+for coefficients $c_\alpha \in C^\infty (\Omega)$. We say that a distribution $u \in \cD' (\Omega)$ is a \emph{fundamental solution} if
+	\[ P(x, \partial) u = \delta_0. \]
+Consider now an operator with constant coefficients $P(x, \partial) \equiv P(\partial)$ defined on global distributions $\cD' (\R^d)$. If we instead replaced the Dirac mass with a generic compactly supported distribution $f \in \cE' (\R^d)$, we can obtain a solution for the corresponding differential equation by convolving the fundamental solution with $f$;
+	\[ f = \delta_0 * f = P(\partial) u * f = P(\partial) (u * f). \]
+	
+
+
+
+
+
+\end{document}

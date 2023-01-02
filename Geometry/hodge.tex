@@ -1,0 +1,152 @@
+\documentclass[reqno]{amsart}
+
+\usepackage{amsfonts,latexsym,amsthm,amssymb,amsmath,amscd,euscript,bm}
+\usepackage[sc]{mathpazo}
+\usepackage[margin = 2cm]{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+% sets numbering of enumerate to a, b, c, ...
+\renewcommand{\theenumi}{\alph{enumi}}
+
+% Theorems, propositions, etc.
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{claim}{Claim}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{notation}{Notation}
+
+\usepackage{tikz-cd}
+
+\usepackage{thmtools}
+\usepackage[framemethod=TikZ]{mdframed}
+	\mdfdefinestyle{mdrecbox}
+		{%
+			linewidth=0.5pt,
+			skipabove=12pt,
+			frametitleaboveskip=5pt,
+			frametitlebelowskip=0pt,
+			skipbelow=2pt,
+			frametitlefont=\bfseries,
+			innertopmargin=4pt,
+			innerbottommargin=8pt,
+			nobreak=true,
+		}
+	\declaretheoremstyle
+		[
+			headfont=\bfseries,
+			mdframed={style=mdrecbox},
+			headpunct={\\[3pt]},
+			postheadspace={0pt},
+		]
+		{thmrecbox}
+\newcounter{problem}[section]	\declaretheorem[style=thmrecbox,name=Problem, numberlike=problem]{statement}
+
+
+% Solution environment
+\newenvironment{solution}
+	{
+		\begin{proof}[Solution]}{\end{proof}
+	}
+
+
+% Math blackboard font
+\newcommand{\nc}{\newcommand}
+\nc{\on}[1]{\operatorname{#1}}
+
+\nc{\R}{\mathbb R}
+\nc{\C}{\mathbb C}
+\nc{\Q}{\mathbb Q}
+\nc{\Z}{\mathbb Z}
+\nc{\N}{\mathbb N}
+\nc{\HH}{\mathbb H}
+\nc{\DD}{\mathbb D}
+\nc{\TT}{\mathbb T}
+\nc{\EE}{\mathbb E}
+\nc{\PP}{\mathbb P}
+
+\nc{\cH}{\mathcal H}
+\nc{\cA}{\mathcal A}
+\nc{\cM}{\mathcal M}
+\nc{\cR}{\mathcal R}
+\nc{\cB}{\mathcal B}
+\nc{\cG}{\mathcal G}
+\nc{\cD}{\mathcal D}
+\nc{\cS}{\mathcal S}
+\nc{\cF}{\mathcal F}
+\nc{\cL}{\mathcal L}
+\nc{\cE}{\mathcal E}
+
+\nc{\diam}{\operatorname{diam}}
+\nc{\supp}{\operatorname{supp}}
+\nc{\vol}{\operatorname{vol}}
+\nc{\im}{\operatorname{im}}
+\nc{\loc}{\text{loc}}
+
+% Why the f*** would you ever use \epsilon
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\emph}{\textsc}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+%inverse Fourier transform widecheck
+
+\let\vec\mathbf
+
+% Title: change problem set number as needed
+\title
+{
+	\emph{Hodge theory}
+} 
+
+\author{Jason Zhao}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Preliminaries}
+
+\subsection{Linear algebra}
+
+Let $(V, \langle \cdot, \cdot \rangle)$ be a real inner product space of dimension $n$ with a choice of orientation $e_1 \wedge \cdots \wedge e_n$. The \emph{Hodge star operator} $\star : \bigwedge^k V \to \bigwedge^{n - k} V$
+	\[ \star (e_{i_1} \wedge \cdots \wedge e_{i_k}) = (-1)^\sigma e_{j_1} \wedge \cdots \wedge e_{j_{n - k}}. \]
+	
+\begin{lemma}
+	$\star \star = (-1)^{n (n - k)}$.
+\end{lemma}
+
+\subsection{Manifolds}
+
+We endow the space of $k$-forms with the inner product
+	\[ (\alpha, \beta) := \int_M \alpha \wedge \star \beta = \int_M \langle \alpha, \beta \rangle d \vol \]
+It is easy to see that this is positive definite, 
+	\[ (\omega, \omega) = \int_M \langle \omega, \omega \rangle d \vol \]
+is non-negative and zero if and only if $\omega = 0$ by continuity. For symmetry, observe that $\langle \omega, \eta \rangle = \langle \star \omega, \star \eta \rangle$. Therefore
+	\[ (\omega, \eta) = \int_M \langle \omega, \eta \rangle d \vol = \int_M \langle \star \omega, \star \eta \rangle d \vol \]
+
+\section{Hodge decomposition theorem}
+
+Denote $\cH^k (M)$ the space of harmonic $k$ forms. Then
+
+\begin{theorem}[Hodge decomposition theorem]
+	Let $M$ be a compact, oriented Riemannian manifold of dimension $n$. Then the space of differential forms admits the following orthogonal decompositions
+		\begin{align*}
+			\Omega^k (M) 
+				&= \im \Delta \oplus \ker \Delta \\
+				&= \im d \delta  \oplus \im \delta d \oplus \ker \Delta\\
+				& = d (\Omega^{k - 1} (M)) \oplus \delta (\Omega^{k + 1} (M)) \oplus \ker \Delta.
+		\end{align*}		
+\end{theorem}
+
+\begin{proof}
+	Choose an orthonormal basis 
+\end{proof}
+
+\end{document}

@@ -1,0 +1,126 @@
+\documentclass[10pt, reqno]{amsart}
+
+\usepackage{amsfonts,latexsym,amsthm,amssymb,amsmath,amscd,euscript}
+\usepackage{mathpazo}
+\usepackage{fullpage}
+\usepackage{slashed}
+\usepackage[utf8]{inputenc}
+\usepackage[margin = 2cm]{geometry}
+
+\usepackage{enumitem}
+\usepackage[linktocpage]{hyperref}
+
+
+% sets numbering of enumerate to a, b, c, ...
+\renewcommand{\theenumi}{\alph{enumi}}
+
+% Problem Formatting
+% sets problem counter
+\newcounter{problem}[section]
+
+\usepackage{thmtools}
+\usepackage[framemethod=TikZ]{mdframed}
+	\mdfdefinestyle{mdrecbox}
+		{%
+			linewidth=0.5pt,
+			skipabove=12pt,
+			frametitleaboveskip=5pt,
+			frametitlebelowskip=0pt,
+			skipbelow=2pt,
+			frametitlefont=\bfseries,
+			innertopmargin=4pt,
+			innerbottommargin=8pt,
+			nobreak=true,
+		}
+	\declaretheoremstyle
+		[
+			headfont=\bfseries,
+			mdframed={style=mdrecbox},
+			headpunct={\\[3pt]},
+			postheadspace={0pt},
+		]
+		{thmrecbox}
+	\declaretheorem[style=thmrecbox,name=Problem, numberlike=problem]{statement}
+
+\usepackage{comment}		% Housekeeping, making the pdf's with only problems
+
+\newenvironment{solution}
+	{
+		\begin{proof}[Solution]}{\end{proof}
+	}
+
+\newenvironment{claimbox}
+	{
+		\par
+		\noindent\hrulefill\hrulefill
+	}
+	{
+		\vspace{-1em}
+		\noindent\hrulefill\hrulefill
+		
+		\vspace{1em}
+		\noindent
+	}	
+
+% Why the f*** would you ever use \epsilon
+\renewcommand{\epsilon}{\varepsilon}
+
+% We can even define a new command for \newcommand!
+\newcommand{\nc}{\newcommand}
+\nc{\on}[1]{\operatorname{#1}}
+\nc{\R}{\mathbb R}
+\nc{\C}{\mathbb C}
+\nc{\F}{\mathbb F}
+\nc{\Q}{\mathbb Q}
+\nc{\Z}{\mathbb Z}
+\nc{\N}{\mathbb N}
+\nc{\DD}{\mathbb D}
+\nc{\TT}{\mathbb T}
+
+\nc{\cM}{\mathcal M}
+\nc{\cG}{\mathcal G}
+\nc{\cF}{\mathcal F}
+\nc{\HH}{\mathbb H}
+\nc{\cN}{\mathcal N}
+\nc{\cS}{\mathcal S}
+\nc{\cB}{\mathcal B}
+\nc{\cT}{\mathcal T}
+
+\nc{\del}{\partial}
+\nc{\diam}{\on{diam}}
+\nc{\loc}{\on{loc}}
+\nc{\supp}{\on{supp}}
+
+\renewcommand{\Re}{\on{Re}}
+\renewcommand{\Im}{\on{Im}}
+% Title: change problem set number as needed
+\title
+{
+	\large Dispersive PDE Solutions
+} 
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+	Solutions to Terry Tao's \textit{Nonlinear Dispersive Equations: Local and Global Analysis}.
+\end{abstract}
+
+
+\tableofcontents
+\clearpage
+
+\section{Constant coefficient linear dispersive equations}
+
+\input{ch2}
+
+\section{Semilinear dispersive equations}
+
+\input{ch3}
+
+
+
+
+\end{document}

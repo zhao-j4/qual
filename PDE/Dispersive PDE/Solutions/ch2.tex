@@ -1,0 +1,485 @@
+\subsection{The Fourier transform}
+
+\begin{statement}[Wave propagators]
+	Show that if $u \in C^2_t \cS_x (\R_t \times \R^d_x)$ is a field obeying the wave equation, then
+		\[ \widehat{u(t)} (\xi) = \cos(t |\xi|) \widehat u_0 (\xi) + \frac{\sin(t |\xi|)}{|\xi|} \widehat u_1 (\xi). \]	
+	Show that if $(u_0, u_1) \in H^s_x (\R^d) \times H^{s- 1}_x (\R^d)$ for some $s \in \R$, then 
+		\[ ||\nabla u||_{H^{s - 1}_x} (t) + ||\partial_t u||_{H^{s - 1}_x} (t) \lesssim_{d, s} ||u_0||_{H^s_x} + ||u_1||_{H^{s - 1}_x} \]
+	and
+		\[ ||u||_{H^s_x} (t) \lesssim_{d, s} \langle t \rangle \left( ||u_0||_{H^s_x} + ||u_1||_{H^{s - 1}_x} \right). \]	
+\end{statement}
+
+\begin{solution}
+	In (spatial) frequency, the Cauchy problem for the wave equation takes the form of a second order linear ODE in time, namely
+		\begin{align*} 
+			(\partial_t^2 + |\xi|^2) \widehat{u(t)} (\xi) 
+				&= 0, 
+		\end{align*}	
+	subject to initial data $\widehat{u(0)} = \widehat{u_0}$ and $\partial_t \widehat{u(0)} = \widehat{u_1}$. The general solution to the equation above is
+		\[ \widehat{u(t)} (\xi) = a(\xi) \cos(t |\xi|) + b(\xi) \sin(t|\xi|)  \]
+	for some coefficients $a$ and $b$ depending on the initial data conditions. Applying the initial data conditions, we obtain $a(\xi) = \widehat{u_0} (\xi)$ and $b(\xi) = \widehat{u_1} (\xi)/|\xi|$, as desired. 
+	
+	To prove the inequalities, we use the explicit form for the spatial Fourier transform of $u$ and the definition of the Sobolev norm via frequency space. Indeed, by the triangle inequality, 
+		\begin{align*}
+			||\nabla u||_{H^{s - 1}_x} (t)
+				&= || \langle \xi \rangle^{s - 1} |\xi| \widehat u ||_{L^2_\xi} (t) \leq || \langle \xi \rangle^{s - 1} |\xi| \widehat{u_0} ||_{L^2_\xi} + || \langle \xi \rangle^{s - 1} \widehat{u_1} ||_{L^2_\xi}  \lesssim ||u_0||_{H^s_x} + ||u_1||_{H^{s - 1}_x}.
+		\end{align*}
+	Similarly, 
+		\begin{align*}
+			||\partial_t u||_{H^{s - 1}_x} (t)
+				&= || \langle \xi \rangle^{s - 1} \partial_t \widehat u ||_{L^2_\xi} (t)
+				\lesssim || \langle \xi \rangle^{s - 1} |\xi| \widehat{u_0} ||_{L^2_\xi} + ||\langle \xi \rangle^{s - 1} \widehat{u_1} ||_{L^2_\xi} \lesssim ||u_0||_{H^s_x} + ||u_1||_{H^{s - 1}_x}.
+		\end{align*}	
+	For the second inequality, 
+		\begin{align*}
+			||u||_{H^s_x} (t)
+				&\lesssim ||\langle \xi \rangle^s \widehat{u_0} ||_{L^2_\xi} + ||  \langle \xi \rangle^s |\xi|^{-1}\sin(t |\xi|) \widehat{u_1}  ||_{L^2_\xi}.
+		\end{align*}	
+\end{solution}
+
+\begin{statement}[Klein-Gordon propagators]
+	If $u \in C^2_{t, \loc} \cS_x (\R_t \times \R^d_x)$ is a classical solution to the Klein-Gordon equations, then 
+		\[ \widehat{u(t)} (\xi) = \cos(t \langle \xi \rangle) \widehat{u_0} (\xi) + \frac{\sin (t \langle \xi\rangle)}{\langle \xi \rangle} \widehat{u_1} (\xi). \]
+\end{statement}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{statement}[Duhamel formula]
+	Let $I$ be a time interval, and suppose $u \in C^1_t \cS_x (I \times \R^d)$ and $F \in C^0_t \cS_x (I \times \R^d)$ solve the equation
+		\[ \partial_t u = Lu + F \]
+	where $L = i h(D)$ is skew-adjoint. Establish the \textit{Duhamel formula}
+		\[ u(t) = e^{(t - t_0) L} u(t_0) + \int_{t_0}^t e^{(t - s) L} F(s) ds. \]
+\end{statement}
+
+\begin{solution}
+	Consider the quantity
+		\[ \partial_t \left( e^{(t_0 - t)L} u(t) \right)  = -L e^{(t_0 - t)L} u(t) + e^{(t_0 - t) L} \partial_t u(t) = e^{(t_0 - t) L} F(t). \]
+	Integrating yields
+		\[  e^{(t_0 - t) L} u(t) = u(t_0) + \int_{t_0}^t e^{(t_0 - s) L} F(s) ds.  \]	
+	Applying the propagator $\exp [(t - t_0) L]$ furnishes the desired formula. 	
+\end{solution}
+
+\begin{statement}[Invariant energy]
+	Show that if $u \in C^\infty_{t, \loc} \cS_x (\R_t \times \R^d_x)$ is a classical solution to the wave equation, then the \textit{invariant energy}
+		\[ C(t) := ||u||^2_{\dot H^{1/2}_x} (t) + ||\partial_t u ||^2_{\dot H^{-1/2}_x} (t) \]
+	is independent of the choice of time $t$. Furthermore, show that it is invariant under the Lorentz transformation. 	
+\end{statement}
+
+\begin{solution}
+	It suffices to show $\partial_t C \equiv 0$; indeed, recalling $|z|^2 = z \overline z$, 
+		\begin{align*}
+			\partial_t C(t) 
+				&= \partial_t \left(\int_{\R^d}  |\xi| |\widehat {u(t)} (\xi)|^2 d \xi + \int_{\R^d}  \frac{1}{|\xi|} |\widehat{u(t)} (\xi)|^2 d \xi\right) \\
+				&= \int_{\R^d} \left(|\xi| + \frac{1}{|\xi|}  \right) \left( \overline{\widehat{u(t)} (\xi)} \widehat{\partial_t u(t)} (\xi) + \widehat{u(t)} (\xi) \overline{\widehat{\partial_t u(t)} (\xi)} \right) d \xi.
+		\end{align*}		
+\end{solution}
+
+\begin{statement}[Illposedness of Schrodinger in $C^\infty_{x, \loc}$]
+	Give an example of a smooth solution $u \in C^\infty_{t, x, \loc} (\R_t \times \R_x \to \C)$ to the Schrodinger equation 
+		\[ i \partial_t u + \partial_x^2 u = 0 \]
+	which vanishes on the upper half-plane $t \geq 0$ but is not identically zero. Show that such an example does not exist if we replace $C^\infty_{t, x, \loc}$ by $C^\infty_{t, x}$. 	
+\end{statement}
+
+\begin{solution}
+	We make the \textit{ansatz}
+		\[ u(t, x) := \int_\gamma f(z) e^{i x z - i t z^2} dz \]
+	where $\gamma \subseteq \C$ is the contour consisting of the positive real and imaginary axes and $f$ is an analytic function decaying sufficiently quickly. Indeed, formally differentiating, 
+		\begin{align*}
+			i\partial_t u (t, x) = \int_\gamma f(z) z^2 e^{i x z - i t z^2} dz, \qquad \partial_x^2 u(t, x) = -\int_\gamma f(z) z^2 e^{i x z - i t z^2} dz.  
+		\end{align*}		
+	We claim that $f(z) = e^{-z^4}$ has the desired properties. Parametrizing $\gamma$, we see the integral and its derivatives converge absolutely 
+		\[ \int_\gamma e^{-z^4} e^{i x z - i t z^2} dz = \int_0^\infty e^{-s^4} e^{i x s - i t s^2} ds - i \int_0^\infty e^{-s^4} e^{- x s + i t s^2} ds. \]		
+	Let $C_R \subseteq \C$ be the quarter-circular contour in the first quadrant of radius $R$. If for $t < 0$ we can show that the integral along this contour vanishes as $R \to \infty$, it follows from Cauchy's theorem that $u(t, x)$ vanishes in the lower half-space $t < 0$. Applying the parametrization $\theta \mapsto R e^{i \theta}$ for $\theta \in [0, \pi/2]$, 
+		\begin{align*}
+			 \left|\int_{C_R} e^{-z^4} e^{ixz - it z^2} dz\right| 
+			 	&\leq \int_0^{\pi/2} \left|e^{- R^4 e^{i \theta}} e^{i x Re^{i \theta} - it R^2 e^{2 i \theta}} R i e^{i \theta} \right| d \theta \leq R \int_0^{\pi/2} e^{-R^4 \cos \theta} e^{- xR \sin \theta + t R^2 \sin 2\theta} d \theta.
+		\end{align*} 	
+	This proves the result. It remains to show that $u \not\equiv 0$. We want to write $u (t, 0)$ as a Fourier integral and appeal to uniqueness; making a change of variables $u = s^2$, 
+		\begin{align*}
+			 u(t, 0) 
+			 	&= \int_0^\infty e^{-s^4} e^{- i t s^2} - i \int_0^\infty e^{-s^4} e^{i t s^2} ds = \frac12 \int_0^\infty \frac{e^{-u^2}}{\sqrt{u}} e^{-i t u} du -\frac{ i}{2} \int_0^\infty \frac{e^{-u^2}}{\sqrt{u}} e^{i t u} d u.
+		\end{align*}	 	
+	Suppose now $u \in C^\infty_{t, x} (\R_t \times \R_x \to \C)$, in particular, it is a tempered distribution. 	
+\end{solution}
+
+\begin{statement}
+	Let $u \in C^0_t H^1_x (\R_t \times \R_x^d) \cap C^1_t L^2_x (\R_t \times \R^d_x)$ be an energy class solution to the wave equation. Show that for any bounded time interval $I$ we have the bound
+		\[ \left|\left| \int_I u(t, x) dt \right| \right|_{\dot H^2_x} \lesssim_d ||u||_{\dot H^1_x} (0) + ||\partial_t u ||_{L^2_x} (0).  \]
+\end{statement}
+
+\begin{solution}
+	In (spatial) frequency, the wave equation takes the form
+		\[ \partial_t^2 \widehat {u(t)} (\xi) = - |\xi|^2 \widehat{u(t)} (\xi). \]
+	It follows from the identity above and the fundamental theorem of calculus, denoting $I = [a, b]$, 
+		\begin{align*}
+			\left|\left| \int_I u(t, x) dt \right| \right|_{\dot H^2_x}
+				&=\left|\left|  \int_I \partial_t^2 \widehat{u(t)} (\xi) dt \right|\right|_{L^2_\xi} \leq ||\partial_t \widehat{u(b)} (\xi)||_{L^2_\xi} + ||\partial_t \widehat{u(a)} (\xi)||_{L^2_\xi}. 
+		\end{align*}	
+	Following the proof of the wave propagator inequality, we can replace the inhomogeneous $H^s$-norm with the homogeneous $H^s$-norm in the case $s = 1$. Hence we obtain the inequality
+		\[ ||\partial_t \widehat{u(b)} (\xi)||_{L^2_\xi} + ||\partial_t \widehat{u(a)} (\xi)||_{L^2_\xi} \lesssim_{d, s} || u||_{\dot H^1_x} (0) + ||\partial_t u_1||_{L^2_x} (0) \] 	
+	as desired. 	
+\end{solution}
+
+\subsection{Fundamental solution}
+
+\begin{statement}[Gaussian integrals]
+	Use contour integration to establish the identity
+		\[ \int_\R e^{-\alpha x^2} e^{\beta x} dx = \sqrt{\frac\pi\alpha} e^{\beta^2/4 \alpha} \]
+	whenever $\alpha, \beta \in \C$ with $\Re \alpha > 0$, where one takes the standard branch of the square root. 	
+\end{statement}
+
+\begin{solution}
+	Completing the square $-\alpha x^2 + \beta x = -(\alpha x - \beta/\sqrt{2\alpha})^2 + \beta^2/2\alpha$, we can write
+		\[ \int_\R e^{-\alpha x^2} e^{\beta x} dx = e^{\beta^2/2 \alpha}\int_\R e^{- (\alpha x - \beta/\sqrt{2 \alpha})^2} dx. \]
+\end{solution}
+
+\begin{statement}[Van der Corput lemma]
+	Let $I \subseteq \R$ be a compact interval. If $\phi \in C_x^2 (I \to \R)$ is either convex or concave, and $|\partial_x \phi| \geq 1$, establish the estimate
+		\[ \int_I e^{i \lambda\phi (x)} dx \leq \frac{4}{\lambda}. \]
+	Conclude that if $k \geq 2$ and $\phi \in C^k (I \to \R)$ satisfies $|\partial^k_x \phi| \geq 1$, then 
+		\[ \left| \int_I e^{i \lambda \phi(x)} dx \right| \lesssim_k \lambda^{-1/k}. \]	
+	Obtain a similar estimate for intervals of the form $\int_\R e^{i \phi(x)} \psi(x) dx$ for $\psi$ of bounded variation. 	
+\end{statement}
+
+\begin{solution}
+	Write $I = [a, b]$, since $\phi' \neq 0$ we can write
+		\[ e^{i \lambda \phi (x)} = \frac{1}{i \lambda \phi'(x)} \frac{d}{dx} \left[ e^{i \lambda \phi(x)} \right] . \]
+	Integrating by parts gives
+		\begin{align*}
+			\int_a^b e^{i \lambda \phi(x)} dx
+				&=  \left[ \frac{e^{i \lambda \phi(b)}}{i \lambda \phi'(b)} - \frac{e^{i \lambda \phi(a)}}{i \lambda \phi'(a)} \right] - \int_a^b e^{i \lambda \phi(x)} \frac{d}{dx} \left[ \frac{1}{i \lambda\phi' (x)} \right] dx.
+		\end{align*}	
+	As $|\phi'| \geq 1$, the first term on the right is bounded by $2/\lambda$. To bound the second term by $2/\lambda$, we want to apply the fundamental theorem of calculus. By concavity/convexity, we know $1/\phi'$ is monotone, so its derivative is either non-negative or non-positive. This allows us to write
+		\[
+		\left| \int_a^b e^{i \lambda \phi(x)} \frac{d}{dx} \left[ \frac{1}{i \lambda\phi' (x)} \right] dx \right| \leq \int_a^b \left| \frac{d}{dx} \left[ \frac{1}{\phi'(x)} \right] dx \right| = \left| \int_a^b \frac{d}{dx} \left[ \frac{1}{\phi'(x)} \right]\right| = \left| \frac{1}{\phi'(b)} - \frac{1}{\phi'(a)} \right| \leq 2.\]
+	This proves the lemma for $k = 1$.  Assume for induction the claim holds for $k \geq 1$ and $|\partial^{(k + 1)}_x \phi| \geq 1$. Without loss of generality, assume $\phi^{(k + 1)} \geq 1$; in particular, $\phi^{(k)}$ is strictly increasing on $[a, b]$, so there exists at most one point $c \in [a, b]$ such that $\phi^{(k)} = 0$. 
+
+Consider the case where a $c$ exists; as $\phi^{(k + 1)} \geq 1$, we know 
+	\[ |\phi^{(k)} (x)| \geq \delta \qquad \text{whenever } |x - c| > \delta \]
+for any choice of $\delta > 0$. Rescaling, it follows that
+	\[  \partial_y^k (\phi(\delta^{-1/k}y)) = \delta^{-1} \phi^{(k)} (\delta^{-1/k} y) \geq 1 \qquad \text{whenever } y \in [\delta^{1/k} a, \delta^{1/k} (c - \delta)] \cup [\delta^{1/k} (c + \delta), \delta^{1/k} b]. \]
+Hence we can apply the induction hypothesis on the rescaled function $y \mapsto \phi(\delta^{-1/k} y)$,
+	\[ \left| \left( \int_a^{c - \delta} + \int_{c + \delta}^b \right) e^{i \lambda \phi(x)} dx \right| = \left| \left( \int_{\delta^{1/k}a}^{\delta^{1/k}(c - \delta)} +\int_{\delta^{1/k}(c + \delta)}^{\delta^{1/k}b} \right) e^{i \lambda \phi(\delta^{-1/k}y)} \delta^{1/k} dy \right| \lesssim \delta^{-1/k} \lambda^{-1/k}, \]
+and similarly for the integral on $[c + \delta, b]$. On the other hand, we estimate naively 
+	\[ \left| \int_{c - \delta}^{c + \delta} e^{i \lambda \phi(x)} \right| \leq 2 \delta. \]
+Choosing $\delta = \lambda^{-1/(k + 1)}$, we obtain
+	\[ \left| \int_a^b e^{i \lambda \phi(x)}  dx \right| \lesssim \delta^{-1/k} \lambda^{-1/k} + 2 \delta \sim \lambda^{- \frac{1}{k + 1}}. \]	
+This completes the proof for this case. 	
+
+Consider the case where $\phi^{(k)} (x) \neq 0$	for all $x \in [a, b]$, e.g. without loss of generality $\phi^{(k)} > 0$. As $\phi^{(k + 1)} \geq 1$, we know that 
+	\[ \phi^{(k)} (x) \geq \delta \qquad \text{whenever } x \in [a + \delta, b]. \]
+Following the argument from the previous case, we have
+	\[ \left| \int_{a + \delta}^b e^{i \lambda \phi(x)} dx \right|  \lesssim \lambda^{-1/k} \delta^{-1/k}\]
+and the naive estimate
+	\[ \left| \int_a^{a + \delta} e^{i \lambda \phi(x)} dx \right| \leq \delta. \]	
+Choosing $\delta = \lambda^{1/(k + 1)}$, we conclude the result. 	
+
+Suppose $\psi$ is of bounded variation and $|\partial_x^k \phi| \geq 1$, then (Riemann-Stieltjes) integrating by parts, we can write
+	\[\int_a^b e^{i \lambda \phi(x)} \psi(x) dx = \int_a^b \psi(x) \frac{d}{dx} \left( \int_a^x e^{i \lambda \phi(y)} dy\right) dx = \psi(b) \int_a^b e^{i \lambda \phi(y)} dy - \int_a^b \left( \int_a^x e^{i \lambda \phi(y)} dy \right) d \psi. \]
+By the triangle inequality, it follows that 
+	\[ \left|\int_a^b e^{i \lambda \phi(x)} \psi(x) dx\right| \lesssim \lambda^{-1/k} \left( |\psi(b)| + ||\psi||_{\on{BV}} \right).\]
+\end{solution}
+
+\begin{statement}[Airy fundamental solution]
+	Let $K_t (x)$ be the fundamental solution of the Airy function. Establish the bounds 
+		\[ K_1 (x) = O_N (\langle x \rangle^{-N})\]
+	for any $N \geq 0$ and $x > 0$, and 
+		\[ K_1 (x) = O(\langle x \rangle^{-1/4}) \]
+	for any $x \leq 0$. Explain why this disparity in decay is consistent with the principle of wave propagation. 	
+\end{statement}
+
+\begin{solution}
+
+		
+\end{solution}
+
+\begin{statement}[Sharp Huygens' principle]
+	Let $d \geq 3$ be odd, and let $u \in C^2_{t, \loc} \cS_x (\R_t \times \R^d_x)$ be a classical solution to the wave equation
+		\begin{align*}
+			\Box u 							&= 0,\\
+			u_{|t = 0}						&= u_0, \\
+			\partial_t u_{|t= 0}	&= u_1,
+		\end{align*}	
+	such that the initial data $u_0$ and $u_1$ are supported on a closed set $\Omega \subseteq \R^d$. Show that $u(t, - )$ is supported on
+		\[ \Omega_t = \{ x \in \R^d : |x - y| = t \text{ for some } y \in \Omega \}. \]
+\end{statement}
+
+\begin{solution}
+	The fundamental solution in odd dimensions is supported on the (forward) light cone, so by finite propagation in time, $u(t, -)$ is supported on $\Omega_t$ 	
+\end{solution}
+
+\subsection{Dispersion and Strichartz estimates}
+
+\begin{statement}[Asymptotic $L^p_x$ behaviour of Schrodinger]
+	Let $u_0 \in \cS_x (\R^d)$ be a non-zero Schwartz function whose Fourier transform is supported in $|\xi| \leq 1$. Show that we have the estimate 
+		\[ |e^{i t \Delta} u_0 (x)| \lesssim_{N, u_0} \langle t \rangle^{-N} \langle x \rangle^{-N} \]
+	uniform in $|x| \geq 5|t|$ and 
+		\[ |e^{it \Delta} u_0 (x)|\lesssim_{u_0} \langle t \rangle^{-d/2} \]
+	uniform in $|x| < 5|t|$. Conclude for all $1 \leq p \leq \infty$ that 
+		\[ ||e^{it \Delta} u_0 ||_{L^p_x} \sim_{d, u_0, p} \langle t \rangle^{d(\frac1p - \frac12)}.  \]
+\end{statement}
+
+\begin{solution}
+	Recall that, inspecting the fundamental solution, we have the dispersive inequality
+		\[ ||e^{it \Delta} u_0 ||_{L^\infty_x} \lesssim_d t^{-\frac{d}{2}} ||u_0||_{L^1_x}. \]
+	This furnishes the desired bound in the case $|x| < 5|t|$. In the case $|x| \geq 5|t|$, we argue by non-stationary phase. By rotational symmetry, assume without loss of generality that $x = (x_1, 0, \dots, 0)$, then 
+		\[ e^{it \Delta} u_0 (x) = \int_{\R^d} e^{i x \cdot \xi} e^{-i t |\xi|^2} \widehat{u_0} (\xi) d \xi = \int_{|\xi'| < 1} e^{- i t |\xi'|^2}\left(\int_{|\xi_1| < 1} e^{i(x_1 \xi_1 - t |\xi_1|^2)} \widehat{u_0} (\xi) d\xi_1 \right) d\xi'. \]
+	Since $|\xi_1| < 1$ and $|x| \geq 5|t|$, the phase $\xi_1 \mapsto x_1 \xi_1 - t |\xi_1|^2$ is non-stationary, i.e. it does not admit critical points. 	Consider the differential operator $D$ and its adjoint $D^t$, given by 
+		\[ D := \frac{1}{i(x_1 - 2 t \xi_1)} \frac{\partial}{\partial\xi_1}, \qquad D^t =- \frac{\partial}{\partial \xi_1} \frac{1}{i (x_1 - 2t \xi_1)}. \]
+	 Integrating by parts, noting the boundary terms vanish due to the support of $\widehat{u_0}$, we obtain 
+		\[ \int_{|\xi_1| < 1} e^{i(x_1 \xi_1 - t |\xi_1|^2)} \widehat{u_0} (\xi) d\xi_1 = \int_{|\xi_1| < 1} D^{2N} (e^{i(x_1 \xi_1 - t |\xi_1|^2)}) \widehat{u_0} (\xi) d\xi_1= \int_{|\xi_1| < 1} e^{i (x_1 \xi_1 - t |\xi_1|^2)} (D^t)^{2N} \widehat{u_0} (\xi) d \xi_1. \]
+
+	For the upper bound, we split the $L^p_x$-norm into the contribution from the region $|x| \geq 5|t|$ and the contribution from $|x| < 5|t|$. The former is dominated by the latter by the pointwise estimates, choosing $N \gg d$, as we can obtain arbitrary decay in $t$, so we obtain
+		\begin{align*}
+			||e^{it \Delta} u_0 ||_{L^p}^p 
+				&= \left( \int_{|x| < 5|t|} + \int_{|x| \geq 5|t|} \right) |e^{it \Delta} u_0 (x)|^p \, dx\\
+				&\lesssim_{u_0} \int_{|x| < 5|t|} \langle t \rangle^{-\frac{dp}{2}} dx + \int_{|x| \geq 5|t|}  \langle t \rangle^{-Np}\langle x \rangle^{-Np} \, dx \sim_{d, p} \langle t \rangle^{-\frac{dp}{2}} |t|^d + \langle t \rangle^{1 - 2Np}  \lesssim \langle t \rangle^{dp (\frac1p - \frac12)} 
+		\end{align*}			
+	with appropriate modifications for $p = \infty$. This proves the upper bound. We prove the lower bound by duality; observe first that the $L^2_x$-norm is time-invariant, so the result holds in the case $p = 2$. Indeed, by Plancharel, 
+		\[ ||e^{it \Delta} u_0||_{L^2_x} = ||e^{-it |\xi|^2} \widehat{u_0} ||_{L^2_\xi} = ||\widehat{u_0} ||_{L^2_\xi} \sim_{u_0} 1. \]
+	It follows from the above, Holder's inequality, and the upper bound that
+		\[ 1 \sim_{u_0} ||e^{it \Delta} u_0||_{L^2_x}^2 \lesssim ||e^{it \Delta} u_0||_{L^p_x}||e^{it \Delta} u_0||_{L^{p'}_x} \lesssim_{d, u_0, p} ||e^{it \Delta} u_0||_{L^p_x} \langle t \rangle^{d (\frac{1}{p'} - \frac12)}. \]
+	Rearranging furnishes the lower bound. 		
+\end{solution}
+
+\begin{statement}[Necessary conditions for fixed-time Schrodinger]
+	Suppose $1 \leq p, q \leq \infty$ and $\alpha \in \R$ are such that the fixed time estimate
+		\[ ||e^{it \Delta/2} u_0||_{L^q_x} \leq C t^\alpha ||u_0||_{L^p_x} \]
+	holds for all $u_0 \in \cS_x (\R^d)$ and $t \neq 0$, and some $C$ independent of $t$ and $u_0$. Using scaling arguments, conclude that $\alpha = \frac{d}{2} (\frac1q - \frac1p)$. Conclude that $q \geq p$ and $q = p'$. 
+\end{statement}
+
+
+\begin{solution}
+	For $\lambda > 0$, we rescale the domain
+		\[ u_0^\lambda (x) := u_0 (\lambda^{-1} x). \]
+	From the scaling symmetry of the Schrodinger equation, we know $e^{it\Delta/2} u_0^\lambda (x) = e^{it\lambda^{-2} \Delta/2}	 u_0 (\lambda^{-1} x)$. Hence by a change of variables $\lambda^{-1} x \mapsto x$, we can write
+		\[ ||e^{it\Delta/2} u_0^\lambda||_{L^q_x} = \lambda^{\frac{d}{q}} ||e^{i t \lambda^{-2} \Delta/2} u_0||_{L^q_x} \leq C t^{\alpha} \lambda^{\frac{d}{q}-2 \alpha} ||u_0||_{L^p_x} =  C t^{\alpha} \lambda^{\frac{d}{q}-2 \alpha - \frac{d}{p}} ||u_0^\lambda||_{L^p_x}. \]
+	Choosing $C$ optimal and optimizing in $t$ and $u_0$, rearranging we obtain
+		\[ 1 \leq \lambda^{\frac{d}{q}-2 \alpha - \frac{d}{p}}. \]	
+	Taking $\lambda \to \infty$ when $\frac{d}{p} > \frac{d}{q} - 2 \alpha$ and $\lambda \to 0$ when $\frac{d}{p} < \frac{d}{q} - 2 \alpha$, we conclude that we must in fact have equality $\frac{d}{p} = \frac{d}{q} - 2 \alpha$, as desired. It follows from the previous exercise that
+		\[ \langle t \rangle^{d (\frac1q - \frac12)} \sim_{d, u_0, p} ||e^{it \Delta/2} u_0 ||_{L^p_x} \lesssim t^{\frac{d}{2} (\frac1q - \frac1p)} ||u_0||_{L^p_x}. \]
+	If $q < p$, i.e.  $\frac{d}{2} (\frac1q - \frac1p) > 0$, then taking $t \to 0$ the left-hand side tends to one while the right-hand side tends to zero, contradicting the inequality. This proves $q \geq p$. Rearranging the inequality above, 
+		\[ \langle t \rangle^{d (\frac1q - \frac12)}t^{-\frac{d}{2} (\frac1q - \frac1p)} \lesssim_{d, u_0, p} 1.\]
+	Taking $t \to \infty$ when 	$d (\frac1q - \frac12) > \frac{d}{2} (\frac1q - \frac1p)$ and $t \to 0$ when $d (\frac1q - \frac12) < \frac{d}{2} (\frac1q - \frac1p)$, we conclude that we must in fact have equality $d (\frac1q - \frac12) = \frac{d}{2} (\frac1q - \frac1p)$, i.e. $q = p'$. 
+\end{solution}
+
+\begin{statement}[Schrodinger Strichartz cannot gain regularity]
+	Using Galilean invariance, show that no estimate of the form 
+		\[ ||e^{i \Delta/2} u_0||_{W^{s_1, q}_x} \lesssim ||u_0||_{W^{s_2, p}_x} \]
+	or 
+		\[ ||e^{i t\Delta/2} u_0||_{W^{s_1, r}_x (I \times \R^d)} \lesssim ||u_0||_{W^{s_2, p}_x} \]
+	can hold unless $s_2 \leq s_1$. 	
+\end{statement}
+
+
+\begin{solution}
+	
+\end{solution}
+
+\begin{statement}[Decay of finite energy Schrodinger solutions] Show that the admissible space $L^\infty_t L^2_x$ which appears in the Strichartz estimate for Schrodinger can be replaced by the slightly smaller space $C^0_t L^2_x$. Similarly, if $u_0 \in H^1_x (\R^3)$ and $u: \R \times \R^3 \to \C$ is the solution to the Schrodinger equation, show that 
+	\[ \lim_{t \to \pm \infty} ||u||_{L^{p'}_x} (t) = 0 \]
+	for $2 < p \leq 6$ and that 
+		\[ \lim_{t \to \pm \infty} || \langle  x \rangle^{-\epsilon} u||_{L^2_x} (t) + || \langle x \rangle^{-\epsilon} \nabla u||_{L^2_x} (t) = 0 \]
+	for any $\epsilon > 0$. 	
+
+\end{statement}
+
+
+\begin{solution}
+	By log convexity of the $L^p$-norm and the dispersive estimate, 
+		\[ ||e^{it \Delta/2} u_0||_{L^p_x}  \lesssim t^{-3 (1 - \frac1p - \frac12)} ||u_0||_{L^{p}_x} \overset{t \pm \infty}{\longrightarrow} 0\]
+	provided that $u_0 \in L^p_x (\R^3)$. This follows from log-convexity of the $L^p$-norm and Sobolev embedding inequality $H^1_x (\R^3) \hookrightarrow L^6_x (\R^3)$; for some $\theta \in [0, 1]$, we have
+		\[ ||u_0||_{L^p_x} \leq || u_0||_{L^{2}_x}^\theta ||u_0||_{L^6_x}^{1 - \theta} \lesssim ||u_0||_{L^2_x}^\theta ||u_0||_{H^1_x}^{1 - \theta} < \infty. \]
+	
+	
+\end{solution}
+
+
+
+\begin{statement}
+	Using the scale invariance, show that the condition $\frac2q + \frac{d}{r} = \frac{d}{2}$ is necessary for
+		\[ ||e^{it \Delta/2} u_0||_{L^q_t L^r_x} \lesssim_{d, q, r} ||u_0||_{L^2_x}. \]
+	Next, by superimposing multiple time-translated copies of a single solution together, i.e. replacing $u(t, x)$ by $\sum_j u(t - t_j, x)$ for some widely separated times $t_j$, show that the condition $q \geq 2$ is also necessary. 	
+\end{statement}
+
+
+\begin{solution}
+	For $\lambda > 0$, we rescale the domain
+		\[ u_0^\lambda (x) := u_0 (\lambda^{-1} x). \]
+	From the scaling symmetry of the Schrodinger equation, we know $e^{it\Delta/2} u_0^\lambda (x) = e^{it\lambda^{-2} \Delta/2}	 u_0 (\lambda^{-1} x)$. Hence by a change of variables $\lambda^{-1} x \mapsto x$ and $\lambda^{-2} t \mapsto t$, we can write
+		\[ \lambda^{\frac2q + \frac{d}{r}}  || e^{it \Delta/2} u_0 ||_{L^q_t L^r_x}= || e^{it \Delta/2} u_0^\lambda ||_{L^q_t L^r_x} \lesssim_{d, q, r} ||u_0^\lambda||_{L^2_x} = \lambda^{\frac{d}{2}}|| u_0||_{L^2_x}. \]	
+	Optimizing in $u_0$ and varying $\lambda$, we conclude that $\frac2q + \frac{d}{r} = \frac{d}{2}$. 
+	
+	For $N \in \N$ and times $t_j := jR$ for $R \gg 1$, define
+		\[ u_N (t, x) := \sum_{j = 1}^N e^{i(t - t_j) \Delta/2} u_0 (x). \]
+	By time invariance of the $L^2_x$ norm of solutions to the Schrodinger equation and Plancharel, 
+		\begin{align*}
+			 ||u_N||^2_{L^2_x} (0) 
+			 	&= \sum_{j = 1}^N ||e^{-i t_j \Delta/2} u_0||_{L^2_x}^2 + \sum_{j \neq k} \langle e^{-i t_j \Delta/2} u_0, e^{-it_k \Delta/2} u_0 \rangle_{L^2_x} \\
+			 	&= N ||u_0||_{L^2_x}^2 + \sum_{j \neq k} \langle e^{-i t_j |\xi|^2/2} \widehat{u_0}, e^{-it_k |\xi|^2/2} \widehat{u_0} \rangle_{L^2_\xi}= N ||u_0||_{L^2_x}^2 + \sum_{j \neq k} \int_{\R^d} e^{i (t_k - t_j) |\xi|^2 /2} |\widehat u_0 (\xi)|^2 d \xi.
+		\end{align*}	 		
+	From the theory of oscillatory integrals, namely stationary phase, we know that the contribution from the second term on the right is arbitrarily negligible since $|t_k - t_j|  \geq R \gg 1$ for $j \neq k$. Hence
+		\[ ||u_N||_{L^2_x} (0) \lesssim_{u_0} N^{1/2}. \]
+	Assume towards a contradiction $1 \leq q < 2$, we claim that the $L^r_x$-norm of $u_N$ for times $|t - t_k| \leq 1$ is dominated by the $t_k$-term. Indeed, by the reverse triangle inequality and the time asymptotics of the $L^r_x$-norm, we have
+		\[  ||u_N||_{L^r_x} (t) \gtrsim  || e^{i(t - t_k) \Delta/2} u_0 ||_{L^r_x} - \sum_{j \neq k} ||e^{i (t - t_j) \Delta/2} u_0 ||_{L^r_x}  \sim  \langle t - t_k \rangle^{-\frac2q} - \sum_{j \neq k} \langle t - t_j \rangle^{-\frac2q} . \]
+	The contribution from the second term on the right is arbitrarily negligible since
+		\[ \sum_{j \neq k} \langle t - t_j \rangle^{-\frac2q} \sim R^{-\frac2q} \sum_{j \neq k} (k - j)^{-\frac2q} \lesssim R^{-\frac2q} \ll 1\]
+	uniformly in $N$ and $|t - t_k| \leq 1$. It follows that 
+		\[ ||u_N||_{L^q_t L^r_x} \geq \left( \sum_{k= 1}^N \int_{|t - t_k| \leq 1} ||u_N ||_{L^r_x}^q (t)  \, dt \right)^\frac1q \gtrsim \left( \sum_{k = 1}^N \int_{|t - t_k| \leq 1} \langle t - t_k \rangle^{-2} dt \right)^{\frac1q} \gtrsim N^{\frac1q} .\]
+	Collecting our inequalities,  
+		\[ N^{\frac1q} \lesssim ||e^{it \Delta/ 2} u_0 ||_{L^q_t L^r_x} \lesssim_{d, q, r} ||u_0||_{L^2_x} \lesssim N^{\frac12}, \]
+	we arrive at a contradiction choosing $N \gg 1$.
+\end{solution}
+
+\begin{statement}
+	Let $I$ be a time interval. Suppose that $u \in C^2_t \cS_x (I \times \R^d)$ and $F \in C^0_t \cS_x (I \times \R^d)$ are fields such that $\Box u = F$. Prove the energy estimate
+		\[ ||\nabla u ||_{C_t^0 H^{s - 1}_x } + ||\partial_t u ||_{C_t^0 H^{s - 1}_x} \lesssim ||\nabla_x u_0||_{H^{s - 1}_x} + ||u_1||_{H^{s - 1}_x} + ||F||_{L^1_t H^{s - 1}_x}. \]
+	Then deduce
+		\[ ||u||_{C^0_t H^s_x} + ||\partial_t u||_{C^0_t H^{s - 1}_x} \lesssim_s \langle |I| \rangle \left( ||u_0||_{H^s_x} + ||u_1||_{H^{s - 1}_x} + ||F||_{L^1_t H^{s - 1}_x} \right) \]	
+\end{statement}
+
+
+\begin{solution}
+
+\end{solution}
+
+\begin{statement}[Besov version of Strichartz estimates]
+	For each dyadic number $N$, let $P_N$ be the Littlewood-Paley multiplier at frequency $N$. By means of complex interpolation, establish the inequalities
+		\[ ||u||_{L^q_t L^r_x} \lesssim _{q, r} \left( \sum_N ||P_N u||^2_{L^q_t L^r_x} \right)^\frac12 \]
+	whenever $2 \leq q, r \leq \infty$, as well as the dual estimate
+		\[ \left( \sum_N ||P_N F||^2_{L^{q'}_t L^{r'}_x } \right)^\frac12 \lesssim_{q, r} ||F||_{L^{q'}_t L^{r'}_x} \]
+	for the same range of $q, r$. By exploiting the fact that $P_N$ commutes with the Schrodinger operator $i \partial_t + \Delta$, establish the estimate
+		\[ \left( \sum_N ||P_N e^{it \Delta/2} u_0||_{L^q_t L^r_x}^2 \right)^\frac12 \lesssim_{d, q, r} ||u_0||_{L^2_x} \]		
+\end{statement}
+
+
+\begin{solution}
+	Recall that the $L^r_x$-norm of $u$ is comparable to the $L^r_x$-norm of its square function for $1 < r < \infty$. Hence by the integral Minkowski inequality, we obtain
+		\[ ||u||_{L^q_t L^r_x} \sim \left|\left| \left( \sum_N |P_N u|^2 \right)^{\frac12} \right|\right|_{L^q_t L^r_x} \leq \left|\left| \left( \sum_N ||P_N u||_{L^r_x}^2 \right)^{\frac12} \right|\right|_{L^q_t} \leq \left( \sum_N ||P_N u||_{L^q_t L^r_x}^2 \right)^{\frac12} \]
+	and
+		\[ \left( \sum_N ||P_N F||_{L^{q'}_t L^{r'}_x}^2 \right)^{\frac12} \leq \left| \left| \left(\sum_{N} ||P_N F||_{L^{r'}_x}^2 \right)^\frac12 \right| \right|_{L^{q'}_t} \leq \left| \left| \left( \sum_N |P_N F|^2 \right)^\frac12 \right|\right|_{L^{q'}_t L^{r'}_x}  \sim ||F||_{L^{q'}_t L^{r'}_x}. \]	
+	The first inequality should fail for the endpoint $r = \infty$; for example, if $u \equiv 1$, then $P_N u \equiv 0$. Since $P_N$ commutes with the propagator $e^{it \Delta/2}$, it follows from the homogeneous Strichartz estimate for Schrodinger that
+		\[ \left( \sum_N ||P_N e^{it \Delta/2} u_0||_{L^q_t L^r_x}^2 \right)^\frac12 \lesssim_{d, q, r} \left( \sum_N ||P_N u_0||^2_{L^2_x} \right)^\frac12 =  \left|\left| \left( \sum_N |P_N u_0|^2 \right)^\frac12 \right|\right|_{L^2_x} \sim  ||u_0||_{L^2_x} \]
+\end{solution}
+
+\subsection{Conservation laws for the Schrodinger equation}
+
+\begin{statement}
+	Let us formally consider $L^2_x (\R^d \to \C)$ as a symplectic phase space with symplectic form 
+		\[ \omega(u, v) = - 2 \int_{\R^d} \Im (u(x) \overline{v(x)}) \, dx .\]
+	Show that the Schrodinger equation is the formal Hamiltonian flow associated to the Hamiltonian
+		\[ H(u) = \frac12 \int_{\R^d} |\nabla u|^2 \, dx. \]
+	Also use this flow to formally connect the symmetries and conserved quantities mentioned in this section via Noether's theorem. 		
+\end{statement}
+
+\begin{solution}
+	Integrating by parts, assuming $u$ and $v$ vanish at infinity, we obtain
+		\[ \frac{d}{d\epsilon} H(u + \epsilon v) \Big|_{\epsilon = 0} = \int_{\R^d} \Re (\nabla u \cdot \overline{\nabla v}) \, dx = - \int_{\R^d} \Re (\Delta u \overline{v}). \]
+	We also have
+		\[ \omega(\nabla_\omega H(u), v) = - 2 \int_{\R^d} \Im (\nabla_\omega H(u) \cdot \overline{v}) \, dx = 2 \int_{\R^d} \Re (i \nabla_\omega H(u) \cdot \overline v)\, dx. \]
+	This implies that the symplectic gradient is given by $2i \nabla_\omega H(u) = \Delta u$. Thus the Hamiltonian flow associated with $H$ is the Schrodinger equation. 
+\end{solution}
+
+\begin{statement}
+	Obtain a local conservation law 
+		\[ \partial_t e_0 + \partial_j e_j = 0 \]
+	for the energy density
+		\[e_0 = \frac12 |\nabla u|^2 \]
+	for the Schrodinger equation. 	
+\end{statement}
+
+\begin{solution}
+	Differentiating in time, 
+		\[ \partial_t e_0 = \Re \sum_j \partial_j \partial_t u \, \overline{\partial_j u} = \Re \frac{i}{2} \sum_j \partial_j \Delta u \, \overline{\partial_j u} = \sum_j \partial_j \left( \Re \frac{i}{2} \Delta u \, \overline{\partial_j u}  \right) - \Re \frac{i}{2} \sum_j |\Delta u|^2.  \]
+	The second term on the right vanishes, hence rearranging we obtain
+		\[ \partial_t e_0 - \nabla \cdot \left(\Re \frac{i}{2} \Delta u \overline{\partial_j u} \right) = 0. \]	
+\end{solution}
+
+\begin{statement}[Local smoothing from localised data]
+	Let $u \in C^\infty_{t, \loc} \cS_x (\R \times \R^d)$ be a smooth solution to the Schrodinger equation. By using mass conservation and the pseudo-conformal conservation law, establish the bound
+		\[ ||\nabla u||_{L^2_x (B_R)} (t) \lesssim_d \frac{\langle R \rangle}{|t|} ||\langle x \rangle u||_{L^2_x (\R^d)} (0) \]
+	for all $t \neq 0$ and $R > 0$. 	
+\end{statement}
+
+\begin{solution}
+	From conservation of pseudo-conformal energy, we know
+		\[ ||(x + it \nabla) u||_{L^2_x (B_R)} (t) \leq ||x u ||_{L^2_x (\R^d)} (0). \]
+	It follows from the triangle inequality and conservation of mass that
+		\begin{align*}
+			 ||\nabla u||_{L^2_x (B_R)} 
+			 	&\leq \frac{1}{|t|} \left( ||x u||_{L^2_x (B_R)} (t) + ||x u||_{L^2_x (\R^d)} (0) \right) \\
+			 	&\leq \frac{1}{|t|} \left( \langle R \rangle || u||_{L^2_x (B_R)} (t) + ||\langle x \rangle u||_{L^2_x (\R^d)} (0) \right) \lesssim \frac{\langle R \rangle}{|t|} ||\langle x \rangle u||_{L^2_x (\R^d)} (0)  .
+		\end{align*}	 
+\end{solution}
+
+\begin{statement}[Weighted Sobolev spaces]
+	For any integer $k \geq 0$, define the weighted Sobolev space $H^{k, k}_x (\R^d)$ to be the closure of Schwartz functions under the norm 
+		\[ ||u||_{H^{k , k}_x} := \sum_{j = 0}^k ||\langle x \rangle^j u ||_{H^{k - j}_x}. \]
+	Establish the estimate
+		\[ ||e^{it \Delta/2} f||_{H^{k, k}_x} \lesssim_{k, d} \langle t \rangle^k ||f||_{H^{k, k}_x} .\]		
+\end{statement}
+
+\begin{solution}
+	By Plancharel's theorem, we can write the $H^{k, k}$ norm as
+		\begin{align*}
+			||e^{i t \Delta/2} f||_{H^{k, k}_x}
+				&= \sum_{j = 0}^k ||\langle \xi \rangle^{k - j} \langle \nabla \rangle^j e^{i t |\xi|^2/2} \widehat f||_{L^2_\xi} \lesssim \sum_{n + m \leq k} || \langle \xi \rangle^n \nabla^m e^{i t |\xi|^2} \widehat f ||_{L^2_\xi}.
+		\end{align*}
+	It follows from the product rule that 
+		\[ || \langle \xi \rangle^n \nabla^m e^{i t |\xi|^2} \widehat f ||_{L^2_\xi} \lesssim \sum_{l = 1}^m t^l || \langle \xi \rangle^{n + l}  e^{i t |\xi|^2}\nabla^{m - l} \widehat f ||_{L^2_\xi} \lesssim_k  \langle t \rangle^k \sum_{j = 0}^k || \langle \xi \rangle^{k - j} \langle \nabla \rangle^j \widehat f||_{L^2_\xi} = \langle t \rangle^k ||f||_{H^{k, k}_x}.  \]
+	We conclude the result by Plancharel's theorem
+\end{solution}
+
+\subsection{The wave equation stress-energy tensor}
+
+\begin{statement}[Hamiltonian formulation of wave equation]
+	Let us formally consider $\dot H^{1/2}_x (\R^d \to \R) \times \dot H_x^{-1/2} (\R^d \to \R)$ as a symplectic phase space with sympectic form	
+		\[ \omega ((u_0, u_1), (v_0, v_1)) := \int_{\R^d} (u_0 v_1 - u_1 v_0) \, dx. \]
+	Show that $u$ is a formal solution to the wave equation if and only if the curve $t \mapsto (u(t), \partial_t u (t))$ follows the formal Hamiltonian flow associated to the Hamiltonian 
+		\[ H(u_0, u_1) := \frac12 \int_{\R^d} |\nabla u_0|^2 + |u_1|^2 \, dx \]	
+\end{statement}
+
+\begin{solution}
+	Differentiating and integrating by parts, 
+		\[ \frac{d}{d\epsilon} H( (u_0, u_1) + \epsilon (v_0, v_1)) \Big|_{\epsilon = 0} = \int_{\R^d} (\nabla u_0 \cdot \nabla v_0 + u_1  v_1) \, dx = \int_{\R^d} (u_1 v_1 - \Delta u_0 v_0 ) \, dx. \]
+	Denoting $(w_0, w_1) = \nabla_\omega H(u_0, u_1)$, we have
+		\[ \omega((w_0, w_1), (v_0, v_1)) = \int_{\R^d} (w_0 v_1 - w_1 v_0) \, dx, \]
+	hence the sympectic gradient is given by $\nabla_\omega H(u_0, u_1) = (u_1, \Delta u_0)$. It follows that the Hamiltonian flow associated with $H$ is $\partial_t (u_0, u_1) = (u_1, \Delta u_0)$. 
+\end{solution}
+
+
+\begin{statement}[Uniqueness of classical solutions]
+	Show that for any smooth initial data $u_0 \in C^\infty_{x, \loc} (\R^d)$ and $u_1 \in C^\infty_{x ,\loc} (\R^d)$ there exists a unique smooth solution $u \in C^\infty_{t, x \loc} (\R^d)$
+\end{statement}
+
+\begin{solution}
+
+\end{solution}
+
+
+
+\subsection{$X^{s, b}$ spaces}
+
+\begin{statement}[$X^{s, b}$ vs. product Sobolev spaces]
+	Let $u \in \cS(\R \times \R^d)$ be a complex field, $h: \R^d \to \R$ be a polynomial, and $L := i h(\Delta/i)$. Denoting $v = e^{-t L} u$, show that
+		\[ ||u||_{X^{s, b}_{\tau = h(\xi)}} = ||v||_{H^b_t H^s_x}. \]
+\end{statement}
+
+\begin{solution}
+	We can write $\cF_x u (t) = e^{i t h(\xi)} \cF_x v (t)$. Hence
+		\begin{align*}
+			||u||_{X^{s, b}_{\tau = h(\xi)}} 
+				&= ||\langle \xi \rangle^s \langle \tau - h(\xi) \rangle^b \cF_t [e^{i t h(\xi)} \cF_x v (t)] ||_{L^2_\tau L^2_\xi} \\
+				&	= ||\langle \xi \rangle^s \langle \tau - h(\xi) \rangle^b \cF_t \cF_x [v(\tau - h(\xi), \xi)]||_{L^2_\tau L^2_\xi} = ||\langle \xi \rangle^s \langle \tau \rangle^b \cF_t \cF_x [v(\tau, \xi)] ||_{L^2_\tau L^2_\xi} = ||v||_{H^b_t H^s_x}.
+		\end{align*}
+\end{solution}
+
+\begin{statement}[Endpoint $X^{s, b}$ spaces]
+	Show that Lemma 2.9, Corollary 2.10, Lemma 2.11, and Proposition 2.12 all break down at the endpoint $b = 1/2$. 
+\end{statement}
+
+\begin{solution}
+	The key idea is that $H^{1/2}$ does not embed into $L^\infty$. 	
+\end{solution}

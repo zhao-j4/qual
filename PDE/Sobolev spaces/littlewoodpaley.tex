@@ -1,0 +1,658 @@
+\documentclass[reqno]{amsart}
+
+\usepackage{amsfonts,latexsym,amsthm,amssymb,amsmath,amscd,euscript,bm}
+\usepackage[sc]{mathpazo}
+\usepackage[margin = 2cm]{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+% sets numbering of enumerate to a, b, c, ...
+\renewcommand{\theenumi}{\alph{enumi}}
+
+% Theorems, propositions, etc.
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{claim}{Claim}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{notation}{Notation}
+
+\usepackage{tikz-cd}
+
+\usepackage{thmtools}
+\usepackage[framemethod=TikZ]{mdframed}
+	\mdfdefinestyle{mdrecbox}
+		{%
+			linewidth=0.5pt,
+			skipabove=12pt,
+			frametitleaboveskip=5pt,
+			frametitlebelowskip=0pt,
+			skipbelow=2pt,
+			frametitlefont=\bfseries,
+			innertopmargin=4pt,
+			innerbottommargin=8pt,
+			nobreak=true,
+		}
+	\declaretheoremstyle
+		[
+			headfont=\bfseries,
+			mdframed={style=mdrecbox},
+			headpunct={\\[3pt]},
+			postheadspace={0pt},
+		]
+		{thmrecbox}
+\newcounter{problem}[section]	\declaretheorem[style=thmrecbox,name=Problem, numberlike=problem]{statement}
+
+
+% Solution environment
+\newenvironment{solution}
+	{
+		\begin{proof}[Solution]}{\end{proof}
+	}
+
+
+% Math blackboard font
+\newcommand{\nc}{\newcommand}
+\nc{\on}[1]{\operatorname{#1}}
+
+\nc{\R}{\mathbb R}
+\nc{\C}{\mathbb C}
+\nc{\Q}{\mathbb Q}
+\nc{\Z}{\mathbb Z}
+\nc{\N}{\mathbb N}
+\nc{\HH}{\mathbb H}
+\nc{\DD}{\mathbb D}
+\nc{\TT}{\mathbb T}
+\nc{\EE}{\mathbb E}
+\nc{\PP}{\mathbb P}
+
+\nc{\cT}{\mathcal T}
+\nc{\cA}{\mathcal A}
+\nc{\cM}{\mathcal M}
+\nc{\cR}{\mathcal R}
+\nc{\cB}{\mathcal B}
+\nc{\cG}{\mathcal G}
+\nc{\cD}{\mathcal D}
+\nc{\cS}{\mathcal S}
+\nc{\cF}{\mathcal F}
+\nc{\cL}{\mathcal L}
+\nc{\cE}{\mathcal E}
+
+\nc{\diam}{\operatorname{diam}}
+\nc{\del}{\partial}
+\nc{\osc}{\operatorname{osc}}
+\nc{\inter}{\mathrm{o}}
+\nc{\close}[1]{\overline{#1}}
+\nc{\supp}{\operatorname{supp}}
+\nc{\BV}{\operatorname{BV}}
+\nc{\Per}{\operatorname{Per}}
+\nc{\loc}{\text{loc}}
+\nc{\Lip}{\operatorname{Lip}}
+\nc{\ACL}{\operatorname{ACL}}
+
+% Why the f*** would you ever use \epsilon
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\emph}{\textsc}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+%inverse Fourier transform widecheck
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{
+      <5> <6> <7> <8> <9> <10>
+      <10.95> <12> <14.4> <17.28> <20.74> <24.88>
+      mathx10
+      }{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareFontSubstitution{U}{mathx}{m}{n}
+\DeclareMathAccent{\widecheck}{0}{mathx}{"71}
+
+\let\vec\mathbf
+
+% Title: change problem set number as needed
+\title
+{
+	\emph{Littlewood-Paley theory}
+} 
+
+\author{Jason Zhao}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+
+\tableofcontents
+	
+\section{Littlewood-Paley theory}
+
+Generally results for $L^2 (\R^d)$ follow from exploiting the Hilbert space structure. Such methods fail for $L^p (\R^d)$ for $p \neq 2$ due to the lack of this additional structure, so we instead attempt to extend the aforementioned results by localising in frequency space and analysing the relationship between the resulting $L^p$-norms. To that end, we construct a dyadic partition of unity as follows; let $\phi  \in C^\infty_c (\R^d)$ satisfy $0 \leq \phi \leq 1$ and 
+\begin{align*}
+	\phi(x) 
+		:= 
+		\begin{cases}
+			1 , 				&|x| \leq 1.4, \\
+			0, 				&|x| > 1.42. 
+		\end{cases}
+\end{align*}
+Denote the dyadics by $2^\Z := \{ 2^n : n \in \Z \}$. For $N \in 2^\Z$, define $\psi, \psi_N, \phi_N \in C^\infty_c (\R^d)$ to be 
+	\[ \psi(x) := \phi(x) - \phi(2x), \qquad \psi_N (x) := \psi(x/N), \qquad \phi_N (x) := \phi(x/N).  \]
+Observe that $\sum_N \psi_N \equiv 1$ since pointwise it forms a telescoping sum. Given a tempered distribution $f \in \cS' (\R^d)$, we define its \emph{Littlewood-Paley projections} to frequencies $|\xi| \sim N$ and $|\xi| \lesssim N$ respectively by
+	\begin{align*}
+		\widehat{f_N} &= \widehat{P_N f}  = \psi_N \widehat f , \qquad
+		\widehat{f_{\leq N}} = \widehat{P_{\leq N} f} = \phi_N \widehat f.
+	\end{align*}	
+Define the Littlewood-Paley projections to frequencies $|\xi| \gtrsim N$ and $N \lesssim |\xi| \lesssim M$ respectively by 
+	\[ f_{\geq N} = P_{\geq N} f = (1 - P_{\leq N}) f, \qquad f_{N \leq - \leq M} = P_{N \leq - \leq M} f = \sum_{N \leq K \leq M} P_K f. \]
+The name ``projection'' is a bit of a misnomer; the multipliers $P_N$ fail to be true projections in the sense that by choosing smooth cutoffs in frequency space rather than sharp cutoffs, we have $P_N P_N \neq P_N$. Nevertheless, a slightly modified statement holds; define the \emph{fattened Littlewood-Paley projections} to frequencies $|\xi| \sim N$ and their corresponding multipliers by
+	\[ \widetilde{P_N} := P_{\frac{N}{2}} + P_{N} + P_{2N},\qquad  \widetilde{\psi_N} := \psi_{\frac{N}{2}} + \psi_N + \psi_{2N}. \]
+Since $\widetilde{\psi_N} \equiv 1$ on the support of $\psi_N$, it follows that $\widetilde{P_N} P_N = P_N$. Similarly, we can define the fattened projections to frequencies $|\xi| \lesssim N$ by 
+	\[ \widetilde{P_{\leq N}} = P_{\leq 2N}, \qquad \widetilde{\phi_N} := \phi_{2N}.  \]	
+
+\begin{remark}
+	By the Paley-Wiener theorem, the projections are analytic functions in physical space. Thus the Littlewood-Paley projections allow us to analyze pointwise decay properties of functions which \textit{a priori} we only know are tempered distributions. 
+\end{remark}
+
+
+\subsection{Properties}
+
+The Littlewood-Paley projections are ``projections'' in the sense that they are uniformly bounded and decompose a function in $L^p (\R^d)$. Thus to study an $L^p$-function, it suffices to study its frequency localisation. 
+
+\begin{proposition}[Boundedness of Littlewood-Paley projections]
+	Let $1 \leq p \leq \infty$, then 
+		\[||f_N||_{L^p} + ||f_{\leq N} ||_{L^p} \lesssim ||f||_{L^p},\]	
+	uniformly for $f \in L^p (\R^d)$ and $N \in 2^\Z$. Furthermore, the following pointwise bound holds
+		\[|f_N (x)| + | f_{\leq N} (x)| \lesssim M f(x),\]
+	uniformly for $f \in L^1_{\loc} (\R^d)$ and $N \in 2^\Z$. \label{prop:bounded}
+\end{proposition}
+
+\begin{proof}
+	We prove the results for $f_N$, the proof is analogous for $f_{\leq N}$. It follows from Young's convolution inequality and a change of variables $Nx = y$ that 
+		\[ ||f_N||_{L^p} = || f * \widecheck{\psi_N} ||_{L^p} \leq ||f||_{L^p} ||N^d \widecheck \psi (Nx)||_{L^1_x} = ||f||_{L^p} ||\widecheck \psi (y) ||_{L^1_y}. \] 
+	This proves boundedness in $L^p (\R^d)$. To establish the pointwise bound, we remark that $|\widecheck \psi (x)| \lesssim \langle x \rangle^{-2d}$ since $\widecheck \psi \in \cS (\R^d)$. Decomposing $\R^d$ into dyadic annuli, we have
+				\begin{align*}
+					|f_N (x)|
+						&\lesssim N^d \int_{\R^d} \frac{|f(y)|}{\langle N(x - y) \rangle^{2d}} dy \\
+						&\lesssim N^d \int_{|x - y| \leq \frac1N} |f(y)| dy + N^d \sum_{R \in 2^\N}  \int_{\frac{R}{N} \leq |x - y| \leq \frac{2R}{N}} \frac{|f(y)|}{|N (x - y)|^{2d}} dy \\
+						&\lesssim \frac{1}{|B(x, 1/N)|} \int_{B(x, 1/N)} |f(y)| dy + N^d \sum_{R \in \R^\N} \frac{1}{R^{2d}} \Big(\frac{R}{N}\Big)^d \frac{1}{|B(x, 2R/N)|} \int_{B(x, \frac{2R}{N})} |f(y)| dy \\
+						&\leq Mf (x) + \sum_{R \in 2^\N} \frac{1}{R^d} M f(x) \sim Mf(x).
+				\end{align*}
+	This proves the pointwise inequality. 
+\end{proof}
+
+\begin{proposition}[$L^p$-convergence of Littlewood-Paley projections]
+	Let $1 < p < \infty$ and $f \in L^p (\R^d)$, then
+		\[ \sum_{N \in 2^\Z} f_N  =  f, \qquad \sum_{K \leq N} f_N = f_{\leq N}, \qquad \sum_{K \geq N} f_K = f_{\geq N},  \]
+	in $L^p (\R^d)$. The case $p = 1$ holds when $\int f = 0$ and the case $p = \infty$ holds when $f \in C_0 (\R^d)$. \label{prop:converge}
+\end{proposition}
+
+\begin{proof}
+	We first show the result for $f \in \cS (\R^d)$; by Plancharel and dominated convergence the result clearly holds for $p = 2$. For general $1 < p < \infty$, we argue by interpolation of norms. Consider the case where $1 < p < 2$, then let $0 < \theta < 1$ satisfy $\tfrac1p = \tfrac{\theta}{1} + \tfrac{1 - \theta}{2}$, then 
+				\begin{align*}
+					 ||f_{1/N \leq - \leq N} - f||_{L^p} 
+					 	&\leq ||f_{1/N \leq - \leq N} - f||_{L^1}^\theta ||f_{1/N \leq - \leq N} - f||_{L^2}^{1 - \theta}\\
+					 	& \lesssim ||f||^\theta_{L^1}||f_{1/N \leq - \leq N} - f||_{L^2}^{1 - \theta} \overset{N \to \infty}{\longrightarrow} 0. 
+				\end{align*}
+			In the case $2 < p < \infty$, let $0 < \theta < 1$ satisfy $1/p = \theta/2 + (1 - \theta)/\infty$, then 
+				\begin{align*}
+					 ||f_{1/N \leq - \leq N} - f||_{L^p} 
+					 	&\leq ||f_{1/N \leq - \leq N} - f||_{L^2}^\theta ||f_{1/N \leq - \leq N} - f||_{L^\theta}^{1 - \theta}\\
+					 	& \lesssim ||f_{1/N \leq - \leq N} - f||_{L^2}^{\theta}   ||f||^{1 - \theta}_{L^\infty}\overset{N \to \infty}{\longrightarrow} 0. 
+				\end{align*}	 
+			For $f \in L^p (\R^d)$, we argue by approximation. Fix $\epsilon > 0$ and choose $g \in \cS (\R^d)$ satisfying $||f - g||_{L^p} < \epsilon$. By the triangle inequality, we have for $N \gg 1$ sufficiently large
+				\begin{align*}
+					||f_{1/N \leq - \leq N} - f ||_{L^p} 
+						&\leq || g_{1/N \leq - \leq N} - g||_{L^p} + ||f - g||_{L^p} + ||(f - g)_{1/N \leq - \leq N}||_{L^p}\lesssim \epsilon.
+				\end{align*}	
+		Arguing similarly gives the result for $\sum_{K \leq N} f_K = f_{\leq N}$ and $\sum_{K \geq N} f_K = f_{\geq N}$. 	
+	
+		The proof of the case $p = \infty$ is analogous to that of $p = 2$, using the strong-type $(1, \infty)$-inequality in place of Plancharel's theorem, recalling $\cS (\R^d)$ is dense in $C_0 (\R^d)$ with respect to the uniform norm. 
+		
+				For $p = 1$, assume $\int f = 0$ and, without loss of generality, $f \in C^\infty_c (\R^d)$. The $p = \infty$ case implies $\sum_N f_N = f$ pointwise, so it follows from Fatou's lemma and the triangle inequality that 
+					\[ ||  f_{1/N \leq - \leq N} - f||_{L^1} \leq || f_{\leq 1/N} ||_{L^1} + \sum_{K \geq N} ||f_K||_{L^1}.\]
+				For high frequencies, we apply the Sobolev-Bernstein inequality and $L^1$-boundedness of the projections,  
+					\[ \sum_{K \geq N} ||f_K||_{L^1} \sim \sum_{K \geq N} K^{-1} || |\nabla| f_K||_{L^1} \lesssim \sum_{K \geq N} K^{-1} || |\nabla| f||_{L^1} \sim N^{-1} || |\nabla| f||_{L^1} \overset{N \to \infty}{\longrightarrow} 0.\]
+				For low frequencies, we can write using that $f$ has mean zero and the fundamental theorem of calculus
+					\begin{align*}
+						 f_{\leq 1/N} (x) 
+							= (f * \widecheck{\phi_{\leq 1/N}})(x)
+							&= N^{-d} \int_{\R^d} f(y)   \widecheck \phi(N^{-1} (x - y))  \, dy \\
+							&= N^{-d} \int_{\R^d} f(y)  \Big( \widecheck \phi(N^{-1} (x - y)) - \widecheck \phi(N^{-1} x) \Big) \, dy\\
+							&= N^{-d} \int_{\R^d} f(y)  \Big(N^{-1} y \cdot \int_0^1 \nabla \widecheck \phi(N^{-1} x - \theta N^{-1} y )\, d \theta \Big) \, dy.
+					\end{align*}
+				Taking the $L^1$-norm of the above, we obtain
+					\begin{align*}
+						||f_{\leq 1/N} ||_{L^1}
+							&\lesssim N^{-d - 1} \int_{\R^d} \int_{|y|\lesssim 1} |y| |f(y)| \int_0^1 |\nabla \widecheck \phi (N^{-1} x - \theta N^{-1} y) | d \theta d y dx \\
+							&\lesssim N^{-d - 1} \int_{\R^d} \int_{|y| \lesssim 1} \frac{|f(y)|}{\langle N^{-1}x \rangle^{100d}} dy dx = N^{-1} \int_{\R^d} \int_{|y| \lesssim 1} \frac{|f(y)|}{\langle z \rangle^{100 d}} dy dz \sim_{f, d} N^{-1} \overset{N \to \infty}{\longrightarrow} 0,
+					\end{align*}	
+			where the second inequality holds by bounding in $\theta$ uniformly, noting $\nabla \widecheck \phi \in \cS(\R^d)$ decays as fast as desired and $|y| \lesssim_f 1$, and the equality follows from the change of variables $N^{-1} x = z$. 
+\end{proof}
+
+\begin{remark}
+	The convergence $\sum_N f_N = f$ fails at the endpoint cases in general; suppose 
+		\[ ||f_{1/N \leq - \leq N} - f||_{L^p} \overset{N \to \infty}{\longrightarrow} 0. \]
+	Observe that $\int f_{1/N \leq - \leq N} = \widehat{f_{1/N \leq - \leq N}} (0) = 0$, so the convergence for $p = 1$ above necessitates that $\int f = 0$. For $p = \infty$, the convergence above is uniform, so since $ f_{1/N \leq - \leq N} \in C^\infty (\R^d)$ we know $\sum_N f_N$ must be continuous. 
+\end{remark}
+
+High frequencies contribute to irregularity while low frequencies contribute to regularity. Thus by localizing in frequency space, we expect the singularities to be very regular, so the only obstruction to moving between $L^p$-spaces is decay at infinity. This can be quantified by the following proposition:
+
+\begin{proposition}[Bernstein's inequalities]
+	For $1 \leq p \leq q \leq \infty$ and $f \in \cS' (\R^d)$, 
+	\begin{align*}
+					||f_N||_{L^q} 
+						&\lesssim N^{\frac{d}{p} - \frac{d}{q}} ||f_N||_{L^p}, \\
+					||f_{\leq N}||_{L^q} 
+						&\lesssim N^{\frac{d}{p} - \frac{d}{q}} ||f_{\leq N}||_{L^p}. 
+				\end{align*}\label{prop:bernstein}
+\end{proposition}
+
+\begin{proof}
+	Let $1 \leq r \leq \infty$ satisfy $\tfrac1p + \tfrac1r = \tfrac1q + 1$, then by Young's convolution inequality and a change of variables $Nx = y$, we have the inequality
+	\begin{align*}
+		|| P_N f ||_{L^q} = || f * \widecheck{\psi_N} ||_{L^p} \leq ||f||_{L^p} ||N^d \widecheck \psi(Nx)||_{L^r_x} = N^{d - \frac{d}{r}} ||f||_{L^p} ||\widecheck \psi ||_{L^r_y} \sim N^{\frac{d}{p} - \frac{d}{q}} ||f||_{L^p}.
+	\end{align*}
+	To obtain $f_N$ instead of $f$ on the right, observe that the same proof holds replacing $P_N$ with the fattened projection $\widetilde{P_N}$. Since $\widetilde{P_N} P_N = P_N$, replacing $f$ with $P_N f$ completes the proof. Arguing similarly furnishes the inequality replacing $f_N$ with $f_{\leq N}$. 
+\end{proof}
+
+\begin{remark}
+	We can view Bernstein's inequality as the dual phenomenon to the embedding of $L^p$-spaces on finite measure spaces. By localising in physical space, we expect no contribution from decay at infinity, so the only obstruction to moving between $L^p$-spaces is blow-up about singularities. In particular, for $1 \leq p \leq q \leq \infty$, we apply Holder's inequality to obtain
+		\[ ||\phi_N f||_{L^p} \lesssim N^{\frac{d}{p} - \frac{d}{q}} ||\phi_N f||_{L^q}. \]
+	Alternatively, we can interpret frequency localising as decreasing the granularity of a function, and consider Bernstein's inequality as the continuous analogue to the discrete inequality 
+		\[ ||f||_{\ell^q (N^d)} \lesssim N^{\frac{d}{p} - \frac{d}{q}} ||f||_{\ell^p (N^d)}. \]
+\end{remark}
+
+
+\subsection{Square function}
+Although the frequency supports of the Littlewood-Paley projections overlap, they nonetheless retain a degree of independence of one another in that one can multiply each projection of $f \in L^p (\R^d)$ by $\pm 1$ and the resulting function will still remain in $L^p (\R^d)$. This is encapsulated by the square function estimate; define the \emph{Littlewood-Paley square function} by
+	\[ S(f) := ||f_N||_{\ell^2_N} = \Big( \sum_{N \in 2^\Z} |f_N|^2 \Big)^\frac12. \]	 
+We claim that the $||f||_{L^p} \sim ||S(f)||_{L^p}$. The aforementioned independence suggests the following probabilistic approach:	
+
+\begin{lemma}[Khinchine's inequality]
+	Let $\{ X_n \}_n$ be i.i.d. random variables with $X_n = \pm 1$ with equal probability, then 
+		\[ \Big( \EE \Big\{ \Big| \sum_n c_n X_n \Big|^p \Big\}  \Big)^\frac1p \sim_p \Big( \sum_n |c_n|^2\Big)^\frac12 \]
+	for all $1 < p < \infty$ and $\{c_n\}_n \subseteq \C$. 	
+\end{lemma}
+
+\begin{proof}
+	When $p = 2$, we have
+		\begin{align*}
+			 \EE \Big\{ \Big| \sum_n c_n X_n \Big|^2\Big\}
+			 	&= \EE \Big\{ \Big( \sum_n c_n X_n \Big)\Big( \sum_m \overline{c_n} X_n \Big)\Big\} \\
+			 	&= \sum_n |c_n|^2 \, \EE \{ X_n^2 \} + \sum_{m \neq n} c_n \overline{c_m} \, \EE\{X_n X_m\} = \sum_n |c_n|^2
+		\end{align*}
+	since $\EE\{X_n^2\} = 1$ and, by independence, $\EE \{X_n X_m\} = \EE \{X_n\} \EE \{X_m\} = 0$ whenever $m \neq n$. 	
+	
+	For the remaining $1 < p < \infty$, we assume without loss of generality $c_n \in \R$. By the layered cake decomposition, we can write
+		\[ \EE \Big\{ \Big| \sum_n c_n X_n \Big|^p \Big\} = p \int_0^\infty \lambda^p \PP \Big\{ \Big| \sum_n c_n X_n \Big| > \lambda \Big\} \frac{d\lambda}{\lambda}. \]
+	Moreover, 
+		\[  \PP \Big\{ \Big| \sum_n c_n X_n \Big| > \lambda \Big\} = \PP \Big\{ \sum_n c_n X_n  > \lambda \Big\} + \PP \Big\{  \sum_n c_n X_n < - \lambda \Big\}. \]	
+	We bound the first term on the right; arguing similarly will give the same bound on the second term on the right. It follows from the exponential Chebyshev inequality and independence that
+		\begin{align*}
+			\PP \Big\{ \sum_n c_n X_n  > \lambda \Big\}
+				&\leq e^{-\lambda t} \EE \Big\{ e^{t \sum_n c_n X_n} \Big\} = e^{-\lambda t} \prod_n \EE \Big\{ e^{t c_n X_n} \Big\} =e^{-\lambda t} \prod_n \frac{e^{t c_n} + e^{- t c_n}}{2} = e^{-\lambda t} \prod_n \cosh (tc_n)
+		\end{align*}	
+	for any $t > 0$. Recalling that $\cosh x \leq e^{x^2/2}$	and choosing $t = \lambda /\sum_n |c_n|^2$ gives
+		\[ \PP \Big\{ \sum_n c_n X_n  > \lambda \Big\} \leq  e^{-\lambda^2/2\sum_n |c_n|^2} .\]
+	Returning to the layered cake decomposition, making a change of variables $\alpha = \lambda /(\sum_n |c_n|^2)^{1/2}$, we obtain
+		\[  \EE \Big\{ \Big| \sum_n c_n X_n \Big|^p \Big\} \leq 2p \int_0^\infty \lambda^p e^{-\lambda^2/2 \sum_n |c_n|^2} \frac{d\lambda}{\lambda} = 2p \Big(\sum_n |c_n|^2 \Big)^{\frac{p}{2}} \int_0^\infty \alpha^p e^{-\alpha^2/2} \frac{d\alpha}{\alpha} \lesssim_p \Big(\sum_n |c_n|^2 \Big)^{\frac{p}{2}}. \]	
+	For the reverse inequality, it follows from Holder's inequality and the inequality above that
+		\begin{align*}
+			 \sum_n |c_n|^2 = \EE \Big\{ \Big| \sum_n c_n X_n \Big|^2 \Big\} &\leq \Big( \EE \Big\{ \Big|\sum_n c_n X_n \Big|^p \Big\} \Big)^\frac1p \Big( \EE \Big\{ \Big|\sum_n c_n X_n \Big|^{p'} \Big\} \Big)^\frac{1}{p'} \\
+			 & \lesssim \Big(\sum_n |c_n|^2 \Big)^\frac12 \Big( \EE \Big\{ \Big|\sum_n c_n X_n \Big|^p \Big\} \Big)^\frac1p.  
+		\end{align*}	 
+	Rearranging furnishes the result. 	 
+\end{proof}
+
+\begin{theorem}[Littlewood-Paley square function estimate]
+	For $1 < p < \infty$ and $f \in L^p (\R^d)$, we have
+		\[ || S(f)||_{L^p} \sim ||f||_{L^p}. \]\label{thm:square}
+\end{theorem}
+
+\begin{proof}
+	Let $\{X_N\}_{N \in 2^\Z}$ be i.i.d with $X_N = \pm 1$ with equal probability. By Khinchine's inequality, 
+		\[ \EE \Big\{ \Big|\sum_{N \in 2^\Z} f_N X_N \Big\}\Big|^p  \sim |S(f)|^p. \]
+	Then 
+		\[ ||S(f)||_{L^p}^p \sim \int_{\R^d} \EE \Big\{ \Big|\sum_{N \in 2^\Z} f_N X_N \Big|^p \Big\} dx. \]	
+	We claim that $m (\xi) := \sum_N X_N \psi_N (\xi)$ is a Mikhlin multiplier uniformly with respect to choice of $X_N$. Indeed, since $\psi (\xi)$ is localised about $|\xi| \sim 1$, we obtain
+		\[ |\partial^\alpha_\xi m (\xi)| \leq \sum_{N \in 2^\Z} |\partial^\alpha_\xi \psi_N (\xi)| \lesssim \sum_{N \in 2^\Z} N^{-|\alpha|} |\partial^\alpha_\xi \psi(\xi/N)| \sim \sum_{|\xi| \sim N} N^{-|\alpha|} \lesssim |\xi|^{-|\alpha|}.  \]
+	Thus
+		\[ ||S(f)||_{L^p}^p \sim \EE \{ || m(\nabla) f ||_{L^p}^p \}\lesssim \EE \{ ||f||_{L^p}^p \} = ||f||_{L^p}^p. \]	
+	For the reverse inequality, we argue by duality and the fattened projections. Denote $\widetilde S(f)$ the fattened square function, i.e. replacing the projections $P_N f$ with the fattened projections $\widetilde{P_N} f$. The inequality above continues to hold replacing $S$ with $\widetilde S$. We write
+	\begin{align*}
+		||f||_{L^p}
+			&= \sup_{||g||_{L^{p'}} = 1} \langle f, g \rangle = \sup_{||g||_{L^{p'}} = 1} \sum_{N \in 2^\Z} \langle \widetilde{P_N} P_N f, g \rangle = \sup_{||g||_{L^{p'}} = 1} \sum_{N \in 2^\Z} \langle  P_N f, \widetilde{P_N} g \rangle \\
+			&\leq  \sup_{||g||_{L^{p'}} = 1} \langle S(f), \widetilde{S} (g) \rangle \leq  \sup_{||g||_{L^{p'}} = 1} || S(f) ||_{L^p} ||\widetilde{S}(g)||_{L^{p'}} \lesssim ||S(f)||_{L^p},
+	\end{align*}
+	where the second equality holds since $f =\sum_N \widetilde{P_N} P_N = \sum_N P_N f$ in $L^p (\R^d)$, the third equality holds by self-adjointness of Fourier multipliers, the first inequality holds by Cauchy-Schwartz in $N$, the second by Holder in $x$, and the third by the square function inequality for the fattened projections. 
+\end{proof}	
+
+\begin{remark}
+	The estimate fails at the endpoints. For $p = \infty$, taking $f = 1$, we have $f_N = 0$ and therefore $S(f) = 0$. For $p = 1$, take $f = \phi_\epsilon$ where $\{\phi_\epsilon\}_\epsilon \subseteq C^\infty_c (\R^d)$ is an approximation to the identity. 
+\end{remark}
+
+
+\section{Sobolev spaces}
+
+We approach the study of Sobolev spaces by proving first results for each Littlewood-Paley projection, and expect to recover the full result by taking the decomposition and summing. In this setting, it will be convenient to define Sobolev spaces as viewed in harmonic analysis. For $s \in \R$ and $u \in \cS (\R^d)$, define the \emph{Bessel potential} to be the Fourier multiplier
+	\[ \widehat{(\langle \nabla \rangle^s u)} (\xi) := \langle 2\pi i \xi \rangle^s \widehat u (\xi),  \]
+and similarly define the \emph{Riesz potential}, or \emph{solid gradient}, for $s > -d$ by
+	\[ \widehat{(|\nabla|^s u)} (\xi) := |2\pi i \xi|^s \widehat u(\xi).  \]	
+In the case of low regularities $s \leq -d$, the Riesz potential is not a well-defined distributionally. This problem can be avoided by restricting to $\mathcal V (\R^d)$ Schwartz functions with Fourier transforms vanishing near the origin, which is a sufficiently rich enough for the purposes of density arguments. 
+
+\begin{remark}
+For $s > 0$, we can view the Riesz potential operator $|\nabla|^s$ as fractional differentiation, and the inverse operator $|\nabla|^{-s}$ as fractional integration.
+\end{remark}
+
+\subsection{Characterisation} 
+
+Let $1 < p < \infty$ and $s \in \R$, we define the \emph{inhomogeneous Sobolev space}, also known as the Bessel potential space, $W^{s, p} (\R^d)$, as the closure of $\cS (\R^d)$ with respect to the norm 
+	\[ ||u||_{W^{k, p}} := ||\langle \nabla \rangle^s u||_{L^p}. \]
+Analogously, we define the \emph{homogeneous Sobolev space}, also known as the Riesz potential space, $\dot W^{s, p} (\R^d)$, as the closure of $\mathcal V (\R^d)$ with respect to the norm 
+	\[ ||u||_{\dot W^{s, p}} := |||\nabla|^s u||_{L^p}. \]
+The homogeneous spaces behave well under dilation and thus are characteristic in the critical cases of inequalities, as we shall see in with Sobolev embedding. We use the space $\mathcal V (\R^d)$ as a technical condition since the multiplier $|\xi|^s$ fails to be smooth at the origin for any $s$ and it also fails to be locally integrable for $s < -d$. Nevertheless, this space is sufficiently rich enough for the purposes of duality and density arguments;
+
+\begin{lemma}
+	Let $f \in \cS(\R^d)$ and $1 \leq p < \infty$, then there exists $\{ g_\epsilon\}_{\epsilon > 0} \subseteq \mathcal V(\R^d)$ such that 
+		\[ ||f - g_\epsilon||_{L^p} \overset{\epsilon \to 0}{\longrightarrow} 0. \]
+	In particular, $\mathcal V (\R^d)$ is dense in $L^p (\R^d)$. 
+\end{lemma}
+
+\begin{proof}
+	Let $\phi \in C^\infty_c (\R^d)$ be a bump function satisfying $\phi \equiv 1$ for $|\xi| \leq 1$. Define 
+		\[ \widehat{g_\epsilon} (\xi) := \widehat g (\xi) (1 - \phi(\xi/\epsilon)). \]
+	By construction, $g_\epsilon \in \mathcal V (\R^d)$ and $g - g_\epsilon = g * \epsilon^d \phi(\epsilon - )$. It follows from Young's convolution inequality and a change of variables $\epsilon x = y$ that 
+		\[ ||g - g_\epsilon||_{L^p} \leq ||g||_{L^1} ||\epsilon^d \phi(\epsilon x)||_{L^p_x} \lesssim \epsilon^{d - \frac{d}{p}} ||\phi(y)||_{L^p_y} \overset{\epsilon \to 0}{\longrightarrow} 0,  \]
+	as desired. 	
+\end{proof}
+
+\begin{proposition}[Sobolev embedding]
+	Let $1 < p < \infty$, and suppose $s \in \R$, then 
+		\[ |||\nabla|^s u||_{L^p} \lesssim ||\langle \nabla \rangle^s u||_{L^p}. \]
+	In particular, $W^{s, p} (\R^d) \subseteq \dot W^{s, p} (\R^d)$. Let $t \in \R$ such that $t < s$, then 	
+		\[ ||\langle \nabla \rangle^t u||_{L^p} \lesssim ||\langle \nabla\rangle^s u||_{L^p}. \]
+	In particular, $W^{t, p} (\R^d) \subseteq W^{s, p} (\R^d)$	
+\end{proposition}
+
+\begin{proof}
+	An elementary calculation shows that $\langle \nabla \rangle^{t - s}$ and $|\nabla|^s \langle \nabla \rangle^{-s}$ are Hormander-Mikhlin multipliers, so they form bounded operators on $L^p (\R^d)$.
+\end{proof}
+
+\begin{proposition}[Characterisation using derivatives]
+	Let $1 < p < \infty$, and suppose $k \in \N$ and $s \in \R$, then 
+		\[ |||\nabla|^{s + k} u||_{L^p} \sim || |\nabla|^s \nabla^k u||_{L^p}, \]
+	and		
+		\[ || \langle \nabla \rangle^{s + k} u||_{L^p} \sim || \langle \nabla \rangle^s u||_{L^p} + || \langle \nabla \rangle^s \nabla^k u ||_{L^p} \sim \sum_{j = 0}^k ||\langle \nabla \rangle^s \nabla^j u||_{L^p}.\]
+\end{proposition}
+
+\begin{proof}
+	The characterisation of the homogeneous Sobolev space by derivatives follows from boundedness of the Riesz transforms $\partial_j/|\nabla|$ on $L^p (\R^d)$, writing 
+		\[ |\nabla| = \sum_{j = 1}^d \frac{\partial_j}{|\nabla|} \partial_j , \qquad \partial_j = \frac{\partial_j}{|\nabla|} |\nabla|. \]
+	For the inhomogeneous Sobolev spaces, the second quantity controls the first via the Hormander-Mikhlin multiplier $\langle \nabla \rangle^k /(1 + |\nabla|^k)$, the third quantity trivially controls the second, the first quantity controls the third via the Hormander-Mikhlin multipliers $|\nabla|^j/\langle \nabla \rangle^k$ for each $j = 0, \dots, k$.  
+\end{proof}
+\subsection{Fractional calculus}
+
+The triangle inequality applied to Proposition \ref{prop:converge} and boundedness of the projections, while far from efficient inequalities, are often sufficient in proving \textit{sub-critical} inequalities, i.e. those with an ``$\epsilon$-of-room'' of regularity to tolerate such inefficiencies. However, when dealing in the \textit{critical} regime, we will need to rely on more precise estimates, such as Theorem \ref{thm:square} the square function estimate. 
+
+
+\begin{theorem}[Triebel-Lizorkin characterisation of Sobolev spaces]
+	Let $1 < p < \infty$, then 
+		\[ || |\nabla|^s f||_{L^p} \sim \Big|\Big| \Big( \sum_{N \in 2^\Z} N^{2s} |f_N|^2 \Big)^\frac12 \Big|\Big|_{L^p} \]
+	for $s \in \R$ and $f \in \mathcal V (\R^d)$, and
+		\[ || |\nabla|^s f||_{L^p} \sim \Big|\Big| \Big( \sum_{N \in 2^\Z} N^{2s} |f_{\geq N}|^2 \Big)^\frac12 \Big|\Big|_{L^p}. \]	
+	for $s > 0$ and $f \in \cS (\R^d)$. 
+\end{theorem}
+
+\begin{proof}
+	We first prove the former implies the latter. It suffices to show 
+		\[ \sum_{N \in 2^\Z} N^{2s} |f_N|^2 \sim \sum_{N \in 2^\Z} N^{2s} |f_{\geq N}|^2. \]
+	Clearly $f_N = f_{\geq N} - f_{\geq 2N}$, so $|f_N|^2 \lesssim |f_{\geq N}|^2 + |f_{\geq 2N}|^2$.	Summing and multiplying by $N^{2s}$, we obtain
+		\begin{align*}
+			 \sum_{N \in 2^\Z} N^{2s} |f_N|^2 
+			 	&\lesssim \sum_{N \in 2^\Z} N^{2s} \Big( |f_{\geq N}|^2 + |f_{\geq 2N}|^2 \Big) \\
+			 	&\lesssim \sum_{N \in 2^\Z} |f_{\geq N}|^2 + 2^{-2s} \sum_{N \in 2^\Z} (2N)^{2s} |f_{\geq 2N}|^2  \sim_s \sum_{N \in 2^\Z} N^{2s} |f_{\geq N}|^2.
+		\end{align*}
+	For the converse, 
+		\begin{align*}
+			\sum_{N \in 2^\Z} N^{2s} |f_{\geq N}|^2
+				&\leq  \sum_{N \in 2^\Z} N^{2s} \Big(\sum_{A \geq N} |f_A|\Big) \Big( \sum_{B \geq N} |f_B|\Big) \lesssim \sum_{N \leq A \leq B} N^{2s} |f_A| \, |f_B| \\
+				&\lesssim \sum_{A \leq B} \frac{A^s}{B^s} A^s |f_A| B^s |f_B| \leq \Big( \sum_{A \leq B} \frac{A^s}{B^s} A^{2s} |f_A|^2 \Big)^\frac12 \Big( \sum_{A \leq B} \frac{A^s}{B^s} B^{2s} |f_B|^2 \Big)^\frac12 \lesssim \sum_{N \in 2^\Z} N^{2s} |f_N|^2.
+		\end{align*}	 	
+	We now prove the first estimate; recall that the Littlewood-Paley square function estimate holds replacing the smooth cut-off $\psi$ with any $\chi \in C^\infty_c (\R^d - 0)$. In this case, we take
+		\[ \chi (\xi) = |\xi|^{-s} \psi(\xi), \qquad \chi_N (\xi) = \chi(\xi/N) = N^s \psi_N (\xi) |\xi|^{-s}. \]
+	Observe that $\widecheck{\chi_N} * g = N^s P_N |\nabla|^{-s} g$. Taking $g = |\nabla|^s f$, it follows from the square function estimate that
+		\[ \Big|\Big| \Big( \sum_{N \in 2^\Z} N^{2s} |f_N|^2 \Big)^\frac12 \Big|\Big|_{L^p} \lesssim |||\nabla|^s f||_{L^p}. \]	
+	For the converse, we argue by duality and the direction above;
+	\begin{align*}
+		|||\nabla|^s f||_{L^p}
+			&= \sup_{||g||_{L^{p'}} = 1} \langle |\nabla|^s f, g \rangle = \sup_{||g||_{L^{p'}} = 1} \sum_{N \in 2^\Z} \langle \widetilde{P_N} P_N |\nabla|^s f, g \rangle = \sup_{||g||_{L^{p'}} = 1} \sum_{N \in 2^\Z} \langle N^s P_N |\nabla|^s f,  N^{-s} \widetilde{P_N} g \rangle \\
+			&\leq  \sup_{||g||_{L^{p'}} = 1} \int_{\R^d} \Big( \sum_{N \in 2^\Z} N^{2s} |f_N|^2 \Big)^{\frac12} \Big( \sum_{N \in 2^\Z} N^{-2s} |\widetilde{P_N} |\nabla|^s g|^2 \Big)^{\frac12} \, dx \\
+			&\leq  \sup_{||g||_{L^{p'}} = 1} \Big| \Big| \Big( \sum_{N \in 2^\Z} N^{2s} |f_N|^2 \Big)^{\frac12}\Big|\Big|_{L^p} \Big| \Big|  \Big( \sum_{N \in 2^\Z} N^{-2s} |\widetilde{P_N} |\nabla|^s g|^2 \Big)^{\frac12} \Big|\Big|_{L^{p'}} \lesssim  \Big| \Big| \Big( \sum_{N \in 2^\Z} N^{2s} |f_N|^2 \Big)^{\frac12}\Big|\Big|_{L^p},
+	\end{align*}
+	where the first line we use self-adjointness, the second line follows from Cauchy-Schwartz, the third line follows from Holder's inequality. 
+\end{proof}	
+
+
+\begin{corollary}[Fractional product rule]
+	Let $s > 0$, then 
+		\[ |||\nabla|^s (fg) ||_{L^p} \lesssim |||\nabla|^s f||_{L^{p_1}} ||g||_{L^{p_2}} + ||f||_{L^{q_1}} |||\nabla|^s g||_{L^{q_2}} \]
+	for $1 < p, p_1, q_2 < \infty$ and $1 < p_2, q_1 \leq \infty$ satisfying $\tfrac1p = \tfrac{1}{p_1} + \tfrac{1}{p_2} = \tfrac{1}{q_1} + \tfrac{1}{q_2}$. 	
+\end{corollary}
+
+\begin{proof}
+	By the Littlewood-Paley characterisation, we can write
+		\[ || |\nabla|^s (f g) ||_{L^p} \sim \Big| \Big| \Big( \sum_{N \in 2^\Z} N^{2s} |P_N (f g)|^2 \Big)^\frac12 \Big| \Big|_{L^p}. \]
+	We perform a paraproduct decomposition on $fg$, 
+		\[ fg = f_{\geq N/4} g + f_{\leq N/4} g_{\geq N/4} + f_{\leq N/4} g_{\leq N/4}. \]
+	Then, since $f_{\leq N/4} g_{\leq N/4}$ has frequency supported on $|\xi| \lesssim N/2$ while $P_N$ projects to frequencies $N/2 \lesssim |\xi| \lesssim 2N$, the last term on the right vanishes under the projection, 
+		\[ P_N (f g) =  P_N (f_{\geq N/4} g) +P_N( f_{\leq N/4} g_{\geq N/4}) .  \]
+	Recall that the low frequency projections are bounded pointwise by the maximal function, so 
+		\[ |P_N (fg)| \lesssim M(f_{\geq N/4} g) + M(M(f) g_{\geq N/4}). \]
+	It follows from the triangle inequality, the vector-valued and scalar-valued Hardy-Littlewood maximal inequalities, Holder's inequality, and the Littlewood-Paley characterisation of Sobolev spaces that
+		\begin{align*}
+			\Big|\Big| \Big( \sum_{N \in 2^\Z} N^{2s} |P_N (fg)|^2\Big)^\frac12 \Big|\Big|_{L^p} 
+				&\lesssim \Big| \Big| \Big( \sum_{N \in 2^\Z} \Big| M(N^s f_{\geq N/4} g) \Big|^2 \Big)^\frac12 \Big| \Big|_{L^p} +  \Big| \Big| \Big( \sum_{N \in 2^\Z} \Big| M(M(f) N^s g_{\geq N/4}) \Big|^2 \Big)^\frac12 \Big| \Big|_{L^p} \\
+				&\lesssim \Big| \Big| \Big( \sum_{N \in 2^\Z} \Big| N^s f_{\geq N/4} g \Big|^2 \Big)^\frac12 \Big| \Big|_{L^p} +  \Big| \Big| \Big( \sum_{N \in 2^\Z} \Big| M(f) N^s g_{\geq N/4} \Big|^2 \Big)^\frac12 \Big| \Big|_{L^p} \\
+				&\lesssim ||g||_{L^{p_2}} \Big| \Big| \Big( \sum_{N \in 2^\Z} \Big| N^s f_{\geq N/4} \Big|^2 \Big)^\frac12 \Big| \Big|_{L^{p_1}} +  ||Mf ||_{L^{q_1}}\Big| \Big| \Big( \sum_{N \in 2^\Z} \Big| N^s g_{\geq N/4} \Big|^2 \Big)^\frac12 \Big| \Big|_{L^{q_2}} \\
+				&\lesssim ||g||_{L^{p_2}} || |\nabla|^s f||_{L^{p_1}} + ||f||_{L^{q_1}} |||\nabla|^s g||_{L^{q_2}}.
+		\end{align*}			
+	This completes the proof. 	
+\end{proof}
+
+
+
+\section{Sobolev embedding}
+
+The Sobolev embedding inequalities trade regularity for integrability. The general strategy will be to prove the embedding inequality for each Littlewood-Paley projection, and then efficiently sum by using Bernstein's inequality to recover the original result,
+	\begin{align*}
+		||u||_{L^q}
+			\leq \sum_{N \in 2^\Z} ||u_N||_{L^q} \lesssim \sum_{N \in 2^\Z} N^{\frac{d}{p} - \frac{d}{q}} ||u_N||_{L^p},
+	\end{align*}
+for $1 \leq p < q \leq \infty$. The factor $N^{\frac{d}{p} - \frac{d}{q}}$ decays for $N \lesssim 1$, so we can control low frequencies by a lower order term. The factor instead grows for $N \gtrsim 1$, so we need to control high frequencies by a higher order term via the \textit{Sobolev-Bernstein} inequality to recover decay. 
+
+\subsection{$L^p$-inequalities}
+
+When localising to frequencies $|\xi| \sim N$, the Riesz potentials behave like $|\nabla|^s \sim N^s$, while the Bessel potentials behave like $\langle \nabla \rangle^s \sim \langle N \rangle^s$. The heuristic is that positive-order differential operators $s > 0$ accentuate high frequencies and diminish low frequencies, while negative-order operators have the opposite effect. More precisely, we have the following family of inequalities, 
+
+
+\begin{lemma}[Sobolev-Bernstein inequalities] For $f \in L^p (\R^d)$, 
+				\begin{alignat*}{2}
+					|| |\nabla|^s f_N||_{L^p} 
+						&\sim N^s ||f_N||_{L^p}, &&\qquad \text{if }s \in \R \text{ and } 1 \leq p \leq \infty, \\
+					|| |\nabla|^s f_{\leq N}||_{L^p} 
+						&\lesssim N^s ||f_{\leq N}||_{L^p}, &&\qquad\text{if }s > 0 \text{ and } 1 \leq p < \infty, \\
+					|| |\nabla|^s f_{\geq N}||_{L^p} 
+						&\lesssim N^s ||f_{\geq N}||_{L^p}, &&\qquad\text{if }s < 0 \text{ and } 1 \leq p < \infty.
+				\end{alignat*}			
+		The endpoint cases $p = \infty$ for the latter two inequalities hold for $f \in \cS (\R^d)$. 
+\end{lemma}
+
+\begin{proof}
+	Let 
+		\[ \chi (\xi) := |\xi|^s \psi (\xi), \qquad \chi_N (\xi) := \chi (\xi/N). \]
+	Observe that $\chi \in \cS (\R^n)$ since $\psi$ vanishes in a neighborhood of the origin. Then by Young's convolution inequality and the change of variables $Nx = y$, we have
+		\[ || |\nabla|^s f_N||_{L^p} = || ({|\xi|^s \psi (\xi/N)})^{\vee} * f ||_{L^p} = N^s ||\widecheck{\chi_N} * f||_{L^p} \leq N^s ||f||_{L^p} ||N^d \widecheck{\chi} (N x)||_{L^1_x} = N^s ||f||_{L^p} ||\widecheck \chi(y)||_{L^1_y}. \]	
+	The inequality continues to hold using instead the fattened Littlewood-Paley projections, so arguing as we did in Bernstein's inequality, we can replace $f$ with $f_N$ on the right-hand side. To obtain the reverse inequality, note the previous argument holds for the fattened projections. Hence, since Fourier multipliers commute and $\widetilde{P_N} P_N = P_N$,
+		\[ ||f_N||_{L^p} = || |\nabla|^{-s} \widetilde{P_N} |\nabla|^s f_N||_{L^p} \lesssim N^{-s} || |\nabla|^s f_N||_{L^p}.  \]
+	Rearranging furnishes the result. 	
+
+	To prove the inequalities, recall that $\sum_{K \leq N} f_K = f_{\leq N}$ and $\sum_{K \geq N} f_K = f_{\geq N}$ in $L^p (\R^d)$ for $1 < p < \infty$ and in the case $p = 1$ when $f$ has zero mean. It follows from the triangle inequality that
+		\[	|| |\nabla|^s f_{\leq N} ||_{L^p} \leq \sum_{K \leq N} || | \nabla|^s f_K||_{L^p} \sim \sum_{K \leq N} K^s ||f_K||_{L^p} \lesssim N^s ||f_{\leq N} ||_{L^p}\]
+	for $s > 0$ and $1 \leq p < \infty$ and
+		\[	|| |\nabla|^s f_{\geq N} ||_{L^p} \leq \sum_{K \geq N} || | \nabla|^s f_K||_{L^p} \sim \sum_{K \geq N} K^s ||f_K||_{L^p} \lesssim N^s ||f_{\geq N} ||_{L^p}\]
+	for $s < 0$ and $1 < p < \infty$. 
+\end{proof}
+
+
+
+\begin{theorem}[Gagliardo-Nirenberg inequality]
+	Let $1 < p < q \leq \infty$ and $s > 0$, then 
+		\[ ||u||_{L^q} \lesssim ||u||_{L^p}^{1 - \theta} || |\nabla|^s u ||_{L^p}^\theta \]
+	where $0 < \theta < 1$ satisfies $\tfrac1p - \tfrac1q = \tfrac{\theta s}{d}$. 	
+\end{theorem}
+
+\begin{proof}
+	Taking a Littlewood-Paley decomposition $u = \sum_N u_N$, we apply the triangle inequality and Bernstein's inequality to obtain
+	\begin{align*}
+		||u||_{L^q}
+			\leq \sum_{N \in 2^\Z} ||u_N||_{L^q} \lesssim \sum_{N \in 2^\Z} N^{\theta s} ||u_N||_{L^p}.
+	\end{align*}
+	Boundedness of the Littlewood-Paley projections and the Sobolev-Bernstein inequality give the respective bounds
+		\[ ||u_N||_{L^p} \lesssim ||u||_{L^p}, \qquad ||u_N||_{L^p} \lesssim N^{-s} || |\nabla|^s u||_{L^p}.\]
+	Hence
+		\[ ||u_N||_{L^p} \lesssim \min \Big\{ ||u||_{L^p}, N^{-s} || |\nabla|^s u||_{L^p} \Big\}. \]
+	Decomposing the sum at the transition $N \sim (|||\nabla|^s u||_{L^p}/||u||_{L^p})^{1/s}$ into high and low frequencies, we conclude
+		\begin{align*}
+			||u||_{L^q}
+				&\lesssim \Big( \sum_{N \lesssim (|||\nabla|^s u||_{L^p}/||u||_{L^p})^{1/s}} + \sum_{N \gtrsim (|||\nabla|^s u||_{L^p}/||u||_{L^p})^{1/s}} \Big) N^{\theta s} ||u_N||_{L^p} \\
+				&\lesssim \sum_{N \lesssim (|||\nabla|^s u||_{L^p}/||u||_{L^p})^{1/s}} N^{\theta s} ||u||_{L^p} + \sum_{N \gtrsim (|||\nabla|^s u||_{L^p}/||u||_{L^p})^{1/s}} N^{(\theta - 1) s}  |||\nabla|^s u||_{L^p} \lesssim ||u||_{L^p}^{1 - \theta} || |\nabla|^s u||_{L^p}^\theta 
+		\end{align*}	
+	as desired. 	
+\end{proof}
+
+\begin{theorem}[Inhomogeneous Sobolev inequality]
+	Let $1 \leq p < q \leq \infty$, and suppose $u \in \cS (\R^d)$ then 
+		\[ ||u||_{L^q} \lesssim || \langle \nabla \rangle^s u ||_{L^p} \]
+	whenever $\tfrac1p - \tfrac1q < \tfrac{s}{d}$ and $s > 0$. In particular, $W^{s, p} (\R^d) \subseteq L^q (\R^d)$ and, in the endpoint case $q = \infty$ and $\tfrac1p < \tfrac{s}{d}$, we have $W^{s, p} (\R^d) \subseteq C^0 (\R^d)$. 
+\end{theorem}
+
+\begin{proof}
+	Taking a Littlewood-Paley decomposition $u = \sum_N u_N$, we apply the triangle inequality and Bernstein's inequality to obtain
+		\[ ||u||_{L^q} \leq \sum_{N \in 2^\Z} ||u_N||_{L^q} \lesssim \sum_{N \in 2^\Z} N^{\frac{d}{p} - \frac{d}{q}} ||u_N||_{L^p}. \]
+	Boundedness of the Littlewood-Paley projections and the Sobolev-Bernstein inequality give the respective bounds	
+		\[ ||u_N||_{L^p} \lesssim ||u||_{L^p} \lesssim || \langle \nabla \rangle^s u||_{L^p}, \qquad ||u_N||_{L^p} \sim N^{-s} |||\nabla|^s u||_{L^p}\lesssim N^{-s} || \langle \nabla \rangle^s u||_{L^p}. \]
+	Hence
+		\[ ||u_N||_{L^p} \lesssim \min\{ 1, N^{-s} \} || \langle \nabla \rangle^s u||_{L^p}.\]
+	Decomposing the sum at the transition $N = 1$ into high and low frequencies, we conclude
+		\begin{align*}
+			 ||u||_{L^q} 
+			 	&\lesssim \left( \sum_{N < 1} + \sum_{N \geq 1} \right) N^{\frac{d}{p} - \frac{d}{q}} ||u_N||_{L^p} \\
+			 	&\lesssim \sum_{N \leq 1} N^{\frac{d}{p} - \frac{d}{q} -s} || \langle \nabla \rangle^s u||_{L^p} +  \sum_{N < 1} N^{\frac{d}{p} - \frac{d}{q}} || \langle \nabla \rangle^s u||_{L^p} \sim || \langle \nabla \rangle^s u||_{L^p},
+		\end{align*}	 
+	as desired. 	
+\end{proof}
+
+The proof of the homogeneous Sobolev inequality in the spirit of that above is far more technical since we do not access to the lower order terms on the right. Furthermore, the triangle inequality and boundedness of the projections are too inefficient to be effective in the critical case. We instead take the classical approach due to Hedberg \cite{Hedberg}, arguing by duality using an inverse inequality.
+
+\begin{lemma}[Hardy-Littlewood-Sobolev]
+	For $f \in L^p (\R^d)$ and $1 < p, r < \infty$, we have
+		\[ ||f * |x|^{-\alpha}||_{L^r_x} \lesssim ||f||_{L^p} \]
+	whenever $0 < \alpha < d$ and $1 + \tfrac1r = \tfrac1p + \tfrac{\alpha}{d}$. 	
+\end{lemma}
+
+\begin{proof}
+	Without loss of generality take $||f||_{L^p} = 1$. We aim to control the convolution pointwise by the maximal function of $f$ and the $L^p$-norm of $f$. For $R > 0$ to be chosen later, 	
+		\[ |(f * |x|^{-\alpha})(x)| \leq \int_{\R^d} |x - y|^{-\alpha} |f(y)| dy = \Big( \int_{|x - y| < R} + \int_{|x - y| \geq R} \Big)  |x - y|^{-\alpha} |f(y)| dy. \]
+	Dividing the integral over the singularity into integrals over annular regions with dyadic radii, 
+		\begin{align*}
+			\int_{|x - y| < R}  |x - y|^{-\alpha} |f(y)| dy 
+				&\leq \sum_{r \in 2^\Z \ : \ r \lesssim R} \int_{r \leq |x - y| \leq 2r}  |x - y|^{\alpha} |f(y)| dy \\
+				&\leq \sum_{r \in 2^\Z \ : \ r \lesssim R} r^{-\alpha} \int_{|x - y| \leq 2r} |f(y)| dy \lesssim  \sum_{r \in 2^\Z \ : \ r \lesssim R} r^{d- \alpha} Mf (x) \lesssim R^{d- \alpha} Mf(x).
+		\end{align*}	
+	Applying Holder's inequality, the integral away from the singularity is controlled pointwise by
+		\[  \int_{|x - y| \geq R}  |x - y|^{-\alpha} |f(y)| dy \leq ||f||_{L^p} || |x|^{-\alpha} ||_{L^{p'} (|x| \geq R)} \sim R^{-\frac{d}{r}}. \]
+	 Choosing the optimal radius $R = Mf(x)^{-p/d}$, we obtain the pointwise bound $|(f * |x|^{-\alpha} ) (x)| \lesssim Mf (x)^{p/r}$. Since the maximal operator is strong-type $(p, p)$, we conclude
+		\[ ||f * |x|^{-\alpha} ||_{L^r_x} \lesssim ||(Mf)^{p/r}||_{L^r} = ||Mf||^{p/r}_{L^p} \lesssim ||f||_{L^p}^{p /r} =1,  \]
+	as desired. 	
+\end{proof}
+
+
+\begin{theorem}[Homogeneous Sobolev inequality]
+	Let $1  < p < q < \infty$, then 
+		\[ ||u||_{L^q} \lesssim |||\nabla|^s u||_{L^p} \]
+	whenever $\tfrac1p - \tfrac1q = \tfrac{s}{d}$ and $0 < s < \tfrac{d}{p}$. In particular, $\dot W^{s, p} (\R^d) \subseteq L^q (\R^d)$. 
+\end{theorem}
+
+\begin{proof}
+	By duality, Plancharel's theorem, and Holder's inequality, 
+		\begin{align*}
+			 ||u||_{L^q} 
+			 	&= \sup_{v \in \mathcal V (\R^d) \, ; \, ||v||_{L^{q'}} = 1} \langle u, v \rangle =  \sup_{v \in \mathcal V (\R^d) \, ; \, ||v||_{L^{q'}} = 1} \langle \widehat u, \widehat v \rangle=  \sup_{v \in \mathcal V (\R^d) \, ; \, ||v||_{L^{q'}} = 1} \langle |\xi|^s \widehat u, |\xi|^{-s} \widehat v \rangle \\
+			 	&\sim  \sup_{v \in \mathcal V (\R^d) \, ; \, ||v||_{L^{q'}} = 1} \langle |\nabla|^s u, |x|^{s - d} * v \rangle \leq  || |\nabla|^s u||_{L^p} \sup_{v \in \mathcal V (\R^d) \, ; \, ||v||_{L^{q'}} = 1} |||x|^{s - d} * v||_{L^{p'}}. 
+		\end{align*}	 
+	It follows from Hardy-Littlewood-Sobolev that
+		\[ || |x|^{d - s} * v||_{L^{p'}} \lesssim ||v||_{L^{q'}} \]
+	for $1 + \tfrac{1}{p'} = \tfrac{1}{q'} + \tfrac{d - s}{d}$, which, upon rearranging, is equivalent to $\tfrac1p = \tfrac1q + \tfrac{s}{d}$, completing the proof. 
+\end{proof}
+
+
+\subsection{$C^\gamma$-inequalities}
+
+In the inhomogeneous Sobolev inequality, we saw that if one has ``surplus'' regularity $s > \tfrac{d}{p}$ that causes one to go past $q = \infty$, we recover continuity. We can be more precise and show that we in fact have Holder continuity in this case. Denoting $u^h (x) := u(x - h)$ the translate of $u : \R^d \to \C$ by $h \in \R^d$, for $1 \leq q \leq \infty$ and $0 < \alpha < 1$, we define the \emph{Holder norm} by 
+	\[ ||u||_{\Lambda^q_\alpha} := ||u||_{L^q} + \sup_{0 < |h| \leq 1} \frac{||u^h - u||_{L^q}}{|h|^\alpha} \]
+and the \emph{Holder semi-norm} by 
+	\[ [u]_{\Lambda^q_\alpha} :=  \sup_{h \neq 0} \frac{||u^h - u||_{L^q}}{|h|^\alpha}. \]	
+Observe that this definition coincide with the usual definition when $q = \infty$.
+
+\begin{proposition}[Besov characterisation of Holder norm]
+	Let $1 \leq q \leq \infty$ and $0 < \alpha < 1$, then 
+		\[ [u]_{\Lambda^q_\alpha} \sim  \sup_{N \in 2^\Z} N^\alpha ||u_N||_{L^q} \]
+	and
+		\[ ||u||_{\Lambda^q_\alpha} \sim ||u||_{L^q} + \sup_{N \in 2^\N} N^\alpha ||u_N||_{L^q}. \]
+	In particular, $u \in L^\infty (\R^d)$ is $\alpha$-Holder continuous if and only if $||u_N||_{L^\infty} \lesssim N^{-\alpha}$ for all $N \in 2^\N$. 
+\end{proposition}
+
+\begin{proof}
+	We prove the first equivalence, the second clearly follows. Using $\int \widecheck{\psi_N} = \psi_N (0) = 0$ and a change of variables $Ny = z$, we can write
+		\begin{align*}
+			u_N (x) = (u * \widecheck{\psi_N})(x) 
+				&= N^d \int_{\R^d} u(x - y) \widecheck\psi (Ny) dy \\
+				&= \int_{\R^d} u(x - z/N) \widecheck \psi (z) dz = \int_{\R^d} \Big( u(x - z/N) - u(x)\Big) \widecheck \phi (z) dz.
+		\end{align*}	
+	Taking the $L^q$-norm of the above, applying Minkowski's inequality and the Holder condition gives
+		\begin{align*}
+			||u_N||_{L^q} \leq  \int_{\R^d} ||u^{z/N} - u||_{L^q} |\widecheck \psi (z)| dz \lesssim N^{-\alpha} [u]_{\Lambda^q_\alpha} \int_{\R^d} |z|^\alpha |\widecheck \psi (z)| \, dz \sim N^{-\alpha} [u]_{\Lambda^q_\alpha}. 
+		\end{align*}
+	To prove the converse inequality, we decompose the difference $u^h - u$ into high and low frequencies; let $M \in 2^\N$ satisfy $ |h|^{-1} \sim 2M$, it follows from the triangle inequality that
+		\[ || u^h - u||_{L^q} \leq ||u^h_{\leq M} - u_{\leq M} ||_{L^q} + ||u^h_{\geq M} + u_{\geq M} ||_{L^q}.  \]
+	For the high frequency terms, we crudely estimate by the triangle inequality, noting $||u^h_{K}||_{L^q} = ||u_{K} ||_{L^q}$ and the Besov condition
+		\[ || u^h_{\geq M} - u_{\geq M} ||_{L^p} \lesssim \sum_{K\geq M} ||u_K||_{L^q} \lesssim [u]_{\Lambda^q_\alpha} \sum_{N \geq M} N^{-\alpha} \sim [u]_{\Lambda^q_\alpha} |h|^{\alpha}.\]	
+	This furnishes the desired bound for the high frequency terms. For the low frequency terms, we can write using the fundamental theorem of calculus
+		\[  u^h_{\leq M} (x) -  u_{\leq M} (x)  = h \cdot \int_0^1 \nabla u_{\leq M} (x - \theta h) d \theta. \]	
+	Taking the $L^q$-norm of the above and applying the triangle, Minkowski, Sobolev-Bernstein inequalities and the Besov condition, we obtain
+		\[ ||u^h_{\leq M} - u_{\leq M} ||_{L^q} \leq |h| \sum_{K \leq M} ||\nabla u_{K}||_{L^q_x} \lesssim  [u]_{\Lambda^q_\alpha} |h| \sum_{K \leq M} K K^{-\alpha} \sim [u]_{\Lambda^q_\alpha} |h|^\alpha  . \]	
+	This furnishes the desired bound for the low frequency terms, completing the proof. 		
+\end{proof}
+
+\begin{theorem}[Morrey-Sobolev embedding]
+	Let $1 < p < \infty$, then 
+		\[ || u ||_{C^{0, \alpha}} \lesssim |||\nabla|^s u||_{L^p}  \]
+	for $0 < \alpha < 1$ satisfying $s - \tfrac{d}{p} = \alpha$. In particular, $\dot W^{s, p} (\R^d) \subseteq C^{0, \alpha} (\R^d)$.
+\end{theorem}
+
+\begin{proof}
+	It suffices to show that $||u_{\leq N}||_{L^\infty} \lesssim || |\nabla|^s u||_{L^p} N^{-\alpha}$ uniformly in $u \in \cS (\R^d)$ and $N \in 2^\N$. Indeed, it follows from the Sobolev-Bernstein inequality, boundedness of the projections, and Bernstein inequality that
+		\[ ||u_{\geq N} ||_{L^\infty} \leq \sum_{K \geq N} ||u_K||_{L^\infty} \sim \sum_{K \geq N} K^{-s} || |\nabla|^s u||_{L^\infty} \sim N^{-s} |||\nabla|^s u||_{L^\infty} \lesssim N^{-\alpha} |||\nabla|^s u||_{L^p}. \]
+\end{proof}
+
+
+
+\bibliography{biblio}
+\bibliographystyle{alpha} 
+
+\end{document}
